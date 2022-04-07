@@ -1,0 +1,259 @@
+<html><head>
+        <!-- basic template -->
+        <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=0.5">
+		<title>B24</title>
+        <link rel="icon" href="/client/img/favicon.png" type="image/png">
+        <!-- libraries -->
+        <link rel="stylesheet" type="text/css" href="client/css/c833bcdb9959934cdadaa65aaf7f13f8.css" media="screen">
+
+		<!-- UI
+		<link rel="stylesheet" type="text/css" href="client/css/bootstrap.min.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="client/css/datepicker.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="client/css/bootstrap-slider.min.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="client/css/toggle-switch.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="client/css/fonts.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="client/css/graphs.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="client/css/rickshaw.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="client/css/embedded.css" media="screen"/>
+		UI -->
+
+        <!-- page style and behavior -->
+    </head>
+    <body id="page-login" class="fullscreen" style="background: url(&quot;/client/img/BG-B24.jpg&quot;) center center / cover no-repeat fixed;">
+		<!--this is a method to prevent chrome from mistakenly auto-filling the encryption keys with the UI password-->
+		<input style="display:none" type="password" name="preventautofillpassword">
+            <div id="cloud-container-bg" class="form-bg">
+            </div>
+            <div id="cloud-container-content" class="form-content"><img src="client/img/logo.png" style="width:250px;"><table id="table-login"><tr><td id="field_password"><input name="username" type="hidden" class="mimosa_field" value="configure"><input name="password" type="password" placeholder="Enter Password" class="form-control unlock-input bottom10"></td></tr><tr><td><div class="bottom20"><button type="button" class="mimosaButton" id="btn-login">Login</button></div></td></tr></table><div id="loading-container"><div class="mask"></div><div class="content"><div id="image_busy" class="image"></div><div class="text"></div></div></div><div class="clear"></div></div>
+		
+        <div id="top-nav-container" style="display: none;">
+			<a href="#dashboard">
+				<img src="client/img/mimosa-white-web-logo.png">
+			</a>
+            <div class="nav-goto">
+				<div class="dropdown">
+					<a class="dropdown-toggle white" data-toggle="dropdown">B24 - <span id="orangeBarText" class="deviceNameHere"></span> <span class="caret"></span></a>
+					<ul class="dropdown-menu nav-dropdown" role="menu">
+						<li><a id="logoutLink" href="#">Logout</a></li>
+					</ul>
+				</div>
+            </div>
+        </div>
+
+        <div>
+            <div class="vertical-nav-div-cont active" id="vertical-nav-div-container">
+                <div id="vert-nav-container">
+                    <ul class="nav nav-stacked">
+                        <li class="title">
+                            <i class="mimosaglyph mimosaglyph-3bars"></i>
+                            <a href="" class="nav-pin pull-right active"><i class="mimosaglyph mimosaglyph-pin"></i></a>
+                        </li>
+                    </ul>
+                    <div id="vertNavCollapsing">
+
+                        <div class="panel"> <!-- required for bs.collapse -->
+                            <ul class="nav nav-stacked" data-target="#vertNavSection1" data-parent="vertNavCollapsing">
+                                <li class="title">
+                                    <i class="mimosaglyph mimosaglyph-overview"></i>
+                                    <span class="text">Overview</span>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-stacked accordion-slow-transition" id="vertNavSection1">
+                                <li class="item"><a href="#dashboard" class="active">Dashboard</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="panel"> <!-- required for bs.collapse -->
+                            <ul class="nav nav-stacked" data-target="#vertNavSection2" data-parent="#vertNavCollapsing">
+                                <li class="title">
+                                    <i class="mimosaglyph mimosaglyph-wireless-right"></i>
+                                    <span class="text">Wireless</span>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-stacked accordion-slow-transition" id="vertNavSection2">
+                                <li class="item"><a href="#wireless.channelpower">Channel &amp; Power</a></li>
+                                <li class="item"><a href="#wireless.link">Link</a></li>
+                                                                <li class="item"><a href="#wireless.location">Location</a></li>
+                                                            </ul>
+                        </div>
+
+                        <div class="panel"> <!-- required for bs.collapse -->
+                            <ul class="nav nav-stacked" data-target="#vertNavSection3" data-parent="#vertNavCollapsing">
+                                <li class="title">
+                                    <i class="mimosaglyph mimosaglyph-preferences"></i>
+                                    <span class="text">Preferences</span>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-stacked accordion-slow-transition" id="vertNavSection3">
+                                <li class="item"><a href="#preferences.general">General</a></li>
+                                <li class="item"><a href="#preferences.management">Management</a></li>
+                                 <li class="item"><a href="#preferences.wificonsole">2.4 GHz Console</a></li>                                <li class="item"><a href="#preferences.notifications">Notifications</a></li>
+                                <li class="item"><a href="#preferences.updatereboot">Firmware &amp; Reset</a></li>
+                                <li class="item"><a href="#preferences.backuprestore">Backup &amp; Restore</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="panel"> <!-- required for bs.collapse -->
+                            <ul class="nav nav-stacked" data-target="#vertNavSection4" data-parent="#vertNavCollapsing">
+                                <li class="title">
+                                    <i class="mimosaglyph mimosaglyph-diagnostics"></i>
+                                    <span class="text">Diagnostics</span>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-stacked accordion-slow-transition" id="vertNavSection4">
+                                <li class="item"><a href="#diagnostics.tests">Tests</a></li>
+                                <li class="item"><a href="#diagnostics.logs">Logs</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="nav nav-stacked fixed-bottom">
+                        <hr>
+                        <p class="copyright">© 2022 Mimosa Networks Inc.</p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-container" class="navPinned" style="display: none;"></div>
+
+        <!-- unsaved manager -->
+        <div id="save-container" style="display: none;">
+            <div class="container">
+                <div class="col-xs-4 col-xs-offset-1">
+                    <h3>
+                        Unsaved changes: <span id="flag-count">0</span>
+                    </h3>
+                </div>
+                <div class="col-xs-7">
+                    <button id="savebar_save" class="btn btn-default pull-right heartbeat mimosa-save"> <i class="glyphicon glyphicon-save"></i> Save Changes </button>
+                    <button id="savebar_discard" class="btn btn-default pull-right mimosa-cancel"><i class="glyphicon glyphicon-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- unsaved manager -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="mo-tos" tabindex="-1" role="dialog" aria-labelledby="mo-tos" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Title</h4>
+                    </div>
+                    <div class="modal-body">
+                        Content goes here...
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modal_cancel" type="button" class="btn btn-default hide" data-dismiss="modal">Close</button>
+                        <button id="modal_ok" type="button" class="btn btn-success hide" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="mo-ssidscan" tabindex="-1" role="dialog" aria-labelledby="mo-ssidscan" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title white" id="myModalLabel">SSID Scan</h4>
+                    </div>
+                    <div class="modal-body">
+						<p>SSID scan may take up to 60 seconds to complete.</p>
+                        <table class="table-flat table-condense table-default">
+                            <thead>
+							<tr><th><strong>Encryption</strong></th>
+                            <th><strong>SSID</strong></th>
+                            <th><strong>Vendor</strong></th>
+							<th><strong>MAC Address</strong></th>
+                            <th><strong>Signal Strength</strong></th>
+                            <th></th>
+                            </tr></thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-success" id="scan_ssid">Scan</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="scan_ssid_close">Close</button>
+                        </div>
+                        <div class="pull-right" style="line-height: 34px; margin-right: 15px;">
+                            <p>If your SSID does not appear please click scan again.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript" async="" src="https://nms-alpha.mimosa.co/app/js/onlineCheck.js?q=1649309241366"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript">
+			bg = new Image();
+			bg.src = "client/img/BG-B24.jpg";
+			logo = new Image();
+			logo.src = "client/img/logo.png";
+		</script>
+        <script type="text/javascript" src="client/js/044eb0ab661e57ba0a37f583c14c12ff.js"></script>
+        <script type="text/javascript" src="client/js/e7b305257bfd81109ce74f2a9f46b6ad.js"></script>
+
+		<!-- UI
+        <script type="text/javascript" src="client/js/jquery-1-10-2.js"></script>
+        <script type="text/javascript" src="client/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="client/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript" src="client/js/bootstrap-slider.min.js"></script>
+        <script type="text/javascript" src="client/js/d3.js"></script>
+        <script type="text/javascript" src="client/js/rickshaw/rickshaw.js"></script>
+        <script type="text/javascript" src="client/js/language.js"></script>
+        <script type="text/javascript" src="client/js/bootstrap-filestyle.min.js"></script>
+        <script type="text/javascript" src="client/js/jquery.inputmask.bundle.min.js"></script>
+        <script type="text/javascript" src="client/js/embedded.js"></script>
+        <script type="text/javascript" src="client/js/pages.js"></script>
+		UI -->
+        <script type="text/javascript">
+                    mimosa.initialized = false;
+                    mimosa.role = 0;
+                    mimosa.unitSystem = 'Metric';
+					mimosa.product = 'B24';
+					mimosa.feature_gps = true;
+					mimosa.feature_fiber = true;
+                    mimosa.isConnected = false;
+                    mimosa.userRefresh = false;
+                    mimosa.activated = true;
+                    mimosa.mode = 'AP';
+                    mimosa.stats = '1';
+                    mimosa.update = false;
+                    mimosa.defaultpassword = false;
+
+                    if(mimosa.product && mimosa.product === 'B11'){
+                        mimosa.isB11DualMode = 0; 
+                        mimosa.operatingBand =  ''; 
+                        mimosa.isB10 = (mimosa.isB11DualMode && mimosa.operatingBand == 10) ? 1:0;
+                    }
+
+                                                                                //                    mimosa.cache.clear();
+                    window.onhashchange();
+
+                    (function() {
+                        function async_load(){
+                            var s = document.createElement('script');
+                            s.type = 'text/javascript';
+                            s.async = true;
+                            s.onload = function() {
+                                mimosa.currentPage.trigger("onlineCheck");
+                            }
+                            s.src = 'https://nms-alpha.mimosa.co/app/js/onlineCheck.js?q='+new Date().getTime();
+                            var x = document.getElementsByTagName('script')[0];
+                            x.parentNode.insertBefore(s, x);
+                        }
+                        if (window.attachEvent)
+                            window.attachEvent('onload', async_load);
+                        else
+                            window.addEventListener('load', async_load, false);
+                    })();
+        </script>
+    
+
+</body></html>

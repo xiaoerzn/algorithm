@@ -1,0 +1,184 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>BaiCells CPE</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-page-mode" content="app">
+    <meta name="browsermode" content="application">
+    <meta name="theme-color" content="#0099CC">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="msapplication-TileColor" content="#0099CC">
+
+    <meta name="application-name" content="BaiCells CPE - LuCI">
+    <meta name="apple-mobile-web-app-title" content="BaiCells CPE - LuCI">
+    <meta name="msapplication-TileImage" content="/luci-static/material/logo.png">
+    <link rel="icon" href="/luci-static/material/logo.png" sizes="144x144">
+    <link rel="apple-touch-icon-precomposed" href="/luci-static/material/logo.png" sizes="144x144">
+
+    <link rel="stylesheet" href="/luci-static/material/css/style.css">
+    <link rel="shortcut icon" href="/luci-static/material/favicon.ico">
+    <script src="/luci-static/material/js/echarts.simple.min.js"></script>
+	<script src="/luci-static/material/js/jquery.min.js"></script>
+	<script src="/luci-static/material/js/CPEScript.js"></script>
+    <script src="/luci-static/resources/xhr.js"></script>
+<script>
+	var time = 0;
+	function RestartTimer() 
+	{
+		time = 0;  
+	}   
+
+	function LogoutTimer()
+	{
+		if(time == 600)
+		{
+			if(location.pathname != "/cgi-bin/luci")
+				window.location.href="/cgi-bin/luci/admin/logout";
+		}
+		time+=1;
+	}   
+
+	setInterval("LogoutTimer()", 1000);
+</script></head>
+
+
+
+<body onmousedown="RestartTimer();" onmousemove="RestartTimer();" onkeydown="RestartTimer();" class="lang_en ">
+
+<header>
+	<div class="container">
+		<!--
+		<span class="showSide"></span>
+		<a class="brand" href="#">BaiCells CPE</a>
+		-->
+		<div class="pull-left">
+			<a href=""><img src="/luci-static/material/logo.png" id="mainlogo" alt="Logo"></a>
+		</div>		
+		<div class="pull-right">
+			
+		<!--  -->
+		</div>
+	</div>
+</header>
+
+ <div class="main">
+	 <div style="" class="loading"><span><div class="loading-img"></div>Loading...</span></div>
+	 <div class="main-left">
+		 <ul class="nav">
+		 </ul>
+	 </div>
+	 <div class="main-right">
+		 <div class="darkMask"></div>
+		 <div id="maincontent">
+			 <div class="container">
+
+
+
+<form method="post" action="/cgi-bin/luci" id="form_set">
+	<div class="cbi-map">
+		<div class="container-header-4G">
+			<h1 class="h1-4G">4G Router</h1>
+		</div>
+		<!-- <h2><a id="content" name="content">Authorization Required</a></h2>
+		<div class="cbi-map-descr">
+			Please enter your username and password.</div> -->
+		<fieldset class="cbi-section"><fieldset class="cbi-section-node">
+			<div class="cbi-value">
+				<!-- <label class="cbi-value-title">Username</label> -->
+				<div class="cbi-value-field">
+					<input class="cbi-input-user" type="text" name="luci_username" placeholder="Username" id="username" value="">
+				</div>
+			</div>
+			<div class="cbi-value cbi-value-last">
+				<!-- <label class="cbi-value-title">Password</label> -->
+				<div class="cbi-value-field">
+					<input class="cbi-input-password" type="password" placeholder="Password" id="password" name="luci_password">
+				</div>
+			</div></fieldset></fieldset>
+	</div>
+
+	<div>
+		<input type="submit" value="Login" class="cbi-button cbi-button-apply">
+	</div>
+</form>
+<script type="text/javascript">//<![CDATA[
+	var input = document.getElementsByName('luci_username')[0];
+	if (input)
+		input.focus();
+//]]></script>
+
+
+
+<script type="text/javascript">//<![CDATA[
+	if (document.location.protocol != 'https:') {
+		var url = 'https://' + window.location.hostname + ':' + '443' + window.location.pathname;
+		var img=new Image;
+		img.onload=function(){window.location = url};
+		img.src='https://' + window.location.hostname + ':' + '443' + '/luci-static/resources/cbi/up.gif?' + Math.random();;
+		setTimeout(function(){
+			img.src=''
+		}, 5000);
+	}
+//]]></script>
+
+
+
+
+					
+                </div>
+            </div>
+			
+				<footer class="mobile-hide">
+					<a href="">2016 © Baicells CPE</a>
+				</footer>
+			
+        </div>	
+	</div>
+	
+	<script type="text/javascript">
+		function setSelectedValue(id,value)
+		{
+			var selectObj = document.getElementById(id);
+			for(i=0;i<selectObj.length;i++)
+			{
+				if(selectObj.options[i].value==value)
+				{
+					selectObj.options[i].selected = "selected";
+				}
+			}
+		}
+
+		if ("en" == "en")
+		{
+			setSelectedValue("header-language", "en");
+		}
+
+		function getSelectedValue(id){
+			var value = document.getElementById(id).value;
+			return value;
+		}
+
+		function langChange()
+		{
+			var lang_change=getSelectedValue("header-language");
+			
+			var langXHR = new XHR();
+			langXHR.get('/cgi-bin/luci/admin/system/langSet', {"LangSetUCI": lang_change},
+				function(x)
+				{
+					location.reload(true);
+				}
+			);
+		}
+	</script>
+	
+    <script>
+        // thanks for Jo-Philipp Wich <jow@openwrt.org>
+        var luciLocation = {};
+    </script>
+    <script src="/luci-static/material/js/jquery.min.js"></script>
+    <script src="/luci-static/material/js/script.js"></script></body></html>

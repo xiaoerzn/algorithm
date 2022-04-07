@@ -1,0 +1,271 @@
+<html><head>
+<title>IMCMEDCOM FTP Server</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<meta http-equiv="Expires" content="0">
+<link rel="Shortcut Icon" href="images/logo.ico" type="image/x-icon">
+<style type="text/css">
+<!--
+body{
+font-family: Tahoma, sans-serif;
+text-align: center;
+font-size:11px;
+font-weight:bold;
+color:#000000;
+overflow: auto;
+}
+a:link,a:visited,a:active,a:hover{color: #FFF;text-decoration:none;}
+.font{
+font-size:12px;
+font-weight:bold;
+color:#000000;
+}
+.bg{
+background:url("images/loginbg_imcmedcom.jpg?t=1635345933") no-repeat;
+-moz-background-size:cover;
+-webkit-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+width:402px;
+height:345px;
+}
+.btn_login{
+    border:none; 
+	background:url("images/btn_login.gif") no-repeat;
+	height:27px;
+	width:110px;
+	cursor:pointer;
+    outline:none;
+	color:#000000;
+	font-size:14px;
+	font-weight:bold;
+	padding-left:25px;
+	margin-top:2px;
+}
+-->
+</style>
+
+<script language="javascript">
+
+if(!navigator.cookieEnabled)
+{
+	alert("Cookies must be enabled on your browser!");
+}
+
+function $(obj)
+{
+	return document.getElementById(obj);
+}
+
+function ch()
+{
+	if($("username_val").value=="")
+	{
+		alert("用户名不能为空!");
+		$("username_val").focus();
+		return false;
+	}
+	$("username").value = $("username_val").value.replace(/\s/g,"%20");
+	$("password").value = $("password_val").value.replace(/\s/g,"%20");
+	return true;
+}
+
+
+function setCookie(name,value,date) 
+{
+	document.cookie = name + "=" + escape(value) + "; expires=" + date.toGMTString() + "; path=/;";
+}
+
+function getCookie(name) 
+{
+	var search; 
+	search = name + "=" 
+	offset = document.cookie.indexOf(search) 
+	if (offset != -1) 
+	{ 
+		offset += search.length ; 
+		end = document.cookie.indexOf(";", offset) ; 
+		if (end == -1) 
+		end = document.cookie.length; 
+		return unescape(document.cookie.substring(offset, end)); 
+	} 
+	else 
+	{
+		return ""; 
+	}
+}
+
+function deleteCookie(name) 
+{
+	var expdate = new Date(); 
+	expdate.setTime(expdate.getTime() - (86400*1000)); 
+	setCookie(name, "", expdate); 
+}
+
+
+isIphone = navigator.userAgent.toLowerCase().indexOf('iphone')==-1? 0:1;
+isAndroid = navigator.userAgent.toLowerCase().indexOf('android')==-1? 0:1;
+isWindowsPhone = navigator.userAgent.toLowerCase().indexOf('windows phone')==-1? 0:1;
+if(isIphone || isAndroid || isWindowsPhone)
+{
+	if(navigator.cookieEnabled)
+		location = 'login_m.html';
+}
+
+var langindexArr = new Array("english","french","german","italian","dutch","portuguese","spanish","schinese","tchinese","japanese","czech","romanian","turkish","korean","polish");
+var langArr = new Array("English","French","German","Italian","Dutch","Portuguese","Spanish","Simplified Chinese","Traditional Chinese","Japanese","Czech","Romanian","Turkish","Korean","Polish");
+
+if(navigator.cookieEnabled)
+{
+	if(getCookie("client_lang") == "" && location.search.indexOf("?lang") == -1)
+	{
+		var language = null;
+		if (navigator.appName == 'Netscape') 
+			language = navigator.language; 
+		else 
+			language = navigator.browserLanguage;
+
+		if (language.indexOf('en') > -1) location = '?lang=english';  
+		else if (language.indexOf('fr') > -1) location = '?lang=french';
+		else if (language.indexOf('de') > -1) location = '?lang=german';
+		else if (language.indexOf('it') > -1) location = '?lang=italian';
+		else if (language.indexOf('nl') > -1) location = '?lang=dutch';
+		else if (language.indexOf('pt') > -1) location = '?lang=portuguese';
+		else if (language.indexOf('es') > -1) location = '?lang=spanish';
+		else if (language.indexOf('zh') > -1) location = '?lang=schinese'; 
+		else if (language.indexOf('tw') > -1) location = '?lang=tchinese'; 
+		else if (language.indexOf('ja') > -1) location = '?lang=japanese';
+		else if (language.indexOf('cz') > -1) location = '?lang=czech'; 
+		else if (language.indexOf('ro') > -1) location = '?lang=romanian';
+		else if (language.indexOf('tr') > -1) location = '?lang=turkish';
+		else if (language.indexOf('ko') > -1) location = '?lang=korean';
+		else if (language.indexOf('pl') > -1) location = '?lang=polish';
+		else location = '?lang=english';
+	}
+	else
+	{
+		langArr = new Array("English","Français","Deutsch","Italiano","Nederlands","Português","Español","简体中文","繁體中文","日本語","Czech","Romanian","Türkçe","한국어","Polski");
+	}
+}
+
+function changelanguage(obj)
+{
+	var l = obj.options[obj.selectedIndex].value;
+	location = "?lang="+l;
+}
+
+function switchcheckbox()
+{
+	if($("remember").checked == false)
+	{
+		deleteCookie("client_login_name");
+	}
+}
+
+function showQRcode()
+{
+	if($("qrcode").style.display == "none" || $("qrcode").style.display == "")
+		$("qrcode").style.display = "block";
+	else
+		$("qrcode").style.display = "none";
+}
+</script>
+</head>
+<body bgcolor="#60605E" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<form name="frm_login" method="post" action="loginok.html">
+<input name="username" id="username" type="hidden">
+<input name="password" id="password" type="hidden">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td align="center" valign="top" style="padding-top:90px;"> 
+	<table width="402" height="381" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td class="bg"> <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody><tr> 
+                <td height="210">&nbsp;</td>
+              </tr>
+              <tr> 
+                <td>
+				<table width="98%" border="0" align="center" cellpadding="0" cellspacing="3">
+                    <tbody><tr> 
+                      <td width="86" height="27" align="right" class="font"><label for="username_val">用户名:</label></td>
+                      <td><input name="username_val" id="username_val" type="text" tabindex="1" value="" style="width:160px;"></td>
+                      <td width="110" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tbody><tr> 
+                            <td width="20"> <input type="checkbox" name="remember" id="remember" tabindex="4" value="true" checked="" onclick="switchcheckbox()">
+                            </td>
+                            <td style="font-size:11px;font-weight:bold;"><label for="remember">记住我</label></td>
+                          </tr>
+                        </tbody></table></td>
+                    </tr>
+                    <tr> 
+                      <td width="86" height="27" align="right" class="font"><label for="password_val">密 码:</label></td>
+                      <td><input name="password_val" id="password_val" type="password" autocomplete="off" tabindex="2" style="width:160px;"></td>
+                      <td style="font-size:11px;cursor:pointer;" onclick="showQRcode();"><img src="images/phone.png" style="vertical-align:bottom; margin-right:2px;">下载 App</td>
+                    </tr>
+                    <tr> 
+                      <td height="27" align="right" class="font">语 言:</td>
+                      <td><select id="lang_sel" onchange="changelanguage(this)" tabindex="3" style="width:160px;"><option value="english">English</option><option value="french">Français</option><option value="german">Deutsch</option><option value="italian">Italiano</option><option value="dutch">Nederlands</option><option value="portuguese">Português</option><option value="spanish">Español</option><option value="schinese">简体中文</option><option value="tchinese">繁體中文</option><option value="japanese">日本語</option><option value="czech">Czech</option><option value="romanian">Romanian</option><option value="turkish">Türkçe</option><option value="korean">한국어</option><option value="polish">Polski</option></select></td>
+                      <td rowspan="2">
+						<a href="https://wftpserver.com/download_client.html" target="_blank"><img src="images/qrcode.png" id="qrcode" border="0" style="display:none" title="Scan or click the QR code to download"></a>
+						</td>
+                    </tr>
+                    <tr> 
+                      <td height="30">&nbsp;</td>
+                      <td valign="top">                         
+					  <input class="btn_login" width="110" height="27" type="submit" name="submit_btn" id="submit_btn" value=" 登 录 " onclick="return ch()" tabindex="5">
+					  </td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </tbody></table></td>
+              </tr>
+            </tbody></table></td>
+        </tr>
+        <tr> 
+        <td height="35" align="center" style="font-size:2px;color:#60605E;">
+		
+		  <a href="https://www.wftpserver.com/">Wing FTP Server</a>
+		
+		</td>
+        </tr>
+      </tbody></table></td>
+  </tr>
+</tbody></table>
+</form>
+
+
+
+
+<script language="javascript">
+var isIE = navigator.userAgent.indexOf('MSIE')==-1? 0:1;
+if(isIE)
+{
+	var strVer = navigator.appVersion;
+	IEversion = parseInt(strVer.substring(strVer.indexOf("MSIE ")+5,strVer.indexOf(";",strVer.indexOf("MSIE "))));
+	if(IEversion < 6)
+	{
+		alert("In order to view and use the web client properly, you will need to upgrade your browser to Internet Explorer 6.0 or higher!");
+	}
+}
+
+if(navigator.cookieEnabled)
+{
+	for(var index in langArr)
+	{
+		$("lang_sel").options.add(new Option(langArr[index],langindexArr[index]));
+		if(getCookie("client_lang") == langindexArr[index])
+			$("lang_sel").options[index].selected = true;
+	}
+}
+
+
+$("username_val").focus();
+
+</script>
+
+<noscript><center><H2>对不起,您的浏览器不支持Javascript,请更改您的浏览器选项以启用Javascript <br>如果你不知道如何设置浏览器, <a href='help_javascript.htm'>请点这里.</a></H2></center></noscript>
+
+
+</body></html>

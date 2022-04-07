@@ -1,0 +1,32 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="login page">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOGIN</title>
+<link rel="stylesheet" href="/esi/10127106/mdl/material.css">
+<link rel="stylesheet" type="text/css" href="/images/login.css">
+<script type="text/javascript" src="/images/md5.js"></script><script type="text/javascript" src="/images/login.js"></script>
+</head>
+<body onload="self.focus(); document.loginForm.user.focus();">
+<div class="mdl-layout mdl-js-layout allSectionsAndButtons be-login"><main class="mdl-layout__content"><form name="loginForm" method="post" autocomplete="off" onsubmit="SendLogin(); return(false);"><div class="mdl-card mdl-shadow--6dp">
+<div class="mdl-card__title mdl-color--primary mdl-color--primary mdl-color-text--primary-contrast"><h2 class="mdl-card__title-text">Welcome to your rs353a</h2></div>
+<div class="mdl-card__supporting-text">
+<div class="hint">Login with your Username and your password. The default User is 'admin'.</div>
+<div><div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label be-textfield__container">
+<input class="mdl-textfield__input" type="text" id="username" name="user" value=""><label class="mdl-textfield__label" for="username">User</label>
+</div></div>
+<div><div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label be-textfield__container">
+<input class="mdl-textfield__input" type="password" id="userpasswd" name="pass" value=""><label class="mdl-textfield__label" for="userpasswd">Password</label>
+</div></div>
+</div>
+<div class="mdl-card__actions mdl-card--border">
+<div class="section-spacer"></div>
+<input class_="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" type="submit" name="login" value="Login">
+</div>
+</div></form>
+<form name="postForm" method="POST" action="/proclog.htm">
+<input type="hidden" name="sessionLoginName"><input type="hidden" name="sessionLoginHash"><input type="hidden" name="savedTarget" value="/esi/10127106/esi.cgi?page=index.xml"><input type="hidden" name="page" value="index.xml">
+</form></main></div>
+<script src="/esi/10127106/mdl/material.js"></script></body></html>

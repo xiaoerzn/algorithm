@@ -1,0 +1,50 @@
+<html><head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="../css/base.css" type="text/css">
+	<link rel="stylesheet" href="../css/login.css" type="text/css">
+	<script type="text/javascript" src="../script/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../script/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../script/login.js"></script>
+	<script type="text/javascript" src="../script/common.js"></script>
+	<script type="text/javascript" src="../script/Translator.js"></script>
+</head>
+<body onload="g_oLogin.initLogin()">
+<div id="container">
+    <div class="loginbg">
+	    <div class="language">
+	        <select id="LanguageSelect" name="LanguageSelect" class="width120" onchange="g_oLogin.changeFrameLanguage(this.value)"></select> 
+	    </div>
+        <div class="login">
+	        <div class="height25 lineheight25">
+			    <span class="displayinlineblock width110 fontwhite">
+				    <label id="lausername" name="lausername"></label>
+				</span>
+				<span>
+				    <input type="text" id="loginUserName" class="inputwidth" maxlength="16">
+				</span>
+			</div>
+            <div class="height25 lineheight25">			
+			    <span class="displayinlineblock width110 fontwhite">
+				    <label id="lapassword" name="lapassword"></label>
+				</span>
+				<span>
+				    <input type="Password" id="loginPassword" class="inputwidth" maxlength="16">
+				</span>			
+			</div>
+			<div>
+			    <span class="displayinlineblock width110"></span>			
+				<span class="loginbtn" onclick="g_oLogin.doLogin()" onmousemove="this.className='loginbtnon'" onmouseout="this.className='loginbtn'">
+					<label id="lalogin" name="lalogin" class="cursorpointer"></label>
+				</span>			
+			</div>
+
+	    </div>
+    </div>
+	<!--<div class="footer">
+        <label name="laCopyRight">©Hikvision Digital Technology Co., Ltd. All Rights Reserved.</label>
+    </div>-->
+</div>
+
+
+</body></html>

@@ -1,0 +1,307 @@
+<html ng-app="cmd-app" data-language-code="zh-cn" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> ShadowControl </title>
+
+    <link rel="icon" type="image/png" href="/static/img/favicon.ico?4.3.0.26">
+    <link href="/static/css/defaults.css?4.3.0.26" rel="stylesheet" type="text/css">
+    <link href="/static/css/base.css?4.3.0.26" rel="stylesheet" type="text/css">
+    <link href="/static/css/custom-theme/jquery-ui-1.10.3.custom.min.css?4.3.0.26" rel="stylesheet" type="text/css">
+    <link href="/static/js/bootstrap-3.1.1-dist/css/bootstrap.min.css?4.3.0.26" rel="stylesheet" type="text/css">
+    <link href="/static/js/bootstrap-3.1.1-dist/css/bootstrap-theme.css?4.3.0.26" rel="stylesheet" type="text/css">
+    <link href="/static/css/tipsy.css?4.3.0.26" rel="stylesheet" type="text/css">
+    
+    <link href="/static/css/forms.css?4.3.0.26" rel="stylesheet" type="text/css">
+
+    
+    
+    <script src="/static/js/jquery/jquery-1.11.1.min.js"></script>
+    <script src="/static/js/jquery.migrate/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/static/js/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.ui/jquery-ui-1.10.3.custom.min.js"></script>
+    
+        <script src="/static/js/jquery.ui/i18n/jquery.ui.datepicker-zh-cn.js?4.3.0.26"></script>
+    
+    <script src="/static/js/globalize/globalize.js?4.3.0.26"></script>
+    
+        <script src="/static/js/globalize/cultures/globalize.culture.zh-cn.js?4.3.0.26"></script>
+    
+    <script src="/static/js/ajax_csrf.js?4.3.0.26"></script>
+    <script src="/static/js/jquery.tipsy/jquery.tipsy.js?4.3.0.26"></script>
+    <script src="/static/js/jquery.cycle/jquery.cycle.all.js?4.3.0.26"></script>
+    <script src="/static/js/angular/angular.min.js?4.3.0.26"></script>
+    <script src="/static/js/angular/angular-resource.min.js?4.3.0.26"></script>
+    <script src="/static/js/chart/Chart.min.js?4.3.0.26"></script>
+    <script src="/static/js/accordion.js?4.3.0.26"></script>
+    <script src="/static/js/refresher.js?4.3.0.26"></script>
+    <script src="/static/js/websockets.js?4.3.0.26"></script>
+    <script src="/static/ng/main.js?4.3.0.26"></script>
+    <script type="text/javascript">
+        var realtime_ws = new ReconnectingWebSocket('/ws');
+
+        $(function() {
+            $(".tipped").tipsy({gravity: 's', fade: true, opacity: 1.0});
+            $(".tipped-left").tipsy({gravity: 'e', fade: true, opacity: 1.0});
+            $(".tipped-right").tipsy({gravity: 'w', fade: true, opacity: 1.0});
+            $(".tipped-topleft").tipsy({gravity: 'se', fade: true, opacity: 1.0});
+
+            Globalize.culture(["zh-cn", "en"]);
+
+            do_resize();
+
+            $('#bootstrap-modal').modal({
+                'backdrop': 'static',
+                'show': false
+            });
+        });
+
+        $(window).resize(function(){
+            do_resize();
+        });
+
+        function do_resize(){
+            $("#fixed-header").css("top", $("#top-nav").height());
+            $("#page").css("padding-top", $("#top-nav").height() + $("#fixed-header").height());
+            $("#fixed-footer").css("bottom", $("#top-bot").height());
+            $("#page").css("padding-bottom", $("#top-bot").height() + $("#fixed-footer").height());
+            $("#fixed-side-menu").css("top", $("#top-nav").height() + $("#fixed-header").height() + 4);
+            $("#settings-content").css("padding-left", $("#fixed-side-menu").width());
+            $("#info-float").css("bottom", $("#fixed-footer").height() + $("#info-float").height() + 10);
+        }
+
+        $.widget( "ui.timespinner", $.ui.spinner, {
+            options: {
+                // seconds
+                step: 60 * 1000,
+                // hours
+                page: 60
+            },
+
+            _parse: function( value ) {
+                if ( typeof value === "string" ) {
+                    // already a timestamp
+                    if ( Number( value ) == value ) {
+                        return Number( value );
+                    }
+                    return +Globalize.parseDate( value );
+                }
+                return value;
+            },
+
+            _format: function( value ) {
+                return Globalize.format( new Date(value), "t");
+            }
+        });
+
+        function create_timespinner(spinner){
+            spinner.timespinner();
+            spinner.focusout(function(){
+                // Force redraw of spinner to make sure the spinner value is valid.
+                spinner.timespinner("stepUp", 1);
+                spinner.timespinner("stepDown", 1);
+            });
+        }
+
+        function utc_spinner_time(spinner) {
+            var d = new Date(1970, 1, 1);
+            var offset = d.getTimezoneOffset() * 60000;
+            spin_value = spinner.timespinner("value");
+            return spin_value - offset
+        }
+
+        function set_spinner_time(spinner, time) {
+            if(isNaN(time))
+                time = +Globalize.parseDate(time, "", "en-US");
+            else
+                time = utc_offset_to_local(parseInt(time, 10));
+            spinner.timespinner("value", time);
+        }
+
+        function utc_offset_to_local(time) {
+            var d = new Date(1970, 1, 1);
+            var offset = d.getTimezoneOffset() * 60000;
+            return time + offset
+        }
+
+        function do_modal(type, msg, ok_handler) {
+            var modal = $('#bootstrap-modal');
+            $(modal).find('.modal-body').html(msg);
+            $(modal).find('.btn').hide();
+            $(modal).find('.' + type + '-btns').show();
+            if(type == 'none')
+                $(modal).find('.modal-footer').hide();
+            modal.modal('show');
+
+            var modalHolder = $('<div id="modal-holder" class="tw-bs"></div>');
+            $('body').append(modalHolder);
+            $('.modal-backdrop').first().appendTo(modalHolder);
+
+            modal.on('hidden.bs.modal', function(e) {
+                $('#modal-holder').remove();
+            });
+
+            if(type == 'confirm') {
+                var ok_btn = $(modal).find('#confirm-ok');
+                ok_btn.unbind('click');
+                ok_btn.click(function(){
+                    setTimeout(ok_handler, 500);
+                });
+            }
+        }
+
+        function do_popover(container, placement) {
+            container.popover({
+                html: true,
+                trigger: 'manual',
+                placement: placement
+            }).on("mouseenter", function () {
+                var _this = this;
+                $(this).popover("show");
+                $(this).siblings(".popover").on("mouseleave", function () {
+                    $(_this).popover('hide');
+                });
+            }).on("mouseleave", function () {
+                var _this = this;
+                setTimeout(function () {
+                    if (!$(".popover:hover").length) {
+                        $(_this).popover("hide")
+                    }
+                }, 100);
+            });
+        }
+
+        function setDisabled(target, bool){
+            $(target).prop('disabled', bool);
+            var fade = 1;
+            if(bool)
+                fade = 0.5;
+            $(target).fadeTo(300, fade);
+        }
+
+    </script>
+    
+    <script type="text/javascript">
+        $(function() {
+
+        });
+	</script>
+
+    
+    
+</head>
+
+<body>
+<div class="tw-bs">
+    <nav id="top-nav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/">
+                <img class="header-logo" src="/static/img/logo2.png?4.3.0.26" alt="ShadowControl">
+            </a>
+        </div>
+        
+        </div>
+    </nav>
+</div>
+
+<div id="fixed-header" style="top: 49px;">
+    <div id="fixed-header-content">
+        
+    </div>
+</div>
+
+<div class="content">
+
+<div id="page" style="padding-top: 53px; padding-bottom: 37px;">
+    <fieldset class="center-form">
+        <legend>登录</legend>
+        <div class="content">
+            <form method="post" action="/accounts/login/?next=/" class="ng-pristine ng-valid"><input type="hidden" name="csrfmiddlewaretoken" value="NyjkKD9l1ez53ACLPAIqfAZ0rKaMssma">
+                <table>
+                    <tbody><tr>
+                        <td>用户名:</td>
+                        <td>
+                            <input id="id_username" maxlength="254" name="username" type="text">
+                        </td>
+                        <td>
+                            <span class="error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密码:</td>
+                        <td>
+                            <input id="id_password" name="password" type="password">
+                        </td>
+                        <td>
+                            <span class="error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <div class="tw-bs">
+                                <input type="submit" class="btn btn-default btn-sm" value="登录">
+                            </div>
+                            <div class="forgot_password_link">
+                                <a href="/accounts/forgot-password/">是否忘记了密码？</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody></table>
+                
+            </form>
+        </div>
+    </fieldset>
+</div>
+<a href="/endpoint/installers/">
+    <div id="info-float" style="bottom: 46px;">
+        <p>EndPoint 安装操作指南</p>
+    </div>
+</a>
+
+</div>
+
+<div id="fixed-footer" style="bottom: 29px;">
+    <div id="fixed-footer-content">
+        
+    </div>
+</div>
+
+
+
+<div class="tw-bs">
+    <nav id="top-bot" class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header footer-div">
+                <div class="footer-logo">
+                    <a href="http://www.storagecraft.com" target="_blank" style="background-color: #e9e9e9;">
+                        <img class="header-logo" src="/static/img/stc_logo2.png?4.3.0.26">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<div class="tw-bs">
+    <div id="bootstrap-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" style="font-size: 16px;"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default confirm-btns" data-dismiss="modal">取消</button>
+                    <button type="button" id="confirm-ok" class="btn btn-primary confirm-btns" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-default alert-btns" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</body></html>

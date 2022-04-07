@@ -1,0 +1,212 @@
+<html class=" ext-strict"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache"> 
+<title>Extreme NetConfig UI</title>
+<link rel="shortcut icon" href="/rs/extimages/favicon-RGB.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="/rs/hm.css">
+<link rel="stylesheet" type="text/css" href="/ext/resources/css/ext-all.css">
+<link rel="stylesheet" type="text/css" href="/ext/multiselect/multiselect.css">
+<link rel="stylesheet" type="text/css" href="/ext/resources/css/xtheme-gray.css">
+
+<script type="text/javascript" src="/ext/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="/ext/ext-all.js"></script>
+<script type="text/javascript" src="/ext/multiselect/multiselect.js"></script>
+<script type="text/javascript" src="/ext/multiselect/DDView.js"></script>
+
+<script type="text/javascript" src="/rs/hm.util.js"></script>
+<script type="text/javascript" src="/rs/hm.error.js"></script>
+
+
+<style>
+.hm_version {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 7px;
+	color: #FFCC00;
+	padding: 0px 10px 0px 0px;
+}
+
+.hm_logo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	line-height: 24px;
+	color: white;
+	padding: 0px 10px 0px 0px;
+}
+</style>
+
+<script>
+	g_miniHiveUI = true;
+    function submitAction(){
+        if(document.forms[0].userName.value.length==0){
+           showError(LOGIN_ERROR_NULL_USERNAME);
+           document.forms[0].userName.focus();
+           return;
+        }
+        if(document.forms[0].password.value.length==0){
+           showError(LOGIN_ERROR_NULL_PWD);
+           document.forms[0].password.focus();
+           return;
+        }
+	        document.forms[0].submit();
+    }
+    function onLoadEvent() {
+           
+        var error = null;        if(!Ext.isEmpty(error)){
+           showError(error);
+        }
+        var href = document.location.href;
+        if (href.indexOf("https") == -1) {
+           document.location.href = href.replace("http:", "https:");
+        }
+
+	    document.forms[0].userName.focus();
+	    document.forms[0].userName.onkeydown = loginKeyHandler;
+	    document.forms[0].password.onkeydown = loginKeyHandler;
+	    var browser = new detectBrowser();	    
+	    var cssText = "padding: 10px 10px 0 25px;";
+	    if(browser.isIE ||  browser.isFF){
+	    	cssText = "width:100px; padding: 10px 10px 0 10px;";    	
+	    } 
+	    document.getElementById("passwordLable").style.cssText  = cssText;
+	    document.getElementById("userNameLable").style.cssText  = cssText;
+    } 
+
+    function loginAuth(){
+        var login_auth='0';
+        if(parseInt(login_auth)!=1)
+        {
+            showError(APPLY_ERROR_LOGIN_AUTH);
+            return false ;
+        }
+        return true;
+    }
+    function loginKeyHandler(e) {
+	    if (!e) {
+		    // Use window.event for IE
+		    e = window.event;
+	    }
+	    if (e && e.keyCode==13) {
+	        submitAction();
+	    }
+    }
+    
+    function showError(message) {
+    var tr = document.getElementById("note");
+	var td = document.getElementById("noteText");
+		td.removeChild(td.firstChild);
+		td.appendChild(document.createTextNode(message));
+		tr.style.display="block";
+	
+	}
+</script>
+</head>
+
+<body class="xtheme-gray body_bg login_bg_img  ext-chrome" onload="onLoadEvent()">
+<form action="login.php5?version=10.4r3" method="post">
+<input type="hidden" name="login_auth" id="login_auth" value="0">
+<input type="hidden" name="miniHiveUI" id="miniHiveUI" value="1">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+		<td class="top_nav_bg">
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody><tr>
+				<td><img src="/rs/extimages/logo-extreme-WHT.png" width="111" height="48" alt="" class="dblk"></td>
+			</tr>
+		</tbody></table>
+		</td>
+		<td class="top_nav_bg" width="100%"></td>
+		<td><img src="/rs/extimages/header-purple-graphic.png" width="28" alt="" class="dblk"></td>
+		<td class="top_nav_right_bg" align="right" width="">
+		<table border="0" cellspacing="0" cellpadding="0" width="150">
+			<tbody><tr>
+				<td class="hm_version" align="right" valign="bottom">10.4r3</td>
+			</tr>
+			<tr>
+				<td class="hm_logo" valign="top" align="right"><b>Hive</b>OS</td>
+			</tr>
+		</tbody></table>
+		</td>
+	</tr>
+	<tr>
+		<td class="top_menu_bg" colspan="4">
+	</td></tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		
+		<tbody><tr>
+			<td style="padding: 100px 150px 150px 150px" align="center">
+			<table border="0" cellspacing="0" cellpadding="0" width="300">
+		<tbody><tr id="note" style="display: none">
+			<td style="padding: 4px 0 0 0px" align="center">
+			<div>
+
+			<table border="0" cellspacing="0" cellpadding="0" width="100%" class="note">
+				<tbody><tr>
+					<td height="5"></td>
+				</tr>
+				<tr>
+					<td class="noteError" id="noteText" align="center">&nbsp;</td>
+				</tr>
+				<tr>
+					<td height="6" width="300"></td>
+				</tr>
+			</tbody></table>
+			</div>
+			</td>
+		</tr>
+				<tr>
+					
+					<td bgcolor="#FFFFFF" rowspan="2" class="menu_bg" style="padding: 2px 0 0 2px;" valign="top">
+					<table style="padding: 2px 2px 2px 2px;" border="0" cellspacing="0" cellpadding="0" width="100%" class="login">
+						<tbody><tr>
+						   <td colspan="2">
+							<table width="300" border="0" cellspacing="0" cellpadding="0">
+							 <tbody><tr>
+							   <!-- <td class="top_menu_bg">&nbsp;</td> -->
+							   <!-- <td width="300"><img src="/rs/extimages/login.png" 
+							     width="300" height='25' alt="" class="dblk"/></td> -->
+							 </tr></tbody></table></td>
+						</tr>			
+						<tr>
+							<td id="userNameLable" style="padding: 10px 10px 0px 25px;" align="left" class="login">Admin Name</td>
+							<td style="padding: 10px 0 0 10px;" align="left"><input type="text" name="userName" style="height:16px;width:150px;font-family: Verdana, Arial, Helvetica, sans-serif;"></td>
+						</tr>
+						
+						<tr>
+							<td id="passwordLable" style="padding: 10px 10px 0px 25px;" align="left" class="login">Password</td>
+							<td style="padding: 10px 0 0 10px;" align="left"><input type="password" autocomplete="off" name="password" style="height:16px;width:150px;font-family: Verdana, Arial, Helvetica, sans-serif;"></td>
+						</tr>
+						<tr>
+									<td width="100" height="50" valign="middle">
+									<div align="right"></div>
+									</td>
+									<td width="120" height="40" align="left" valign="middle" style="padding: 10px 0 0 10px;"><a href="javascript:submitAction()"><img class="dinl" src="/rs/extimages/button-login.png" width="164" height="25"></a></td>
+						</tr>
+						
+						<tr>
+							<td colspan="2" style="padding: 4px 0 8px 0;"></td>
+					    </tr>
+					</tbody></table>
+					</td>
+					
+				</tr>
+				<tr>
+					<td class="menu_bg"></td>
+					<td class="menu_bg"></td>
+				</tr>
+				
+			</tbody></table>
+			</td>
+		</tr>
+	</tbody></table>
+
+</form>
+
+
+
+</body></html>

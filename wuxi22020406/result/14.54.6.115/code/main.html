@@ -1,0 +1,110 @@
+<html><head>
+	<!-- no cache headers -->
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="" x-ui-compatible"="" content="IE=9;IE=8;IE=7;IE=EDGE">
+	<!-- end no cache headers -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Net Video Browser</title>
+    <link href="tdvideo.css" rel="stylesheet">
+</head>
+<body id="bodyText" style="background:#F2F2F2; overflow-y:hidden;">
+	<div id="div_1" style="display: none;"><object name="TiandyVideo" id="NvsVideo" type="application/plugin-NetVideo NVR" style="border:1px solid black; width:1px; height:1px"></object></div>
+    <div id="div_2" style="display: block;">
+    	<table style="width:100%; height:100%">
+        	<tbody><tr>
+            	<td align="center">
+                  <div id="div_image">
+                  	<a href="NetVideo.exe" id="donwnloadHref" style="cursor: hand; color:blue; width:90%; display:block">请点击此处下载插件，如果您已安装插件，请按F5刷新，安装插件过程中请关闭浏览器。</a>
+                </div>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+
+	<script language="javascript" type="text/javascript">
+		var Sys = {};
+		var ua = navigator.userAgent.toLowerCase();
+		var s;
+		(s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+		(s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+		(s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+		(s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+		(s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+		
+		//	兼容IE11的判断
+		if(document.documentMode && document.documentMode == 11)
+		{
+			Sys.ie = 1;
+		}
+				
+		if (Sys.ie){
+			document.getElementById("div_1").innerHTML ="<object classid=\"clsid:CBA75DB2-4139-4ce1-BE8D-9EC0927BFB2A\" name=\"TiandyVideo\" id=\"NvsVideo\"></object>";
+		} else {
+			document.getElementById("div_1").innerHTML ="<object name=\"TiandyVideo\" id=\"NvsVideo\" type=\"application/plugin-NetVideo NVR\" style='border:1px solid black; width:1px; height:1px'></object>";
+		}
+		function CheckOCX()
+		{
+			var retval = -1;
+			try
+			{	
+				video.CheckLocalOcx();
+				retval = 0;
+			}
+			catch(e)
+			{
+				retval = -1;
+			}
+			return retval;
+		}
+		var video = document.getElementById("NvsVideo");
+		var Ret = -1;
+		for (i=0; i<10; i++)
+		{
+			Ret = CheckOCX();
+			if(Ret == 0)
+			{
+				var la;
+				if (typeof ActiveXObject != "undefined"){
+				//IE
+				   la = navigator.browserLanguage.toLowerCase();
+				}else if (window.XMLHttpRequest) {
+				//firefox
+				   la = navigator.language.toLowerCase();
+				}
+				
+				var now=new Date(); 
+				var number = now.getYear().toString()+now.getMonth().toString()+now.getDate().toString()+now.getHours().toString()+now.getMinutes().toString()+now.getSeconds().toString(); 
+				//alert("index_ch.html?" + number);//测试 
+				if(la == 'zh-cn'){
+					document.location = 'index_ch.html' + '?time=' + number; //+ Para;
+				}else{
+					document.location = 'index_en.html' + '?time=' + number;//+ Para; 
+				}
+				break;
+			}
+		}	//如果加载控件失败
+		if(Ret == -1)
+		{
+			document.getElementById("div_1").style.display = "none";
+			document.getElementById("div_2").style.display = "block";
+						
+			var la;
+			if (typeof ActiveXObject != "undefined"){
+			//IE
+			   la = navigator.browserLanguage.toLowerCase();
+			}else if (window.XMLHttpRequest) {
+			//firefox
+			   la = navigator.language.toLowerCase();
+			}
+			if(la == "en-us"){
+				document.getElementById("donwnloadHref").innerHTML = "Please click to download the plugin. If installed already,please just press F5 to refresh it (no need install again ).Please close the browser during installing.";
+			}else if(la == "zh-cn"){
+				document.getElementById("donwnloadHref").innerHTML = "请点击此处下载插件，如果您已安装插件，请按F5刷新，安装插件过程中请关闭浏览器。";
+			}else{
+				document.getElementById("donwnloadHref").innerHTML = "Please click to download the plugin. If installed already,please just press F5 to refresh it (no need install again ).Please close the browser during installing.";
+			}
+		}
+    </script>
+</body></html>

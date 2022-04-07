@@ -1,0 +1,55 @@
+<html><head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="gui/icons/font-awesome-4.5.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="gui/themes/default/login/codepen.io/marcobiedermann/css/style.css">
+  </head>
+  <body class="align">
+    <div class="site__container">
+      <div class="grid__container">
+      <img src="gui/themes/default/images/tl-logo-transparent-25.png"><br>
+      <span>1.9.20 [DEV]  </span>
+      </div>
+      
+      
+      
+            
+        
+        <div class="grid__container">
+          <form name="login" id="login" action="login.php?viewer=" method="post" class="form form--login">
+                       <input type="hidden" name="CSRFName" value="CSRFGuard_406397872">
+                       <input type="hidden" name="CSRFToken" value="8f55f6edb71b3040cec55608a8b81d49a594ffc73cb61b186920d7b73a5f628a7cabdb40027c420cced43c791792581a1f907b51e180308aff5a72139a58e5b4">
+            <input type="hidden" name="reqURI" value="">
+            <input type="hidden" name="destination" value="">
+
+            
+            <div class="form__field">
+              <label for="tl_login"><i class="fa fa-user"></i></label>
+              <input maxlength="100" name="tl_login" id="tl_login" type="text" class="form__input" placeholder="Login Name" required="">
+            </div>
+
+            <div class="form__field">
+              <label for="tl_password"><i class="fa fa-lock"></i></label>
+              <input name="tl_password" id="tl_password" type="password" class="form__input" placeholder="Password" required="">
+            </div>
+
+            <div class="form__field">
+              <input id="tl_login_button" type="submit" value="Login">
+            </div>
+
+                      </form>
+
+          <p class="text--center">
+                      <a href="firstLogin.php?viewer=new" id="tl_sign_up">
+            New User?</a> &nbsp; &nbsp;
+          
+              
+                      <a href="lostPassword.php?viewer=new" id="tl_lost_password">
+            Lost Password?</a>
+                    </p> 
+        </div>
+        </div>
+
+
+</body></html>

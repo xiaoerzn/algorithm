@@ -1,0 +1,67 @@
+<html><head>
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<title>FW-Enigami - Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<script type="text/javascript">
+function replaceParam(){
+  var newParam = "Enabled";
+  document.loginform.action = document.loginform.action.replace(/Disabled$/,newParam);
+}
+
+</script>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+    </head><body><div class="header">
+<a href="http://www.lancom-systems.de"><img class="headerimg" src="/images/productsvg.svg" alt="LANCOM Systems Homepage"></a><p class="headerp">LANCOM 1781VAW (over ISDN)</p>
+</div>
+<div class="logincontent">
+<div class="login">
+ <h1> FW-Enigami </h1>
+<div id="leftDiv">
+<img style="border:0" src="/images/prodimg.jpeg" alt=" LANCOM 1781VAW (over ISDN)">
+</div>
+<div id="rightDiv">
+ <form method="POST" action="/?JavaScriptDisabled" name="loginform" onsubmit="replaceParam();calculatehashthensubmit();">
+   <table border="0" cellpadding="3" cellspacing="0" class="centeredTable">
+     <tbody><tr>
+       <td align="left"> Login</td>
+       <td>  <input type="text" name="loginname" class="Feld" size="30" maxlength="16"></td>
+     </tr>
+     <tr>
+       <td align="left"> Password</td>
+       <td>  <input name="passwort" type="password" class="Feld" size="30" maxlength="40"> </td>
+       <td>  <input name="challenge" type="hidden" value="54440325f5eacb6628291c3d3bb29455cb1e1adc6ce72c4e51152c5146c90f22"> </td>
+       <td>  <input name="hashpasswort" type="hidden" value=""> </td>
+     </tr>
+     <tr>
+       <td></td><td><button type="submit" class="Button" accesskey="o"><span style="text-decoration:underline">O</span>K</button>
+       </td>
+     </tr>
+   </tbody></table>
+ </form>
+<script type="text/javascript">
+  document.forms[0].elements[0].focus();
+</script>
+<noscript>
+<span style="color:red"><p>A webbrowser with active <a href="http://wikipedia.org/wiki/JavaScript">JavaScript</a> support is required.</p></span>
+</noscript>
+</div>
+<div style="clear:both"></div></div>
+<script type="text/javascript" charset="utf-8" src="/js/sjcl.js"></script>
+<script type="text/javascript" charset="utf-8">
+function hexStringToBytes(hex){
+for (var bytes=[],c=0;c<hex.length;c+=2)
+	bytes.push(parseInt(hex.substr(c,2),16));
+return bytes;}
+function calculatehashthensubmit(){
+	var pwd = document.getElementsByName("challenge")[0].value + document.getElementsByName("passwort")[0].value;
+  var bitArray = sjcl.hash.sha256.hash(pwd);
+document.getElementsByName("hashpasswort")[0].value = sjcl.codec.hex.fromBits(bitArray);
+document.getElementsByName("passwort")[0].disable = true;
+document.getElementsByName("challenge")[0].disable = true;
+return true;}
+</script>
+    </div>
+  
+
+</body></html>

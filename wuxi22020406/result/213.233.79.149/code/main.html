@@ -1,0 +1,152 @@
+<html><head>
+	<base href="https://213.233.79.149:443/boss/">
+	<link rel="icon" href="favicon.ico">
+	<title>RS000322 MI SISESTI</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="mobile-web-app-capable" content="yes">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Imported CSS -->
+	<link rel="stylesheet" type="text/css" href="scripts/bootstrap/css/bootstrap.min.css" media="all">
+	<link rel="stylesheet" type="text/css" href="scripts/bootstrap/bootstrap-toggle/css/bootstrap-toggle.min.css" media="all">	
+	<link rel="stylesheet" type="text/css" href="stylesheet/glyphs.css" media="all">
+	<link rel="stylesheet" type="text/css" href="stylesheet/style.css" media="all">
+<!-- Imported JS -->
+	<script type="text/javascript" src="scripts/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="scripts/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/bootstrap/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+	<script type="text/javascript" src="scripts/arch/cookie.js"></script>
+	<script type="text/javascript" src="scripts/arch/Login.js"></script>
+	<script type="text/javascript" src="scripts/arch/comm/Communication.js"></script>
+	<script type="text/javascript" src="scripts/app/applmask.js"></script>
+	<script type="text/javascript" src="scripts/arch/MaskInOut.js"></script>
+	<script type="text/javascript" src="scripts/arch/Alarm.js"></script>
+</head>
+<body onload="initLoginPage('normal');">
+<div class="container body-login" style="background-image:url(images/login_mini.jpg);">
+<form name="loginfrm" id="loginfrm" action="servlet/login;jsessionid=7BF523724587A478A54E41EDBE1EFAF7" method="post" target="_top" role="form" onsubmit="$('#WaitCursor').removeClass('hidden')">
+<input type="hidden" name="browser" id="browser" value="FF">
+<input type="hidden" name="screenw" id="screenw" value="800">
+<input type="hidden" name="screenh" id="screenh" value="600">
+<input type="hidden" id="cmd" name="cmd" value="normal">
+<input type="hidden" name="pagetype" id="pagetype" value="standard">
+<input type="hidden" id="jsession" name="jsession" value="7BF523724587A478A54E41EDBE1EFAF7">
+<input type="hidden" name="txtEnterPassword" id="txtEnterPassword" value="Insert the password">
+<input type="hidden" name="txtStandardPassword" id="txtStandardPassword" value="Password must be at least 6 characters">
+<input type="hidden" name="txtStrictPassword" id="txtStrictPassword" value="Passwords must be at least 8 chars, must contain at least one number and one of the following symbols: . , _ ! ? $ % &amp;">
+<input type="hidden" name="txtConfPwdIncorrect" id="txtConfPwdIncorrect" value="Confim password mismatch">
+<input type="hidden" name="txtLanguage" id="txtLanguage" value="EN_en">
+<input type="hidden" id="snooze" value="Guardian snooze&amp;#13;Please login to perform the acknowledge">
+<input type="hidden" id="txtAutoLogin" name="txtAutoLogin" value="">
+
+<div class="row" align="center">
+		<h1 class="text-white"><img src="images/top/boss_logo_login_mini.svg" style="width:220px"></h1>
+	</div>
+	<div class="row" align="center">
+		<img src="images/login_bkg.svg" style="position:fixed;margin-left:-180px;width:360px;height:360px;opacity:0.5;z-index:-1;">
+		<br>
+		<h2>RS000322 MI SISESTI</h2>
+	</div>
+	<div class="row" style="height:55px;" align="center">
+		<button type="submit" class="btn btn-primary form-control hidden" style="display: none" id="loginArea_dummy" name="btnLogin_dummy" onclick="return checkFields('standard');" tabindex="10">Login</button>
+		<img id="alarmdivlogin" style="width: 40px; height: 40px; position: relative; top: -10px; visibility: visible;" class="" src="images/top/alarm/alarm.svg">
+		&nbsp;&nbsp;
+		<!-- merge from mb rev.3868 -->
+		<div class="hidden"><button id="guardivloginsnooze" type="button" style="position:relative;top:-10px;" class="btn btn-default hidden" onclick="snoozeGp();">
+			<span class="boss icon-snooze" style="font-size:30px"></span>
+		</button>
+		</div></div>
+	<div class="row vpadding" align="center">
+		<div style="width:225px;">
+			<div class="input-group" style="margin-bottom:15px;">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-user"></span>
+				</div>
+				<input type="text" name="txtUser" class="form-control" placeholder="User name" id="txtUser" value="" tabindex="1">
+				</div>
+			<div class="input-group" style="margin-bottom:15px;">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-lock"></span>
+				</div>
+		        <input style="" type="password" class="form-control" placeholder="Password" name="txtPassword" id="txtPassword" value="" tabindex="2">
+		    </div>
+		    <div class="form-group">
+		        <button type="submit" class="btn btn-primary form-control" style="">Login</button>
+		    </div>
+<div class="input-group" style="margin-bottom:15px;display: none">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-lock"></span>
+				</div>
+		        <input type="password" class="form-control" placeholder="New Password" name="npassword" id="npassword" value="" style="display: none" onblur="noBadCharOnBlur(this,event);" onkeydown="checkBadChar(this,event);" tabindex="3">
+		    </div>
+		    <div class="input-group" style="margin-bottom:15px;display: none">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-lock"></span>
+				</div>
+				<input type="password" class="form-control" placeholder="Confirm password" name="cpassword" id="cpassword" value="" style="display: none" onblur="noBadCharOnBlur(this,event);" onkeydown="checkBadChar(this,event);" tabindex="4">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary form-control" style="display: none" id="loginArea2" name="btnLogin" onclick="return checkFields('standard');" tabindex="10">Login</button>
+			</div>
+
+			<div class="form-group" style="position:absolute;top:85%;width:225px;">
+				<button type="button" class="btn btn-default form-control hidden-hxs" onclick="top.location.href='https://213.233.79.149:8443'">
+					<span class="link-color">System administration</span>
+				</button>
+			</div>
+		</div>
+		<div class="form-group hidden-hxs" style="position:absolute;right:5px;width:185px;height:30px;top:94%;text-align: center;line-height: 30px;background-color:#ececec;border-radius:4px">
+			<span class="hidden-hxs" style="background-color:#ececec;"> 74-FE-48-40-54-1A</span>
+		</div>
+	</div>
+</form>
+
+<form id="gpaction" action="servlet/ajrefresh;jsessionid=7BF523724587A478A54E41EDBE1EFAF7" method="GET" onsubmit="$('#WaitCursor').removeClass('hidden')">
+<input type="hidden" name="cmd" id="cmd" value="GPSND">
+<input type="hidden" name="login" id="login" value="true">
+</form>
+
+</div>
+
+<!-- INFO DIALOG -->
+<div id="alert" class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+      		<div class="modal-header"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Info</div>
+      		<div id="alert_info" class="modal-body"></div>
+      		<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      		</div>
+      	</div>
+     </div>
+</div>
+
+<!-- WAIT CURSOR -->
+<div id="WaitCursor" class="hidden" onclick="event.stopPropagation()" ondblclick="event.stopPropagation()">
+	<div class="centered">
+		<div class="sk-fading-circle">
+		  <div class="sk-circle1 sk-circle"></div>
+		  <div class="sk-circle2 sk-circle"></div>
+		  <div class="sk-circle3 sk-circle"></div>
+		  <div class="sk-circle4 sk-circle"></div>
+		  <div class="sk-circle5 sk-circle"></div>
+		  <div class="sk-circle6 sk-circle"></div>
+		  <div class="sk-circle7 sk-circle"></div>
+		  <div class="sk-circle8 sk-circle"></div>
+		  <div class="sk-circle9 sk-circle"></div>
+		  <div class="sk-circle10 sk-circle"></div>
+		  <div class="sk-circle11 sk-circle"></div>
+		  <div class="sk-circle12 sk-circle"></div>
+		</div>
+	</div>
+</div>
+
+<input type="hidden" id="message" value="">
+<input type="hidden" id="pathCookie" value="/boss">
+
+
+
+</body></html>

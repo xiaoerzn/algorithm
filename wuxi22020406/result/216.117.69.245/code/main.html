@@ -1,0 +1,1349 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Cache-control" content="private">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title id="titleLbl_id"></title>
+<link href="./css/loginmaster.css" rel="stylesheet" type="text/css">
+ <link href="/css/custom.css" rel="stylesheet" type="text/css">
+<link rel="SHORTCUT ICON" href="./images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="./images/favicon.png" type="image/png">
+<!-- <script type="text/javascript" src="functions.js?<%= fVer %>"></script> -->
+<script src="/js/prototype.js" type="text/javascript"></script>
+<script type="text/javascript" src="ImageLoader.jsesp"></script>
+<script src="/js/Clarity.js" type="text/javascript"></script><meta http-equiv="cache-control" content="private">
+
+<script type="text/javascript">
+	//
+var FieldMapping;
+FieldMapping.TYPE_HTML     = 0;
+FieldMapping.TYPE_TEXT     = 1;
+FieldMapping.TYPE_CHECKBOX = 2;
+FieldMapping.TYPE_SELECT   = 3;
+FieldMapping.TYPE_RADIO    = 4;
+FieldMapping.TYPE_CALLBACK = 5;
+
+var xmlRequestObject;
+var requestCtxt = new Object();
+requestCtxt.m_fieldMapping = null;
+requestCtxt.updateComplete = null;
+var productClassName="";
+var lang="en";
+
+var scEnabled;
+var isCtrlBaseIPMI;
+var titleBarNum;
+var licenseReqCount = 0;
+var LDAPEnableMode,isCtrlDirSrv;
+
+function FieldMapping( n, d, type, encoder, decoder )
+{
+	//fieldName used for displaying data
+	this.m_fieldName = n;
+	//dataName used for updating data
+	this.m_dataName = d == null ? n : d;
+	this.m_type = type == null  ? FieldMapping.TYPE_HTML : type;
+	this.m_encoder = encoder == null ? encodeText : encoder;
+	this.m_decoder = decoder == null ? decodeText : decoder;
+}
+function showInlineMessage( elementName, errorMsg ) {
+	var elem = document.getElementById( elementName );
+	if( elem != null ) {
+		elem.innerHTML = errorMsg;
+		elem.style.display = 'inline';
+	}
+	else {
+		alert('Cannot find element: ' + elementName );
+	}
+}
+//  This can be refactored into waitWithCallback
+function setFieldListFromXML(xmlDoc)
+{
+	if (xmlDoc==null)
+	{
+		//Request failed
+		//TODO: disable screen?
+	}
+	else
+	{
+		//  Set the fields.
+		for( var i=0 ; i<fieldList.length ; ++i )
+		{
+			var dataName = fieldList[i].m_dataName;
+			var paramValue = getXMLValue( xmlDoc, dataName ) ;
+			//
+			if( fieldList[i].m_type == FieldMapping.TYPE_CALLBACK )
+				dataCallback( fieldList[i], paramValue, xmlDoc );
+			else
+				fieldList[i].m_decoder( fieldList[i], paramValue );
+		}
+	}  //end status==ok block
+	//
+	hideElement( 'progressScreen' );
+	showInlineElement( 'contentArea' );
+}
+//  Convenience method for hiding elements (such as error messages).
+function hideElement( elemName ) {
+	var elem = document.getElementById( elemName );
+	if( elem == null || elem['style'] == null ){}
+		//alert('Missing element ' + elemName );
+	else
+		elem.style.display = 'none';
+}
+
+//  Convenience method for showing elements.
+function showInlineElement( elemName ) {
+	var elem = document.getElementById( elemName );
+	if( elem == null || elem['style'] == null ){}
+		//alert('Missing element ' + elemName );
+	else
+		elem.style.display = 'inline';
+}
+
+function sendPost( reqUrl, postData, renderPageCallback )
+{
+  if( renderPageCallback != null )
+	  document.chainedCallback = renderPageCallback;
+  else
+	  document.chainedCallback = setFieldListFromXML
+  //
+  loadXMLDocument( reqUrl, waitWithCallback, postData );
+}
+function getXMLValue( xmlDoc, elementName )
+{
+	//alert("getXMLValue( xmlDoc, " + elementName + ");");
+	var rtn = "";
+	var i;
+	//
+	if( xmlDoc == null || xmlDoc.childNodes.length == 0 )
+	{
+	  //alert("Received bad XML document.");
+	}
+	else
+	{
+	   var elements = xmlDoc.getElementsByTagName( elementName );
+	   //
+	   if( elements != null && elements.length > 0  && elements[0].childNodes != null  )
+	   {
+		   if( elements[0].childNodes.length == 0 )
+			   return null;
+		   else if( elements[0].childNodes[0].nodeType == 3){
+				var j = elements[0].childNodes.length;
+				for (i = 0; i < j; i++){
+					rtn = rtn + elements[0].childNodes[i].nodeValue;
+				}
+				//Fix for FireFox. Long returns are broken up into 4096 byte child nodes.  IE is all in one.
+				//alert("rtn len=" + rtn.length + "ChildNode count=" + j + "\n" );
+		   }
+		   else {
+			   rtn = elements[0];
+	   }
+	   }
+	}
+   return rtn
+ }
+ function loadXMLDocument( url, callback, postData )
+{
+	var xDoc;
+	//
+	if( window.XMLHttpRequest )
+	{
+		xmlRequestObject = new XMLHttpRequest();
+	}
+	else if( window.ActiveXObject )
+	//     if( window.ActiveXObject )
+	{
+		try
+		{
+			xmlRequestObject = new ActiveXObject("Msxml2.XMLHTTP");
+		   // alert("XMLHttpRequest is executed");
+		}
+		catch ( e )
+		{
+			try
+			{
+				xmlRequestObject = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch ( E )
+			{
+			}
+		}
+	 }
+	 //
+	 if( xmlRequestObject )
+	 {
+		 xmlRequestObject.onreadystatechange = callback;
+		 xmlRequestObject.open("POST", url, true );
+		 if( postData == null )
+			 postData = '';
+		 xmlRequestObject.setRequestHeader("Content-Type", "application/x-www-form-urlencoded" );
+		 xmlRequestObject.send( postData );
+	 }
+}
+function waitWithCallback()
+{
+	//Only execute for state "loaded", all other states have
+	//  no processing.
+	if (xmlRequestObject.readyState == 4)
+	{
+		// only if "OK"
+		if (xmlRequestObject.status == 200 )
+		{
+			var xmlDoc = xmlRequestObject.responseXML;
+			var reqStatus = getXMLValue( xmlDoc, 'status' );
+			if( reqStatus != 'ok' )
+			{
+				var message = getXMLValue( xmlDoc, 'message' );
+				//alert(" Request failed: " + message );
+				//If we fail perform the callback with a null doc
+				//  to signal the chainedCallback that the server'
+				//  did not recognize the request
+				document.chainedCallback(null);
+			}
+			else
+			{
+				//It might be wise at somepoint to implement
+				//  chainedCallback as a stack to avoid accidentally
+				//  stepping on a callback by overwriting it with
+				//  a value that hasn't been called back yet.  This
+				//  would introduce substantial complexity though...
+				document.chainedCallback(xmlDoc);
+				if( requestCtxt.updateComplete != null)
+				{
+					requestCtxt.updateComplete( requestCtxt, xmlDoc );
+				}
+			}
+		}
+		else if( xmlRequestObject.status == 401 )
+		{
+			document.location = "/login.html";
+		}
+		else
+		{
+			//showErrorMessage(" Could not retrieve data from server ( status=" +
+			//                                 xmlRequestObject.status + ", " + xmlRequestObject.statusText + ")" );
+			if (xmlRequestObject.responseXML != null) {
+				if (xmlRequestObject.responseXML.URL.indexOf(ServerURL) != -1) {
+					loadServerGenError();
+				}
+			}
+			showContentPanel();
+		}
+	}
+} //end of waitWithCallback
+function showContentPanel()
+{
+	hideElement( 'progressScreen' );
+	showInlineElement( 'contentArea' );
+}
+
+//
+//  Show or hide button
+function showButton( buttonName, enable )
+{
+	if (buttonName == null) {}
+	else
+	{
+		if (enable)
+		{ // enable button
+			buttonName.className = "container_button";
+			buttonName.disabled = false;
+		}
+		else
+		{ // disable button
+			buttonName.className = "page_button_disabled";
+			buttonName.disabled = true;
+		}
+	}
+}
+
+function doTryAgain()
+{
+	var tryAgainButton = document.getElementById("try_again_button");
+	if (tryAgainButton.disabled)
+	   return;
+
+	frmReset();
+}
+
+
+	//  Make sure we are not being displayed in a frame.
+	//var thisIDRACText = EntityDecode("<%= writeRes('log_thisDRAC','en') %>") //" This iDRAC"; //the leading blank should insure that it is first in the list
+	var thisIDRACText;
+
+	if (top.frames.length >= 1)
+		top.location.replace("/login.html");
+	var isCancel=false;
+	var ie=(!(!document.all)) && navigator.userAgent.indexOf("Opera")==-1;
+	var ns=!(!document.layers);
+	var loggingIn = false;
+
+	var fTriedLogin = false;
+
+	//DF340980 GUI: Web navigation after session termination can result in IE redirection loop
+/*
+		var sessionID = "";
+		var sessionID = "<%=session['aimSession']%>";
+		//alert(sessionID);
+	if(sessionID != "")
+		document.location.replace('/index.html');
+*/
+	var MAXUNLEN = 512;          // Dell's limit on the maximum # of char in a username
+	var MINUNLEN = 1;            // Dell's limit on the minimum # of char in a username
+	var MAXPWLEN = 254;        // Dell's limit on the maximum # of char in a password
+	var MINPWLEN = 1;            // Dell's limit on the minimum # of char in a password
+
+	var productServerGenName = "";
+	var tmpDracName = "";
+	var tmpDracGEN7 = "";
+	var tmpDracGEN8 = "";
+
+	<!-- getting dynamic messages from resource file -->
+
+	var userNameMustMoreMsg;
+	var userNameMustLessMsg;
+	var userNamePrintableMsg;
+
+	var passwordMustMoreMsg;
+	var passwordMustLessMsg;
+	var passwordPrintableMsg;
+
+	var charsMsg;
+	var loginWaitMsg;
+	var loginFailedVerifyMsg;
+	var loginFailedBlockingTimeMsg;
+	var secondsMsg;
+	var loginSessionCtExceeded;
+	var g_BlockingTime;
+	var ssologinerr;
+
+	var missedUserNameMsg;
+	var missedPasswordMsg;
+	var loginFailedPrvMsg;
+
+	var loginFailedMsg;
+	var badResponseMsg;
+	var validateUserInputMsg;
+
+	var commFailedMsg;
+
+	var log_logon;
+
+	var fullUserName = "";
+
+	var tStr = "";
+	var dNames = new Array();
+	var x = 0;
+
+
+	//var LDAPEnableMode = "<%= LDAPEnableMode%>";
+	var LDAPEnableMode;
+
+
+
+
+// -------------------------------------------
+
+   function my_trim(str) {
+			if (str == null || str==undefined )
+			{
+					return "";
+			}
+			else if (str.length > 0) {
+				//str = str.replace(/EMPTY_STR\n/gi, "");
+				str = str.replace(/^\s*/gi, "");
+				str = str.replace(/\s*$/gi, "");
+			}
+			return str;
+	}
+
+	function select(val) {
+		if(val == 13)
+		{
+			if( isCancel || fTriedLogin) {
+				//Avoid frmReset when "Try Again" button is disabled
+				if($("try_again_button").disabled) {
+					return( true );
+				}
+				frmReset();
+			} else {
+				frmSubmit();
+			}
+			return( false );
+		}
+		return( true );
+	}
+
+	function frmSubmit() {
+		hideElement("login_info");
+		document.getElementById("btnOK").className = 'blackpage_button_emphasized_clicked';
+		document.getElementById("login_progress").style.display="";
+
+		if(loggingIn == true) { return; }
+	var localDomain = false;
+	var element     = document.getElementById("domainDisp");
+	var domainName  = element.value;
+
+	if (domainName == null || domainName == ""){   // IE7 needs extra help to read the selected option
+	  for (var i = 0; i < element.options.length; i++) {
+		if (element.options[i].selected == true) {
+		  domainName = element.options[i].text;
+		  break;
+		  }
+	  }
+	}
+
+	if( element.selectedIndex ==0 ) {
+	   localDomain  = true;
+	   domainName   = "";
+	}
+
+
+
+		//showInlineMessage( "loginStatus", validateUserInputMsg );
+
+	element      = document.getElementById("user");
+	fullUserName = element.value;
+
+
+	  if ( fullUserName == null || fullUserName == "" ) {
+		showInlineMessage( "login_failed_message",userNameMustMoreMsg + " " + (MINUNLEN - 1) + " " + charsMsg );
+		showLoginFail();
+		return;
+	  }
+
+	if (isLongerThanMax(fullUserName, MAXUNLEN)) {
+		showInlineMessage( "login_failed_message", userNameMustLessMsg + " " + (MAXUNLEN + 1) + " " + charsMsg );
+		showLoginFail();
+	  return;
+	}
+	if (isShorterThanMin(fullUserName, MINUNLEN)) {
+		showInlineMessage( "login_failed_message", userNameMustMoreMsg + " " + (MINUNLEN - 1) + " " + charsMsg );
+		showLoginFail();
+	  return;
+	}
+
+	if (!isPrintable(fullUserName, true)) {
+		showInlineMessage( "login_failed_message", userNamePrintableMsg );
+		showLoginFail();
+	  return;
+	}
+
+	element      = document.getElementById("password");
+	fullPassword = element.value;
+
+	  if ( fullPassword == null || fullPassword == "" ) {
+		showInlineMessage( "login_failed_message", passwordMustMoreMsg + " " + (MINUNLEN - 1) + " " + charsMsg );
+		showLoginFail();
+		  return;
+	  }
+
+	if (isLongerThanMax(fullPassword, MAXPWLEN)) {
+		showInlineMessage( "login_failed_message", passwordMustLessMsg + " " + (MAXPWLEN + 1) + " " + charsMsg );
+		showLoginFail();
+	  return;
+	}
+	if (isShorterThanMin(fullPassword, MINPWLEN)) {
+		showInlineMessage( "login_failed_message", passwordMustMoreMsg + " " + (MINPWLEN - 1) + " " + charsMsg );
+		showLoginFail();
+	  return;
+	}
+
+	if (!isPrintable(fullPassword, true)) {
+		showInlineMessage( "login_failed_message", passwordPrintableMsg );
+		showLoginFail();
+	  return;
+	}
+
+	if( !localDomain ) {
+	  if ( !( (fullUserName.indexOf("@" + domainName)  > -1 ) || //if domain not in uid, tack it on.
+		  (fullUserName.indexOf("\\" + domainName) > -1)  ||
+		  (fullUserName.indexOf("/" + domainName)  > -1 ) )) { fullUserName += "@" + domainName; }
+	}
+		//showInlineMessage( "loginStatus", loginWaitMsg );
+	sendLoginRequest();
+	document.auth.user.disabled = true;
+	document.auth.password.disabled = true;
+	document.getElementById("btnOK").focus();
+
+	loggingIn = true;
+	}
+
+// Tests to see if the value is a printable ASCII Char
+// Return true if value contains only printable ASCII chars
+	function isPrintable(value, bAllowSpace) {
+	   var nASCII_StartP = 33;
+	   var nASCII_EndP   = 126;
+	   var str = new String(value);
+
+	 if ( value == null || value == "" ) { return false; }
+
+	   for (var i = 0; i <  str.length; i++) {
+		  if (bAllowSpace == true) {
+			 //§ =: char code == 167
+			 if(str.charCodeAt(i) == 167) {
+				// Exception to handle
+				// DF386463: idrac special character "§" (section sign on foreign KB's) not supported
+			 } else if (((str.charCodeAt(i) < nASCII_StartP)&&(str.charCodeAt(i)!=32)) || str.charCodeAt(i) > nASCII_EndP)
+				return false;
+		  } else {
+			 if (str.charCodeAt(i) < nASCII_StartP || str.charCodeAt(i) > nASCII_EndP)
+			  return false;
+		  }
+	   }
+	   return true;
+   }
+
+// Tests to see if the length of the string is LONGER than the customer desired maximum
+// Return true if its LONGER than the Maximum length
+	function isLongerThanMax(value, MAXLEN) { return value.length > MAXLEN ? true : false; }
+
+// Tests to see if the length of the string is SHORTER than the customer desired minimum
+// Return true if its SHORTER than the Minimum length
+	function isShorterThanMin(value, MINLEN) { return value.length < MINLEN ? true : false; }
+
+
+	function frmCancel() {
+		var loc = document.location.href;
+		if(loc != null) {
+			var param = document.location.href;
+			if(param.indexOf("ErrorMsg=") != -1) {
+				param = param.substring(0, param.indexOf("ErrorMsg=")-1 );
+			}
+			document.location.href = param;
+		}
+		else
+			top.document.location.reload(true);
+	}
+
+	function frmReset() {
+		// clear password
+		document.getElementById("password").value = "";
+
+		// clear error message
+		var elem = document.getElementById( "login_failed_message" );
+		if( elem != null ) {
+			elem.innerHTML = "";
+		}
+		var elemBlocking = document.getElementById( "blocking_time_message" );
+		if(elemBlocking != null)
+		{
+			elemBlocking.innerHTML = "";
+		}
+
+		// ungrey submit button
+		document.getElementById("btnOK").className = 'blackpage_button_emphasized';
+
+		// reset frame info
+		fTriedLogin = false;
+		document.getElementById("login_info").style.display="";
+		document.getElementById("login_buttons").style.display="";
+		document.getElementById("loginStatus").style.display="";
+
+		document.auth.user.disabled = false;
+		document.auth.password.disabled = false;
+
+		hideElement("login_progress");
+		hideElement("login_failed");
+		hideElement("login_failed_buttons");
+
+
+		// focus on password
+		document.auth.user.focus();
+	}
+
+	var savedHelpId;
+	var savedProdDesc;
+
+	function f_help() {
+		//savedHelpId = "h_authenticate.html";
+		savedHelpId = "GUID-D21E96FA-13AA-4454-B774-5CD4653F776A.html";
+		savedProdDesc = productClassName;
+		window.open("helpProxy.html", "help", "height=500,width=700,scrollbars=no,toolbar=no,menubar=no,resizable=yes,location=no,directories=no,status=no");
+	}
+
+	function f_about() {
+		savedProdDesc = productClassName;
+		window.open("/public/about.html", "About", "height=320,width=700,scrollbars=no,toolbar=no,menubar=no,resizable=yes,location=no,directories=no,status=no");
+	}
+var supportURL;
+	function f_support() {
+
+		savedProdDesc = productClassName;
+		if (supportURL.length > 3)
+			window.open(supportURL, "support");
+		else
+			window.open("/public/support.html", "Support", "height=320,width=700,scrollbars=no,toolbar=no,menubar=no,resizable=yes,location=no,directories=no,status=no");
+	}
+
+	//
+	function sendLoginRequest() {
+	   // 70970 - Session Fixation/Sidejacking
+	   //Delete_Cookie('_appwebSessionId_', '/', '');
+	   //contLoginRequest();
+
+	   // The sessionID no longer can be deleted
+	   // workaround below:
+	   document.chainedCallback = contLoginRequest;
+	   loadXMLDocument( '/data/logout' , waitWithCallback );
+	}
+
+	//
+	function contLoginRequest() {
+		var form = document.auth;
+		var url = 'data/login';
+	if ( window.location.href.search('console') >= 0 )
+		url = 'data/login?console';
+		//var postData = 'user=' + encodeURIComponent(fullUserName) + '&password=' + encodeURIComponent(form.password.value);
+		//var postData = 'user=' + escape(fullUserName) + '&password=' + escape(form.password.value);
+		var postData = 'user=' + handleGermanChar(fullUserName) + '&password=' + handleGermanChar(form.password.value);
+		sendPost(url, postData, loginRequestChange);
+		//loadXMLDocument( url, loginRequestChange );
+		return false;
+	}
+
+	function handleGermanChar(str) {
+		var tmp = new Array();
+		var i;
+		var escstr="";
+		var dec;
+
+		//str = str.replace(/\\/g, "\\\\");
+		tmp = str.split("");
+		for(i=0; i<str.length; i++) {
+		   dec = (tmp[i]+'').charCodeAt(0);
+		   if(dec == 167) {
+			  escstr += escape(tmp[i]);
+		   } else {
+			  escstr += encodeURIComponent(tmp[i]);
+		   }
+		}
+		return(escstr);
+	}
+
+	//    Handler for xml requests.
+	//
+	errMsg = new Array();  //display msg x via: showInlineMessage( "loginStatus", errMsg[x] );
+	errMsg[0] = null;
+	errMsg[1] = loginFailedVerifyMsg;
+	errMsg[2] = missedUserNameMsg;
+	errMsg[3] = missedPasswordMsg;
+	errMsg[4] = loginFailedPrvMsg;
+	errMsg[5] = loginSessionCtExceeded;
+	errMsg[99] = loginFailedMsg;
+
+	function loginRequestChange() {
+		// Only do something if req shows that the response was loaded.
+		var errorMessage;
+		var nBlockingTime = 0;
+		//
+		if (xmlRequestObject.readyState == 4) {
+			// Was the requests sucessfull?
+			if (xmlRequestObject.status == 200) {
+				var xmlDoc = xmlRequestObject.responseXML;
+				if( xmlDoc == null ) {
+					errorMessage = badResponseMsg;
+				} else {
+					//  Did we get a valid response?
+					var reqStatus = getXMLValue( xmlDoc, 'status' );
+					if( reqStatus != 'ok' ) {
+						errorMessage = getXMLValue( xmlDoc, 'errorMessage' );
+					}
+					else {
+						var authResult = getXMLValue( xmlDoc, 'authResult' );
+
+						if(authResult == 1)
+						{
+							var blockingTime = getXMLValue( xmlDoc, 'blockingTime');
+							nBlockingTime = parseInt(blockingTime);
+						}
+						if (authResult != 0) { errorMessage = errMsg[authResult]; }
+						else {
+							var url = getXMLValue( xmlDoc, "forwardUrl" );
+							document.location = url;
+						}
+					}
+				}
+			} else
+				errorMessage = commFailedMsg;
+			//
+			if( errorMessage != null ) {
+				showInlineMessage( "login_failed_message", errorMessage );
+
+				if(nBlockingTime > 0)
+				{
+					updateBlockingTime(nBlockingTime);
+					setTimeout(function(){updateBlockingTime(0);}, nBlockingTime * 1000);
+				}
+				showLoginFail();
+				/*
+				document.auth.user.disabled = false;
+				document.auth.password.disabled = false;
+				document.auth.user.value = "";
+				document.auth.password.value = "";
+				document.auth.user.focus();
+				*/
+				loggingIn = false;
+				fTriedLogin = true;
+			}
+		}
+	}
+
+	function updateBlockingTime(nBlockingTime)
+	{
+		var tryAgainButton = document.getElementById("try_again_button");
+		if(nBlockingTime == 0)
+		{
+			var elemBlocking = document.getElementById( "blocking_time_message" );
+			if(elemBlocking != null)
+			{
+				elemBlocking.innerHTML = "";
+			}
+
+			showButton(tryAgainButton, true);
+		}
+		else
+		{
+			showButton(tryAgainButton, false);
+			var msg = loginFailedBlockingTimeMsg + " " +nBlockingTime + " " + secondsMsg;
+			showInlineMessage( "blocking_time_message", msg );
+		}
+	}
+
+	function pageRendererCallback( xmlDoc )
+	{
+	  //  Call standard processing method.
+	   setFieldListFromXML( xmlDoc );
+	}
+
+	function setProdDesc()
+	{
+		var prodDescURI = "/data?get=prodClassName";
+		var config = new Ajax.Request(prodDescURI, { method: 'post', onSuccess: setLicDescCallback, onFailure: configError});
+	}
+
+	function setLicDescCallback(data)
+	{
+		var xmlDoc = data.responseXML;
+
+		if (xmlDoc != null)
+		{
+			productClassName = getXMLValue(xmlDoc,"prodClassName");
+			if (productClassName == null)
+				productClassName ="";
+			if(productClassName == ""  && licenseReqCount < 2) {
+				++licenseReqCount; 
+				setTimeout(function() { setProdDesc() },3000);
+			}
+			var elem = document.getElementById("prodClassName");
+			elem.innerHTML =productClassName;
+		}
+	}
+
+var ServerURL = "data?get=prodServerGen";
+function getServerGen()
+{
+	document.chainedCallback = getServerGenCallBack;
+	loadXMLDocument(ServerURL , waitWithCallback);
+}
+
+function getServerGenCallBack(xmlDoc)
+{
+	if (xmlDoc != null)
+	{
+		productServerGenName = getXMLValue(xmlDoc,"prodServerGen");
+		top.serverGen = productServerGenName;
+		if (productServerGenName == "12G") {
+			$('headerImg_id').src = "/images/Ttl_2_iDRAC7_Base_ML.png";
+		} else if (productServerGenName == "13G") {
+			$('headerImg_id').src = "/images/Ttl_2_iDRAC8_Base_ML.png";
+		} else {
+			$('headerImg_id').src = "/images/Ttl_2_iDRAC8_Base_ML.png";
+		}
+		setTitle();
+	}
+}
+
+/*
+	This function will be invoked in error condition. When we are unable to
+	get server generation details, it uses default as iDRAC8/13G.
+*/
+function loadServerGenError()
+{
+	productServerGenName = "13G";
+	top.serverGen = productServerGenName;
+	$('headerImg_id').src = "/images/Ttl_2_iDRAC8_Base_ML.png";
+	setTitle();
+}
+
+
+function loadLocale(){
+	var config = new Ajax.Request('locale/locale_'+lang+'.json', { method: 'get', onSuccess: getResponse, onFailure: localeError});
+	//loadXMLDocument( 'locale_en.xml' , getResponse );
+}
+
+function localeError(e){
+	//By default load English for Unsupported language
+	lang = "en";
+	var config = new Ajax.Request('locale/locale_'+lang+'.json', { method: 'get', onSuccess: getResponse, onFailure: configError});
+}
+
+function configError(e)
+{
+	//alert("error "+e);
+}
+
+	function getResponse(request)
+	{
+		if (request.responseText == null || request.responseText.length == 0) return;
+		try {
+		var jsonData = request.responseText.evalJSON();
+		assignLocaleValues(jsonData.localeString);
+		}catch(e){
+
+		}
+	}
+
+	function assignLocaleValues(_jsonData)
+	{
+		tmpDracGEN7 = _jsonData["gen_iDrac6"];
+		tmpDracGEN8 = _jsonData["gen_iDrac8"];
+
+		document.getElementById("login_lbl").innerHTML = log_logon = _jsonData['btn_login'];
+		document.getElementById("login_inst_lbl").innerHTML =  _jsonData['log_logonInfo'];
+		document.getElementById("username_lbl").innerHTML =  _jsonData['log_username'];
+		document.getElementById("password_lbl").innerHTML =  _jsonData['log_password'];
+		document.getElementById("domain_lbl").innerHTML =  _jsonData['log_domain'];
+		document.getElementById("submit_lbl").innerHTML =  _jsonData['btn_submit'];
+		document.getElementById("cancel_lbl").innerHTML =  _jsonData['btn_cancel'];
+		document.getElementById("about_lbl").innerHTML =  _jsonData['gen_about'];
+		document.getElementById("support_lbl").innerHTML =  _jsonData['gen_support'];
+		//
+		userNameMustMoreMsg= _jsonData['alert_userNameMustMore'];
+		userNameMustLessMsg= _jsonData['alert_userNameMustLess'];
+		userNamePrintableMsg= _jsonData['alert_userNamePrintable'];
+
+		passwordMustMoreMsg= _jsonData['alert_passwordMustMore'];
+		passwordMustLessMsg= _jsonData['alert_passwordMustLess'];
+		passwordPrintableMsg= _jsonData['alert_passwordPrintable'];
+
+		charsMsg= _jsonData['alert_chars'];
+		loginWaitMsg= _jsonData['alert_loginWaitMsg'];
+		loginFailedVerifyMsg= _jsonData['alert_loginFailedVerify'];
+		loginFailedBlockingTimeMsg = _jsonData['alert_loginFailedBlockingTime'];
+		secondsMsg = _jsonData['alert_seconds'];
+		loginSessionCtExceeded= _jsonData['alert_sessionCtExceeded'];
+
+		missedUserNameMsg= _jsonData['alert_missedUserName'];
+		missedPasswordMsg= _jsonData['alert_missedPassword'];
+		loginFailedPrvMsg= _jsonData['alert_loginFailedPrv'];
+
+		loginFailedMsg= _jsonData['alert_loginFailed'];
+		badResponseMsg= _jsonData['alert_badResponse'];
+		validateUserInputMsg= _jsonData['alert_validateUserInput'];
+
+		commFailedMsg= _jsonData['alert_commFailed'];
+
+		document.getElementById("log_verify_lbl").innerHTML= _jsonData['log_verify'];
+		document.getElementById("log_error_lbl").innerHTML= _jsonData['log_error'];
+
+		//BITS123424
+		if(ssologinerr == "RAC0109")
+		{
+			document.getElementById("login_failed_message").innerHTML= _jsonData['sso_failed'];
+		}
+		if(g_BlockingTime >0 )
+		{
+			document.getElementById("blocking_time_message").innerHTML= loginFailedBlockingTimeMsg + " "+ g_BlockingTime +" " + secondsMsg;
+		}
+
+		//document.getElementById("log_fail_lbl").innerHTML= _jsonData['log_fail'];
+		document.getElementById("btn_tryagain_lbl").innerHTML= _jsonData['btn_tryagain'];
+		supportURL =  _jsonData['gen_supportURL'];
+		document.getElementById("gen_help_id").title= _jsonData['gen_help'];
+
+			thisIDRACText = _jsonData['log_thisDRAC'];
+		 oObj = new Array();
+		 dNames[x++] = thisIDRACText;
+		var element = document.getElementById("domainDisp");
+		element.length = 0;
+		oObj[x] = document.createElement('option');  // <<<<<< x HAS NOT BEEN DEFINED YET!!! RBJ >>>>>>>>>>>>>>
+			if(dNames[0] == thisIDRACText ) { dNames[0] = dNames[0].substr(1); }
+		for (x = 0; x < dNames.length; x++) {
+			//alert("dNames=" + dNames[x]);
+			oObj[x] = document.createElement('option');
+			oObj[x].text = dNames[x];
+			try{ element.add(oObj[x], null); }     // standards compliant (add at end)
+			catch(ex) { element.add(oObj[x]); }    // ie only
+		}
+
+		errMsg[0] = null;
+		errMsg[1] = loginFailedVerifyMsg;
+		errMsg[2] = missedUserNameMsg;
+		errMsg[3] = missedPasswordMsg;
+		errMsg[4] = loginFailedPrvMsg;
+		errMsg[5] = loginSessionCtExceeded;
+		errMsg[99] = loginFailedMsg;
+
+		if( scEnabled > 0 )
+		{
+			top.document.location.href = "/sclogin.html";
+		}
+
+		if((isCtrlDirSrv == 0) && (LDAPEnableMode==2)) {
+			getDomainNames();
+		} else {
+			getAimProp();
+		}
+		$('initImg').style.display = "none";
+		$('dataarea').style.visibility = "visible";
+		document.auth.user.focus();
+	}
+
+	function getAimIntProp(){
+		var sessionURI = "/session?aimGetIntProp=scl_int_enabled,gui_int_control_basegui,gui_int_title_bar_num,gui_int_control_dirService,pam_int_ldap_enable_mode";
+		var config = new Ajax.Request(sessionURI, { method: 'get', onSuccess: aimGetSuccess, onFailure: configError});
+	}
+
+	function aimGetSuccess(e)
+	{
+		if (e.responseText == null || e.responseText.length == 0) return;
+		try {
+			lang = (e.getResponseHeader('X_Language').substring(0,2)).toLowerCase();
+			var jsonData = e.responseText.evalJSON();
+			var intObj = jsonData.aimGetIntProp;
+			scEnabled = intObj['scl_int_enabled'];
+			isCtrlBaseIPMI = intObj['gui_int_control_basegui'];  //NOT USING NOW
+			titleBarNum = intObj['gui_int_title_bar_num'];
+			isCtrlDirSrv = intObj['gui_int_control_dirService'];
+			LDAPEnableMode = intObj['pam_int_ldap_enable_mode'];
+			loadLocale();
+		}catch(e){
+
+		}
+	}
+
+	function getDomainNames(){
+		var sessionURI = "/session?getDomainNames";
+		var config = new Ajax.Request(sessionURI, { method: 'get', onSuccess: onGetDomainNameSuccess, onFailure: configError});
+	}
+
+	function onGetDomainNameSuccess(e)
+	{
+		if (e.responseText == null || e.responseText.length == 0) return;
+		try {
+			var jsonData = e.responseText.evalJSON();
+			var nameObj = jsonData.getDomainNames;
+			for (var j in nameObj) {
+				if(j!="status"){
+					$('domainDisp').options[$('domainDisp').options.length] = new Option(nameObj[j], nameObj[j], true, false);
+				}
+			}
+			getAimProp();
+		}catch(e){
+			getAimProp();
+		}
+	}
+
+	function getAimProp(){
+		var sessionURI = "/session?aimGetProp=hostname,gui_str_title_bar,OEMHostName,fwVersion,sysDesc";
+		var config = new Ajax.Request(sessionURI, { method: 'get', onSuccess: showSessinDetails, onFailure: configError});
+	}
+
+	function showSessinDetails(e)
+	{
+		if (e.responseText == null || e.responseText.length == 0) return;
+		try {
+			var jsonData = e.responseText.evalJSON()
+			assignSessionValues(jsonData.aimGetProp);
+		}catch(e){
+
+		}
+
+	}
+	var hostNameLbl ;
+	var titleLbl;
+	var serviceTagLbl;
+	var fwversionLbl;
+	var sysDesc;
+	function assignSessionValues(_jsonData)
+	{
+		hostNameLbl =  _jsonData['hostname'];
+		titleLbl=  _jsonData['gui_str_title_bar'];
+		serviceTagLbl= _jsonData['OEMHostName'];
+		fwversionLbl=  _jsonData['fwVersion'];
+
+		LDAPEnableMode = "";
+		sysDesc=_jsonData["sysDesc"];
+		document.getElementById("servertype").innerHTML  = sysDesc;
+//			document.getElementById("titleLbl_id").innerHTML = titleLbl;
+		// document.title = titleLbl;
+		getServerGen();//BITS121774
+	}
+
+	function loadPageData()
+	{
+		getAimIntProp();		
+		// DF302415
+		showErrorMsg();
+		preloadSysSummary(); // preload files for systemSummary
+		setProdDesc();
+	}
+
+	function TextEncode( text )
+	{
+		return String(text).replace(/&/g, '&amp;')
+						   .replace(/"/g, '&quot;')
+						   .replace(/'/g, '&#39;')
+						   .replace(/</g, '&lt;')
+						   .replace(/>/g, '&gt;');
+	}
+
+	// DF302415
+	function showErrorMsg()
+	{
+		var loc = window.location;
+		if(loc != null)
+		{
+			var param = loc.search.substring(1);
+			if(param.indexOf("ErrorMsg=") != -1)
+			{
+				var blockingTime = getQueryVariable("BlockTime");
+				var errMsg = getQueryVariable("ErrorMsg");
+				ssologinerr = getQueryVariable("ErrorMsg");
+				g_BlockingTime = parseInt(blockingTime);
+				if(g_BlockingTime > 0)
+				{
+					updateBlockingTime(g_BlockingTime);
+					setTimeout(function(){updateBlockingTime(0);}, g_BlockingTime * 1000);
+				}
+
+				fTriedLogin = true;
+				showInlineMessage( "login_failed_message", TextEncode(decodeURIComponent(errMsg.substring())) );
+				showLoginFail();
+			}
+		}
+	}
+
+	function getQueryVariable(variable)
+	{
+		var val = "";
+		var loc = window.location;
+		if(loc != null)
+		{
+			var param = loc.search.substring(1);
+			if(param.indexOf("&") != -1)
+			{
+				var vars = param.split('&');
+				for (var i = 0; i < vars.length; i++)
+				{
+					if(vars[i].indexOf("=") != -1)
+					{
+						var pair = vars[i].split('=');
+						if (decodeURIComponent(pair[0]) == variable)
+						{
+							val = decodeURIComponent(pair[1]);
+							break;
+						}
+					}
+				}
+			}
+			else
+			{
+				if(param.indexOf("=") != -1)
+				{
+					var pair = param.split('=');
+					if (decodeURIComponent(pair[0]) == variable)
+					{
+						val = decodeURIComponent(pair[1]);
+					}
+				}
+			}
+		}
+
+		return val;
+	}
+
+	function parseQueryString(queryString, variable)
+	{
+		var val = "";
+		if( null != queryString &&
+			queryString.length > 0 &&
+			param.indexOf("=") != -1)
+		{
+			var pair = queryString.split('=');
+			if (decodeURIComponent(pair[0]) == variable)
+			{
+				val = decodeURIComponent(pair[1]);
+			}
+		}
+
+		return val;
+	}
+
+  function EntityDecode(str) {
+	var matches = str.match(/&#\d+;?/g);
+
+	if ((matches != null)&&(matches.length != null))
+	{
+	  for(var i = 0; i < matches.length; i++)
+	  {
+		// line wraps here -- be careful copy/pasting
+		var replacement = String.fromCharCode((matches[i]).replace(/\D/g,""));
+
+		str = str.replace(/&#\d+;?/,replacement);
+	  }
+	}
+	return str;
+  }
+
+	function setTitle()
+	{
+		var titleString = "";
+		var tmpTB = titleLbl;
+		var tmpTBN = titleBarNum;
+		var tmpHN = hostNameLbl;
+		if (tmpHN == null) tmpHN = "";
+		var tmpIPName = document.location.host;
+		var oemName = serviceTagLbl;
+
+		if (tmpIPName[0] == '[') { tmpIPName = tmpIPName.replace(/\[\]\=/g, ''); }
+
+		//0=auto,1=DNSname,2=ip,3=serTag,4=OEMname,5=Custom
+		switch(tmpTBN){
+		case 0:
+			if(tmpHN.length > 0) { titleString = tmpHN; }
+			else { titleString = tmpIPName; }
+			break;
+		case 1:
+			if(tmpHN.length > 0) { titleString = tmpHN; }
+			break;
+		case 2:
+			titleString = tmpIPName;	//ip will never be blank (or we would not be connected.)
+			break;
+		case 3:
+			if (tmpTB.length > 0) {titleString = tmpTB;}
+			break;
+		case 4:
+			if (oemName.length > 0) {titleString = oemName;}
+			break;
+		case 5:
+			if (tmpTB.length > 0) {titleString = tmpTB;}
+			break;
+		default:
+
+		}
+
+		titleString = EntityDecode(titleString);
+		setServerInfo(titleString);
+
+		if (productServerGenName == "12G") {
+			tmpDracName = tmpDracGEN7;
+		} else if (productServerGenName == "13G") {
+			tmpDracName = tmpDracGEN8;
+		} else {
+			tmpDracName = tmpDracGEN8;
+		}
+
+		if (titleString == "") titleString = tmpDracName + " - " + log_logon;
+		else         titleString +=  " - " + tmpDracName + " - " + log_logon;
+		document.title = titleString;
+	}
+
+	function setServerInfo(TitleString)
+	{
+		if (TitleString && (TitleString.length > 0))
+		{
+			document.getElementById("servername").innerHTML = TitleString;
+		}
+
+		var sysDesc = document.getElementById("servertype").innerHTML;
+		if (sysDesc)
+			sysDesc = sysDesc.replace(/^\s+|\s+$/g, '');
+		if (sysDesc && (sysDesc.length > 0))
+		{
+			if (TitleString && (TitleString.length >0))
+			{
+				document.getElementById("span_divider").style.display = "";
+			} else {
+				document.getElementById("servertype").style.paddingLeft = "0px";
+			}
+		}
+	}
+
+function escapeStr(str) {
+  var tmp = new Array();
+  var i;
+  var escstr="";
+  var dec;
+
+  str = str.replace(/\\/g, "\\\\");
+  tmp = str.split("");
+  for(i=0; i<str.length; i++) {
+	switch(tmp[i]) {
+	  case '@':
+	  case '(':
+	  case ')':
+	  case ',':
+	  case ':':
+	  case '?':
+	  case '=':
+	  case '&':
+	  case '#':
+	  case '+':
+	  case '%':
+		dec = (tmp[i]+'').charCodeAt(0);
+		escstr+= "@0"+ dec.toString(16);
+		break;
+	  default:
+		escstr+=tmp[i];
+	}
+  }
+  return(escstr);
+}
+
+function showLoginFail()
+{
+	fTriedLogin = true;
+	hideElement("login_info");
+	hideElement("login_progress");
+	hideElement("login_buttons");
+	hideElement("loginStatus");
+	document.getElementById("login_failed").style.display="";
+	document.getElementById("login_failed_buttons").style.display="";
+}
+
+function procKeyPress(evt)
+{
+	return(select(ns ? evt.which : evt.keyCode));
+}
+</script>
+</head>
+<body style="margin-top:0; margin-left:0; margin-height:0; margin-width:0;" onkeypress="return procKeyPress(event)" onload="loadPageData();">
+<div style="margin-height:auto; margin-width:auto;padding-top:40%;padding-left:50%;background:url('../images/progress.gif') no-repeat center;" id="initImg"></div>
+	<div class="login" id="dataarea" style="visibility:hidden;">
+	   <div class="login_header">
+		   <img src="" id="headerImg_id" alt="" style="top:64px;">
+		</div>  <div class="login_header_product" id="prodClassName"></div>
+		<div class="login_left">
+			<div class="login_right">
+				<div class="login_content">
+				  <div id="login_progress" style="display: none;">
+					<div class="hr">
+					</div>
+					<div id="login_progress_text">
+						<span id="log_verify_lbl"> </span>
+					</div>
+					<div class="hr">
+					</div>
+				  </div>
+				  <div id="login_failed" style="display: none;">
+					<div class="login_failed_hr_top">
+					</div>
+					<div id="login_failed_text">
+					  <span id="log_error_lbl"></span>
+					</div>
+					<div style="width:470px;" id="login_failed_message">
+					</div>
+					<div style="width:470px;" id="blocking_time_message">
+					</div>
+					<div class="login_failed_hr_bottom">
+					</div>
+				  </div>
+				  <div class="button_clear" id="login_failed_buttons" style="display: none;">
+					 <a class="blackpage_button" id="try_again_button" href="javascript:doTryAgain();">
+						<span id="btn_tryagain_lbl"></span>
+					 </a>
+				  </div>
+
+				  <div id="login_info" style="display: block;">
+					<div class="hr">
+					</div>
+					<div class="login_title">
+						<div class="login_text">
+
+							<span id="login_lbl"></span>
+						</div>
+						<div class="login_help">
+							<a href="javascript:f_help()" id="gen_help_id">
+							  <span class="login_help_icon">&nbsp;</span>
+							</a>
+						</div>
+					</div>
+					<div class="login_server_info" id="serverinfo">
+						<span class="login_server_name" id="servername"></span>
+						<span id="span_divider" style="display:none;">|</span>
+						<span class="login_server_type" id="servertype"></span>
+					</div>
+					<div class="login_instructional_text">
+
+						<span id="login_inst_lbl"></span>
+					</div>
+					<form method="post" onsubmit="sendLoginRequest();" onreset="return false;" name="auth" id="auth" action="">
+					<div class="login_userinfo">
+						<table>
+							<tbody><tr>
+							  <td class="left">
+
+								<span id="username_lbl"></span>
+							  </td>
+							  <td class="right">
+
+								<span id="password_lbl"></span>
+							  </td>
+							</tr>
+							<tr>
+							  <td class="left input">
+								<input style="width: 150px;" maxlength="512" value="" id="user" name="user" onfocus="javascript:isCancel=false;" type="text" autocomplete="off">
+							  </td>
+							  <td class="right input">
+								<input style="width: 150px;" maxlength="128" value="" id="password" name="password" onfocus="javascript:isCancel=false;" type="password" autocomplete="off">
+							  </td>
+							</tr>
+							<tr>
+							  <td class="left" colspan="2">
+
+								<span id="domain_lbl"></span>
+							  </td>
+							</tr>
+							<tr>
+							  <td class="left input" colspan="2">
+									<input type="hidden" id="ADUserDomain">
+									<select size="1" id="domainDisp" name="domainDisp" style="width:200">
+									   <option></option>
+									</select>
+							  </td>
+							</tr>
+						</tbody></table>
+					</div>
+
+					<div class="hr"></div>
+					<div class="button_clear" id="login_buttons">
+					   <a class="blackpage_button_emphasized" href="javascript:frmSubmit()" id="btnOK" onfocus="javascript:isCancel=false;">
+
+						  <span id="submit_lbl"></span>
+					   </a>
+					   <a class="blackpage_button" href="javascript:frmCancel()" onfocus="javascript:isCancel=true;">
+
+						  <span id="cancel_lbl"></span>
+					   </a>
+					</div>
+					</form>
+				  </div>
+			</div>
+		</div>
+		<div class="login_footer">
+		</div>
+		</div>
+		<div class="title_links">
+			<a href="javascript:f_support()" id="support_lbl"></a>|<a href="javascript:f_about()" id="about_lbl"></a>
+		</div>
+				<div align="center">
+					<p><span id="loginStatus" class="login-status"></span></p>
+				</div>
+	</div>
+
+
+</body></html>

@@ -1,0 +1,534 @@
+<html lang="en-US"><head dir="ltr">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Script-Type" content="text/javascript">
+        
+        <title>myhome</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+
+        <!--
+            Common scripts
+        -->
+        <!-- Define utility functions -->
+        <script type="text/javascript" src="/util.js" defer=""></script>
+
+        
+        
+            <script type="text/javascript" src="/hmac-sha1.js" defer=""></script>
+            <script type="text/javascript">
+                function generateHMAC(form)
+                {
+                    var rem = form.__pass;
+
+                    form.__hash.value = CryptoJS.HmacSHA1(form.__user.value + form.__pass.value,
+                                                          "623479bc355f3202");
+
+                    if (rem.parentNode && rem.parentNode.removeChild)
+                        rem.parentNode.removeChild(rem);
+
+                    form.submit();
+                }
+            </script>
+        
+
+        <!--
+            Style sheets
+        -->
+        <link rel="stylesheet" type="text/css" href="/general.css">
+        <link rel="stylesheet" type="text/css" href="/base.css">
+        <link rel="stylesheet" type="text/css" href="/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="/content.css">
+        <link rel="stylesheet" type="text/css" href="/form.css">
+        <link rel="stylesheet" type="text/css" href="/page.css">
+        <link rel="stylesheet" type="text/css" href="/voip.css">
+        <!--[if !IE]>-->
+            <link rel="stylesheet" type="text/css" href="/compressed-control.css">
+        <!--<![endif]-->
+        <!--[if IE]>
+            <LINK rel="stylesheet" type="text/css" href="/general-ie.css">
+            <LINK rel="stylesheet" type="text/css" href="/base-ie.css">
+            <LINK rel="stylesheet" type="text/css" href="/sidebar-ie.css">
+            <LINK rel="stylesheet" type="text/css" href="/form-ie.css">
+            <LINK rel="stylesheet" type="text/css" href="/page-ie.css">
+            <LINK rel="stylesheet" type="text/css" href="/voip-ie.css">
+        <![endif]-->
+        <!--[if IE 6]>
+            <LINK rel="stylesheet" type="text/css" href="/base-ie6.css">
+            <LINK rel="stylesheet" type="text/css" href="/general-ie6.css">
+            <LINK rel="stylesheet" type="text/css" href="/form-ie6.css">
+        <![endif]-->
+        <!--[if gte IE 8]>
+            <LINK rel="stylesheet" type="text/css" href="/compressed-control.css">
+        <![endif]-->
+
+        <!--
+            Scripts
+        -->
+        <!-- Attach IE bug-fixing routine, if it is IE -->
+        <!--[if IE]>
+            <SCRIPT type="text/javascript" src="/ie.js" defer></SCRIPT>
+        <![endif]-->
+        <!-- Attach confirmation attaching routine -->
+        <script type="text/javascript" src="/confirm.js" defer=""></script>
+        <!-- Attach choice support attaching routine -->
+        <script type="text/javascript" src="/choice.js" defer=""></script>
+        <!-- Attach limiting routine -->
+        <script type="text/javascript" src="/limit.js" defer=""></script>
+
+        
+        
+    </head>
+    <body class="layout_hkbn">
+        <!--
+            Assigning direction here to offset IE's
+            desire to mirror UI for RTL scripts.
+        -->
+        <div id="frame" dir="ltr" class="ltr">
+            <!-- Header -->
+            <div id="header">
+                <!-- Logo -->
+                <div id="logo">
+                    
+                        <span class=" selected" title="myhome">
+                        <img src="/logo.png">
+                        </span>
+                    
+                </div>
+
+                <!-- Global controls -->
+                <div id="sysctrls">
+                    
+
+
+
+<form method="post" action="">
+    <div id="login_field">
+        <input type="hidden" name="__formtok" value="">
+        
+        
+            
+    
+
+        
+
+        
+            <label>
+                Username:
+                <input type="text" size="10" name="__user" value="" maxlength="128">
+            </label>
+            <label>
+                Password:
+                <input type="password" size="10" name="__pass" maxlength="128">
+            </label>
+
+            <input type="hidden" name="__auth" value="login">
+            <input type="hidden" name="__hash" value="">
+            
+                <button type="submit" id="login_button" onclick="generateHMAC(this.form); return false">
+                    Login
+                </button>
+            
+        
+    </div>
+    
+
+</form>
+
+<div id="login_message">
+    
+        Login to access more configuration options.
+    
+</div>
+
+                </div>
+
+                <!-- Main menu -->
+                <div id="mainmenu">
+                    <a href="/status/" class="menuitem" title="Status">Status</a><span class="separator"> </span><a href="/help/" class="last menuitem" title="Help">Help</a>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <table id="body">
+                <tbody>
+                    <tr>
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td id="content-frame">
+    <h1 id="title">
+        
+            Welcome to the Tilgin router
+        
+    </h1>
+
+    <!-- Special menu -->
+    
+    
+        
+
+
+
+    
+
+    
+
+    
+        
+    
+
+
+
+    <div id="spclmenu">
+        
+            
+        
+            
+        
+            
+                
+        
+    </div>
+
+    
+
+
+    
+    <div class="labels-none" id="content">
+        
+
+            
+
+            
+
+            
+
+            
+                    
+<table id="smmr-tbl">
+    <tbody><tr>
+        <td class="smmr-tbl-column">        
+            <div id="stts-smmr-box" class="box-shadow flanked nofloat">
+                <div class="box-frame">
+                    <h2 class="box-heading">Status summary</h2>
+                    <div class="box-content">
+                        
+                            <form method="post" action="">
+                                <input type="hidden" name="__form" value="status"><input type="hidden" name="__formtok" value="">
+
+                                <div class="field">
+                                    <span class="label"></span>
+                                    <table class="control">
+                                        <tbody>
+                                            <tr>
+                                                <td class="first">Product name:</td>
+                                                <td class="last">IAD601D</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="first">Software family:</td>
+                                                <td class="last">HG238x</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="first">Software revision:</td>
+                                                <td class="last">ESx000-02_10_01_24</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="first">ISP:</td>
+                                                <td class="last"><img src="/led_green.gif" alt=":)" class="led"> Online</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="first">Local time:</td>
+                                                <td class="last">Thu Apr  7 13:41:54 2022</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="first">System uptime:</td>
+                                                <td class="last">
+                                                    69 days 15 hours 15 minutes
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="box-shadow nofloat" id="acct-smmr-box">
+                <div class="box-frame">
+                    <h2 class="box-heading">WLAN status</h2>
+                    <div class="box-content">
+                        
+                            <form method="post" action="">
+                            <input type="hidden" name="__form" value="wlan"><input type="hidden" name="__formtok" value="">
+                                
+                                    <table class="control">
+                                        <tbody>
+                                            
+                                                <tr>
+                                                    <td class="first">
+                                                        
+                                                            <img src="/led_red.gif" alt=":(" class="led"> Offline
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="1" name="ssids.20">
+                                                        <a href="/wireless/?ssid=20">
+                                                            ip
+                                                        </a>
+                                                    </td>
+                                                    <td class="last">WPA2</td>
+                                                </tr>
+                                            
+                                                <tr>
+                                                    <td class="first">
+                                                        
+                                                            <img src="/led_gray.gif" alt=":/" class="led"> Disabled
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="1" name="ssids.23">
+                                                        <a href="/wireless/?ssid=23">
+                                                            HKBN-71B73A-Guest
+                                                        </a>
+                                                    </td>
+                                                    <td class="last">WPA2</td>
+                                                </tr>
+                                            
+                                                <tr>
+                                                    <td class="first">
+                                                        
+                                                            <img src="/led_red.gif" alt=":(" class="led"> Offline
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="1" name="ssids.22">
+                                                        <a href="/wireless/?ssid=22">
+                                                            ip-5G
+                                                        </a>
+                                                    </td>
+                                                    <td class="last">MIXED_WPA_WPA2</td>
+                                                </tr>
+                                            
+                                                <tr>
+                                                    <td class="first">
+                                                        
+                                                            <img src="/led_gray.gif" alt=":/" class="led"> Disabled
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="1" name="ssids.26">
+                                                        <a href="/wireless/?ssid=26">
+                                                            HKBN-71B73A-5G-Guest
+                                                        </a>
+                                                    </td>
+                                                    <td class="last">WPA2</td>
+                                                </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                
+                            </form>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="box-shadow flanked nofloat" id="stts-smmr-box">
+                <div class="box-frame">
+                    <h2 class="box-heading">LAN clients</h2>
+                    <div class="box-content">
+                        
+                            <form method="POST" action="">
+                            <input type="hidden" name="__form" value="lan_clients_list"><input type="hidden" name="__formtok" value="">
+
+                            
+                                <div class="field">
+                                    <span class="label"></span>
+                                    <span class="control">
+                                        Please, log in to see the list
+                                    </span>
+                                </div>
+                            
+                            </form>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </td>
+        <td class="smmr-tbl-column">
+
+            
+                <div class="box-shadow nofloat" id="acct-smmr-box">
+                    <div class="box-frame">
+                        <h2 class="box-heading">Accounts</h2>
+                        <div class="box-content">
+                            <form method="post" action="">
+        <input type="hidden" name="__form" value="account"><input type="hidden" name="__formtok" value="">
+
+        <div class="field">
+            <span class="label"></span>
+            
+                <table class="control">
+                    <tbody>
+                        
+                            
+                                <tr>
+                                    <td class="first">
+                                        
+                                            hknegvj1137 (A)
+                                        
+                                    </td>
+                                    <td><img src="/led_green.gif" alt=":)" class="led"> Registered</td>
+                                    <td class="last">
+                                        
+                                            
+                                                3 missed calls
+                                            
+                                        
+                                    </td>
+                                </tr>
+                            
+                        
+                    </tbody>
+                </table>
+            
+        </div>
+    </form>
+
+                        </div>
+                    </div>
+                </div>
+            
+            
+                <div class="box-shadow nofloat" id="acct-smmr-box">
+                    <div class="box-frame">
+                        <h2 class="box-heading">Storage devices</h2>
+                        <div class="box-content">
+                            
+                                <form method="post" action="">
+                                <input type="hidden" name="__form" value="storage"><input type="hidden" name="__formtok" value="">
+                                    
+                                        <div class="field">
+                                            <span class="label"></span>
+                                            <span class="control">
+                                                No storage devices.
+                                            </span>
+                                         </div>
+                                    
+                                </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+            
+                <div class="box-shadow nofloat" id="acct-smmr-box">
+                    <div class="box-frame">
+                        <h2 class="box-heading">Cellular network devices</h2>
+                        <div class="box-content">
+                            
+                                <form method="post" action="">
+                                <input type="hidden" name="__form" value="te"><input type="hidden" name="__formtok" value="">
+                                    
+                                        <div class="field">
+                                            <span class="label"></span>
+                                            <span class="control">
+                                                No cellular network devices.
+                                            </span>
+                                         </div>
+                                    
+                                </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+
+            
+                <div class="box-shadow nofloat" id="acct-smmr-box">
+                    <div class="box-frame">
+                        <h2 class="box-heading">DECT/CAT-iq devices</h2>
+                        <div class="box-content">
+                            
+                                <form method="post" action="">
+                                <input type="hidden" name="__form" value="dect"><input type="hidden" name="__formtok" value="">
+                                    
+                                        <div class="field">
+                                            <span class="label"></span>
+                                            <span class="control">
+                                                
+                                                <img src="/led_red.gif" alt=":(" class="led"> No handset registered
+                                                
+                                                 <a href="/phone/phones/">
+                                                     Tilgin PMB CAT-iq - DECT device
+                                                 </a>
+                                            </span>
+                                        </div>
+                                    
+                                </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+        </td>
+    </tr>
+</tbody></table>
+
+            
+        
+    </div>
+</td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Footer -->
+            <div id="footer">
+                <span id="version">
+                    
+                        
+                            ESx000-02_10_01_24
+                        
+                    
+                </span>
+
+                <span id="l10n">
+                    <a href="/index.ar-ae.ui" class="l10n" title="العربية"><img src="/flag.ar-ae.png" alt="&nbsp;"></a><a href="/index.ar-bh.ui" class="l10n" title="العربية"><img src="/flag.ar-bh.png" alt="&nbsp;"></a><a href="/index.ar-sa.ui" class="l10n" title="العربية"><img src="/flag.ar-sa.png" alt="&nbsp;"></a><a href="/index.da-dk.ui" class="l10n" title="Dansk"><img src="/flag.da-dk.png" alt="&nbsp;"></a><a href="/index.de-de.ui" class="l10n" title="Deutsch"><img src="/flag.de-de.png" alt="&nbsp;"></a><a href="/index.en-us.ui" class="l10n negotiated" title="English"><img src="/flag.en-us.png" alt="&nbsp;"></a><a href="/index.fr-fr.ui" class="l10n" title="Français"><img src="/flag.fr-fr.png" alt="&nbsp;"></a><a href="/index.nn-no.ui" class="l10n" title="Bokmål"><img src="/flag.nn-no.png" alt="&nbsp;"></a><a href="/index.ru-ru.ui" class="l10n" title="Русский"><img src="/flag.ru-ru.png" alt="&nbsp;"></a><a href="/index.sv-se.ui" class="l10n" title="Svenska"><img src="/flag.sv-se.png" alt="&nbsp;"></a><a href="/index.tr-tr.ui" class="l10n" title="Türkçe"><img src="/flag.tr-tr.png" alt="&nbsp;"></a>
+                </span>
+
+                
+                    <span id="copyright">
+                        © 2000-2016 Tilgin. All rights reserved. Copyright and Trademark.
+                    </span>
+                
+            </div>
+
+            
+        </div>
+    
+
+
+</body></html>
