@@ -1,0 +1,89 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Router Web Manager</title>
+<link href="css/ui-icons.css" rel="stylesheet" type="text/css">
+<link href="css/login.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquerymini.js"></script>
+<script type="text/javascript" src="js/style.js"></script>
+<script type="text/javascript" src="js/language_type.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript">add_class_color_ctl();</script><style type="text/css">body{
+background:#245D7F;
+color:white;
+}
+#header{
+background:#3EA48F;
+border:1px solid #3EA48F;
+}
+select, input[type='text'], input[type='password']{
+background:rgb(242,242,242);
+color:#3EA48F;
+border:1px solid #3EA48F;
+}
+input[type='submit']{
+background:#3EA48F;
+color:white;
+}
+.cs_rbt_styled_select:after{
+background:#3EA48F;
+color:rgb(242,242,242);
+}
+.cs_rbt_styled_select select option{
+background:rgb(242,242,242);
+}
+.cs_auth_username, .cs_auth_password, .cs_auth_language{
+color:#3EA48F;
+}
+</style>
+</head>
+<body onload="browser_detecting();">
+<div id="boder">
+<div id="wrapper">
+<div id="header" style="height: 309px;"><img id="logo" src="/auth/image/logo_login.png"></div>
+<div id="content">
+<form id="login_form" method="post" action="/action/weblogin">
+<div class="cs_arearow" id="id_user_row">
+<ul>
+<li class="cs_colval">
+    <span class="icon-ui-user cs_auth_username"></span>
+    <input type="text" id="id_username_val" name="username" hidefocus="true" placeholder="Enter Username">
+</li>
+</ul>
+</div>
+<!-- DIV end of id_user_row -->
+<div class="cs_arearow" id="id_password_row">
+<ul>
+<li class="cs_colval">
+    <span id="id_password_icon" class="icon-ui-lock cs_auth_password"></span>
+    <input type="password" id="id_password_val" name="password" hidefocus="true" placeholder="Enter Password">
+</li>
+</ul>
+</div>
+<!-- DIV end of id_password_row -->
+<div class="cs_arearow" id="id_language_row" style="display: none;">
+<ul>
+<li class="cs_colval" id="id_language_val">
+<span class="icon-ui-language-change cs_auth_language"></span>
+<label class="cs_rbt_styled_select">
+    <select name="language" id="id_language_sel">
+        <option value="english">English</option>
+    </select>
+</label>
+</li>
+</ul>
+</div>
+<div class="cs_arearow" id="id_login_row">
+<input type="submit" name="submit" id="id_login" value="LOGIN">
+</div>
+<!-- DIV end of id_login_row -->
+</form>
+<!-- FORM end -->
+</div>
+<!-- DIV end of content -->
+</div>
+<!-- DIV end of wrapper -->
+</div>
+<!-- DIV end of boder -->
+
+
+</body></html>

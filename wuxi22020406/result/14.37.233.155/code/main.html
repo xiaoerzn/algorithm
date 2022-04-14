@@ -1,0 +1,183 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><script src="https://14.37.233.155/js/main.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/jquery.base64.js?version=1.0.1.25"></script><script src="https://14.37.233.155/ligerUI/js/ligerui.min.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/jquery.qrcode.min.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/plugin.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/divBox.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/RSUI.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/function.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/CProgress.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/class.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/common.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/language.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/jcookie.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/json.js?version=1.0.1.25"></script><script src="https://14.37.233.155/js/jquery-1.11.1.min.js"></script><script src="https://14.37.233.155/js/pluginVersion.js?version=1649326351397"></script>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store, must-revalidate">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <!--<meta http-equiv="Access-Control-Allow-Origin" content="*">--><!--safari本地打开网页放开此注释-->
+    <title>Web Viewer</title>
+    <script type="text/javascript" src="js/LAB.min.js"></script>
+    <link href="css/RSUI.css" rel="stylesheet">
+	<link href="ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet">
+    <script language="javascript" for="ipcocx" event="SendMsgToWeb(strMsg)">
+        SendMsgToWeb(strMsg);
+    </script>
+    <script language="javascript" for="timelineocx" event="SendMsgToWeb(strMsg)">
+        SendMsgToWeb(strMsg);
+    </script>
+
+    <script>
+		$LAB.script("js/pluginVersion.js?version=" + (new Date).getTime())
+			.wait(function(){
+        			$LAB.script("js/jquery-1.11.1.min.js")
+                		.script("js/json.js?version=" + version_web)
+                		.wait(function () {	
+                			$LAB.script("js/jcookie.js?version=" + version_web)
+                            .script("js/language.js?version=" + version_web)
+                            .script("js/common.js?version=" + version_web)
+                            .script("js/class.js?version=" + version_web)
+                            .script("js/CProgress.js?version=" + version_web)
+                            .script("js/function.js?version=" + version_web)
+                            .script("js/RSUI.js?version="+version_web)
+							.script("js/divBox.js?version="+version_web)
+                            .script("js/plugin.js?version=" + version_web)
+                            .script("js/jquery.qrcode.min.js?version=" + version_web)
+							.script("ligerUI/js/ligerui.min.js?version=" + version_web)
+							.script("js/jquery.base64.js?version="+version_web)
+                            .wait(function () {
+                                $LAB.script("js/main.js?version=" + version_web)
+                            })	
+                		})
+			})
+    </script>
+</head>
+<body>
+<iframe id="MsgPaop_box" src="" frameborder="0" scrolling="no" style="width:240px; height:150px; position:fixed; left:2px; bottom:2px; z-index:10003; display:none;"></iframe>
+<iframe frameborder="0" scrolling="no" id="pbSoundLine" name="" style="width: 195px; height: 30px;position:absolute;z-index: 99999;display: none;left: 640px;top: 634px;"></iframe>
+<iframe frameborder="0" scrolling="no" id="playbackSpeed" name="" style="width: 240px; height: 34px;position:absolute;z-index: 99999;display: none;left: 670px;top: 640px;"></iframe>
+<iframe id="MaskLayout" style="opacity:0.6;z-index: 10001"></iframe>
+<iframe id="MaskLayoutFirefox" style="opacity:1;z-index: 10001;display: none;position: absolute;"></iframe>
+
+<div class="header" style="-moz-user-select:none;display:none;">
+        <!------菜单栏部分----------->
+        <div class="headerMenu">
+            <div id="logo" class="logoImg"></div>
+            <div class="menuBg">
+                <div class="otherBg">
+                    <div id="logout" class="other"></div>
+                    <div id="help" class="other" title=""></div>
+                </div>
+                <div class="Menu">
+                    <div class="menuBox" id="LiveMenu" name="">
+                        <div id="liveBtn" class="menuBtn" name="active">Preview</div>
+                    </div>
+                    <div class="menuBox" id="PlayBackMenu" name="">
+                        <div id="playbackBtn" class="menuBtn" disabled="disabled">Playback</div>
+                    </div>
+                    <div class="menuBox" id="ConfigMenu" name="">
+                        <div id="configBtn" class="menuBtn" disabled="disabled">Remove Setting</div>
+                    </div>
+                    <div class="menuBox" id="PathMenu" name="">
+                        <div id="pathConfigBtn" class="menuBtn" disabled="disabled">PathConfig</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div id="container" class="container">
+    <!-----登录页面------>
+    <div id="login"></div>
+    <!-----提示下载页面------>
+    <div id="webplugins"></div>
+    <!-------头部----------->
+    
+    <!-------主体----------->
+    <div class="main" id="main">
+        <!------主体内容----------->
+        <div class="mcontainer">
+            <div class="Page" id="live" name="notLoad"></div>
+            <div class="Page" id="playback" name="notLoad"></div>
+            <div class="Page" id="config" name="notLoad"></div>
+            <div class="Page" id="pathConfig" name="notLoad"></div>
+            
+            <!----控件部分----->
+            <div class="mcmcmain" id="IndexObj" style="display: block;"><embed pluginspage="Surveillance_Brower_Plugin.crx" style="width:1px; height:1px;" type="application/x-browser-web_plugin_wbs" id="ipcocx"></div>
+        </div>
+    </div>
+    <div id="mfoot" class="mfoot" style="display:none;height:35px;">
+        <div id="moreScreens" style="display: none;" name="">
+            <div class="divideMode" id="divide_1" data-ori="0 0" data-hover="45 0" mode="0"></div>
+            <div class="divideMode" id="divide_4" data-ori="0 -32px" data-hover="45 32" mode="1"></div>
+            <div class="divideMode" id="divide_6" data-ori="0 -64px" data-hover="45 64" mode="2"></div>
+            <div class="divideMode" id="divide_8" data-ori="0 -96px" data-hover="45 96" mode="3"></div>
+            <div class="divideMode" id="divide_9" data-ori="0 -128px" data-hover="45 128" name="active" mode="4"></div>
+            <div class="divideMode" id="divide_10-1" data-ori="0 -160px" data-hover="45 160" mode="5"></div>
+            <div class="divideMode" id="divide_10-2" data-ori="0 -192px" data-hover="45 192" mode="6"></div>
+            <div class="divideMode" id="divide_12" data-ori="0 -224px" data-hover="45 224" mode="7"></div>
+            <div class="divideMode" id="divide_13-1" data-ori="0 -256px" data-hover="45 256" mode="8"></div>
+            <div class="divideMode" id="divide_13-2" data-ori="0 -288px" data-hover="45 288" mode="9"></div>
+            <div class="divideMode" id="divide_14" data-ori="0 -320px" data-hover="45 320" mode="10"></div>
+            <div class="divideMode" id="divide_16" data-ori="0 -352px" data-hover="45 352" mode="11"></div>
+            <div class="divideMode" id="divide_25" data-ori="0 -384px" data-hover="45 384" mode="13"></div>
+            <div class="divideMode" id="divide_36" data-ori="0 -416px" data-hover="45 416" mode="14"></div>
+        </div>
+        <div id="liveSoundLineBox">
+            <div class="liveSmallImg sound-silence" id="liveSmallImg" silence="silence"></div>
+            <div id="liveSoundLine"></div>
+        </div>
+    </div>
+</div>
+
+<div class="popupBox" id="reboot_prompt" style="display:none;">
+  <div>
+      <li class="popupBoxTitle" id="reboot_title"><em></em></li>
+   </div>
+   <div class="popupBoxContent" id="reboot_content">
+        <li>
+          <input class="inputTxt" id="reboot_input" type="password" maxlength="8">
+        </li>
+        <li class="btn_box">
+          <input type="button" class="btn" id="btn_reboot_ok" value="OK">
+          <input type="button" class="btn" id="btn_reboot_cancle" value="Cancel">
+        </li>
+  </div>
+</div>
+
+<div class="popupBox" id="cloud_prompt" style="display:none;">
+	<div class="popupBoxContent" id="cloud_content">
+		<li id="cloud_title"><em></em></li>
+		<li>
+			<input class="inputTxt" id="cloud_input" type="password" maxlength="8" style="display:none;">
+		</li>
+		<li class="btn_box">
+			<input type="button" class="btn" id="btn_cloud_ok" value="OK">
+			<input type="button" class="btn" style="display:none;" id="btn_cloud_ok2" value="OK">
+			<input type="button" class="btn" id="btn_cloud_cancle" value="Cancle">
+		</li>
+	</div>
+</div>
+
+<div class="popupBox" id="confirmDiv" style="display:none;">
+  <div>
+      <li class="popupBoxTitle" id="confirm_title"><em></em></li>
+   </div>
+   <div class="popupBoxContent" id="confirm_content">
+        <li>
+          <em class="inputTxt" id="confirm_str"></em>
+        </li>
+        <li class="btn_box">
+          <input type="button" class="btn" id="btn_confirm_ok" value="OK">
+          <input type="button" class="btn" id="btn_confirm_cancle" value="Cancel">
+        </li>
+  </div>
+</div>
+
+<div class="popupBox" id="user_prompt" style="display:none;">
+  <div>
+      <li class="popupBoxTitle" id="user_title"><em></em></li>
+   </div>
+   <div class="popupBoxContent" id="user_content">
+        <li>
+          <input class="inputTxt" id="user_input" type="password" maxlength="8">
+        </li>
+        <li class="btn_box">
+          <input type="button" class="btn" id="btn_user_ok" value="OK">
+          <input type="button" class="btn" id="btn_user_cancle" value="Cancel">
+        </li>
+  </div>
+</div>
+
+
+</body></html>

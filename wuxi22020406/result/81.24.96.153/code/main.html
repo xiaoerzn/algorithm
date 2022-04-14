@@ -1,0 +1,80 @@
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="Cache-Control" content="private, no-transform">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="x-rim-auto-match" content="none">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimal-ui">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta http-equiv="cleartype" content="on">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/css/default/images/kopfbalken_links.png">
+<link rel="apple-touch-startup-image" href="/css/default/images/kopfbalken_links.png">
+<style>
+@font-face {
+font-family: 'Source Sans Pro';
+src: url('/css/rd/fonts/sourcesanspro.woff');
+}
+@font-face {
+font-family: 'Source Sans Pro';
+src: url('/css/rd/fonts/sourcesansproBold.woff');
+font-weight: bold;
+}
+@font-face {
+font-family: 'AVM';
+src: url('/css/rd/fonts/metaWebProBold.woff');
+font-weight: bold;
+}
+html, input, textarea, keygen, select, button {
+font-family: 'Source Sans Pro', Arial, sans-serif;
+font-size: 100%;
+}
+.blue_bar_title,
+.logoArea {
+font-family: 'AVM', 'Source Sans Pro', Arial, sans-serif;
+}
+</style>
+
+<link rel="stylesheet" type="text/css" href="/css/rd/login.css">
+<title>
+FRITZ!Box
+</title>
+</head>
+<body>
+<script>
+var gNbc = false,
+config = {"gu_type":"release","GUI_IS_POWERLINE":false,"GUI_IS_REPEATER":false,"isDebug":false,"language":"en"};
+</script>
+<script src="/js/avmcore.js?lang=en"></script>
+<!--<script src="/js/browser.js"></script>-->
+<!--<script src="/js/jsl.js"></script>-->
+<!--<script src="/js/md5.js"></script>-->
+<!--<script src="/js/html.js"></script>-->
+<!--<script src="/js/func.js"></script>-->
+<!--<script type="text/javascript" src="/myfritz/js/focuschanger.js?lang=en"></script>-->
+<!--<script src="/js/html2.js?lang=en"></script>-->
+<!--<script src="/js/http.js"></script>-->
+<script type="text/javascript" src="/js/login.js"></script>
+<script type="text/javascript">
+var data = {"challenge":"ca06a9a4","blockTime":0,"pageTitle":"Welcome to your FRITZ!Box","lastPage":"","loginReason":0,"changedPassTxt":"\"The FRITZ!Box password has been changed.\"","logoutTxt":"\"You've logged out successfully from the FRITZ!Box.\"","facTitle":"FRITZ!Box Factory Settings","falseUsername":false,"txt":{"facNotAllowedOr10Min":"You are not authorized to perform this action, or your FRITZ!Box has been in operation for longer than 10 minutes.","facOnAllowedComp":"You start to restore the factory settings from a computer for which no limitations for Internet use are defined.","pleaseChoose":"Please select...","loginAgainUserMailPass":"Please log in with your user name or e-mail address and your password.","facNotSet":"The FRITZ!Box was not reset to its factory settings.","notAuthorized":"You are currently logged in as user %1%Name%. This user is not authorized to access the FRITZ!Box contents you requested.","autoLogoutLoginAgain":"You've been logged out automatically; please log back in.","sendLoginLink":"Send access link","facFailed":"Restoring the factory settings failed.","loginAgainUserPass":"Please log in with your user name and your password.","waitMore":"Please wait %1 seconds.","facNotAllowed":"The factory settings could not be restored because this computer does not have the necessary rights.","autoLogoutTimeout":"You were logged out automatically because no activity has been registered for some time.","waitOne":"Please wait 1 second.","chooseUsername":"Please enter a user name.","sendPushServiceMail":"Send Push Service mail","loginFailed":"Login failed.","mistypedOrNotAuthorized":"Did you make a typing error, or do you not have the right to access this area?","choose":"OK","back":"Back","login":"Log In","loginMailSent":"The e-mail with the data for accessing the user interface has been sent.","waitTryAgain":"Please log back in again.","caution":"Attention","facRepeat":"The factory settings can be restored again.","loginLinkMailPossible":"If you forgot your password for the user interface, you can have an access link sent as a Push Service mail.","pass":"Password","setFacDefaults":"Restore Factory Settings","facDisconnectPower":"Disconnect FRITZ!Box from the power mains temporarily. After about a minute you can open the user interface again. Then click \"To Overview\".","forgotPassword":"Forgot your password?","facLoseSettings":"Please note that resetting the box will overwrite all of your settings!","loginAgainPass":"Please log in using your password.","user":"User name","tooManyLogins":"Too many sessions have been started simultaneously."},"cutPowerTxt":"Cut power to the FRITZ!Box briefly first, and then return to this page once your FRITZ!Box has been restarted.","showUser":true,"facWhatNextTxt":"After the reset you will be automatically redirected to the FRITZ!Box \"Overview\" page.","facIsSetTxt":"The FRITZ!Box factory settings are restored and then the system will be rebooted. All connections to the system will be interrupted briefly.","facPationsTxt":"It can take up to 5 minutes before the FRITZ!Box can be reached again. Please be patient!","fallbackRedirectUrl":"http:\/\/192.168.178.1\/","fromInternet":true,"setFacTxt":"Alternatively, you can restore the factory settings to the FRITZ!Box.","username":"","bluBarTitle":"FRITZ!Box","ifSetFacTxt":"If you have forgotten your FRITZ!Box password, you cannot open the user interface again until the factory settings have been restored to the FRITZ!Box.","activeUsers":[]};
+if (gNbc) {
+data.nbc = true;
+}
+function localInit() {
+"use strict";
+window.history.replaceState({}, '', '/');
+html.blueBarHead({
+"type": "login",
+title: data.bluBarTitle,
+parent: document.body
+});
+login.init(data);
+}
+localInit();
+</script>
+
+
+
+</body></html>

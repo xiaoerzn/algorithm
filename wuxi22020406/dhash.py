@@ -85,7 +85,7 @@ if __name__ == "__main__":
             print('dist is ' + '%d' % dist)
             print('{} and {} similarity is {}'.format((image_dir[50:]),(key[50:]),str(similarity)))
 
-            if similarity >= 0.7:
+            if similarity >= 0.9:
                 os.system("cp " + key + " " + tmp)
                 dic_done[key] = 1
     end = time.time()

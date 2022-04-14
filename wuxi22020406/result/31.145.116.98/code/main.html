@@ -1,0 +1,551 @@
+<html><head>
+	<meta name="robots" content="noodp">
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="-1">
+	<meta http-equiv="Cache-control" content="max-age=0">
+	<title>Check Point SSL Network Extender</title>
+	<meta name="title" content="Check Point SSL Network Extender">
+	<meta name="robots" content="noindex">
+	<meta name="Copyright" content="checkpoint">
+	<link rel="shortcut icon" href="theme/images/favicon.png">
+	<link rel="stylesheet" href="skin/chkp/skin1/index.css" type="text/css">
+	<style>
+		BODY { background: white url(bkg.gif);
+		  margin: 0 0 0 0 ;
+
+		  color: white;
+		  font-size: 11;
+		}
+
+		a {color: #99ccff;};
+
+		TABLE {
+			  font-size: 12;
+		}
+
+		.right_menu {
+			color: #99ccff;
+		}
+
+		a.right_menu {
+			color: #99ccff;
+		}
+
+		.links_table {  
+					color: black;
+					width:600px;
+					height:110px; 
+					border:1px solid black;
+					margin: 5px;
+					white-space: nowrap;
+					background-color : White;
+					overflow : scroll; 
+		}
+
+		a.links_table {color: black;};
+
+		.copyright_font {
+			font-size: 10;
+			position:relative;
+			
+			bottom:0; 
+			align: center;
+		}
+
+		.isb_header {
+			color: #000080;
+		}
+
+		.zl-alertTable { 
+			width: 100%; 
+			border: 1px solid #3284b3; 
+			margin-bottom: 10px
+		}
+
+		.zl-alertData {
+			padding: 1px 1px 2px 7px; 
+			color: white; 
+			font-weight: bold
+		}
+
+		.zl-alertText {
+			padding: 1px 1px 2px 7px;
+			color: white;
+			font-weight: normal
+		}
+
+		.error_table {
+			border:1px solid black;
+			background-color : #FFFCF8;
+		}
+		 
+		.snx_title {
+			font-size: 24;
+			color: #99ccff;
+		}
+
+		.wssTree-container {
+			margin: 0px;
+			padding: 0px 0px 0px 0px;
+			white-space: nowrap;
+			border: 0px;
+		}
+
+		.wssTree-item {
+			padding: 0px 0px 0px 0px;
+			margin: 0px;
+			white-space: nowrap;
+			border: 0px;
+		}
+
+		.wssTree-item a, .wssTree-item a:active, .wssTree-item a:hover {
+			margin-left: 0px;
+			padding: 1px 2px 1px 2px;
+			color: black;
+		}
+
+		.wssTree-item img {
+			vertical-align: middle;
+			border: 0px;
+		}
+
+		.wssTree-icon {
+			height: 16px;
+			width: 19px;
+		}
+		.helplinkTable {background-color: #cccccc; color:black}
+		.helplinkIcon {padding-right: 7px}
+		.helplinkTitle {vertical-align: middle}
+		.helplinkHint {background-color: #ffffff; padding-top: 7px; padding-bottom: 7px}
+		.helplinkHint2 {background-color: #ffffff; padding-top: 7px; padding-bottom: 7px; font-size: 11pt}
+
+		.splashList {padding-top: 2px; padding-bottom: 2px}
+
+		.regularRow td {background-color: #dfdfdf}
+		.selectedRow td {background-color: #cccccc}
+		.disabledRegularRow td {background-color: #dfdfdf; color: #999999}
+		.disabledSelectedRow td {background-color: #cccccc; color: #999999}
+
+		.hoverMenuOn {color: #ffffff; background-color: #cccccc}
+		.hoverMenuOff {color: #000000; background-color: #ffffff}
+
+		.zl-tabOn {
+		background-color: #ffffff;
+		width: 70px;
+		text-align: center;
+		padding: 4px;
+		border: solid 1px #000000; 
+		border-bottom: solid 1px #ffffff;
+		white-space: nowrap; 
+		font-weight: bold;
+		}
+
+		.zl-tabOff {
+		background-color: #dfdfdf;
+		width: 70px;
+		text-align:center;
+		padding: 4px;
+		border: solid 1px #000000;
+		border-bottom: solid 1px #000000;
+		white-space: nowrap;
+		font-weight: bold;
+		}
+
+		.zl-tabOff a:visited,
+		.zl-tabOn a:visited,
+		.zl-tabOn a:link,
+		.zl-tabOff a:link {color: #000000; text-decoration: none}
+
+		.zl-tabSpace {
+		width: 7px;
+		border: solid 0px #000000;
+		border-bottom: solid 1px #000000
+		}
+
+		.zl-tabSpaceEnd {
+		width: 100%;
+		border: solid 0px #000000;
+		border-bottom: solid 1px #000000;
+		}
+
+		.zl-tabHideShow {
+		width: auto;
+		padding: 1px;
+		border-bottom: solid 1px #000000
+		}
+
+	</style>
+	<link rel="stylesheet" href="theme/css/style.css" type="text/css">
+	<style>
+	* {
+			margin: 0;
+		}
+
+		html {
+			height: 100%;
+		}
+
+		body {
+			background: url(theme/images/banner_background.png) #f1f5ff repeat-x top center;
+			font-family: Segoe UI, Segoe UI Light, calibri, arial;
+			font-size: 14px;
+			color: #384c4e;
+			height: 100%;
+			overflow: hidden !important;
+		}
+
+		h1 {
+			font-size: 30px;
+			margin: 30px 0px;
+		}
+
+		p {
+			font-size: 14px;
+		}
+
+		a {
+			color: #3d81ff !important;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline !important;
+		}
+
+		#main-body {
+			width: 990px;
+			margXXin: 0px auto;
+			
+			min-height: 100%;
+			height: auto !important;
+			height: 100%;
+			margin: 0 auto -50px;
+		}
+
+		#inner-body {
+			
+			min-height: 100%;
+			height: auto !important;
+			height: 100%;
+			margin: 0 auto -50px;
+		}
+
+		.push {
+			height: 50px;
+			clear: both;
+		}
+
+		#footer {
+			border-top: 1px solid #bfc8d8;
+			height: 50px;
+			clear: both;
+		}
+
+		#footer-content {
+			margin: 0px auto;
+			color: #b6bbc5;
+			font-size: 12px;
+			width: 350px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+		}
+
+		#first-column {
+			width: 649px;
+			float: left;
+			margin-left: 20px;
+		}
+
+		#vert-separator {
+			width: 1px;
+			float: left;
+			background-color: #D9DFEC;
+			height: 350px;
+			margin: 80px 20px 30px 10px;
+		}
+
+		#second-column {
+			width: 270px;
+			float: right;
+			margin-top: 80px;
+			margin-right: 20px;
+		}
+
+		ul.links {
+			list-style-type: none;
+			padding: 0px;
+			margin: 10px 0px 0px 0px;
+		}
+
+		ul.links li{
+			border-top: 1px #bfc8d8 dotted;
+			padding: 10px 0px;
+			
+			background-image: url(theme/images/arrow_close.png);
+			background-repeat: no-repeat;
+			background-position: 0px 15px;
+			padding-left: 14px; 
+		}
+
+		.rtl-body {
+			direction: rtl;
+		}
+
+		.rtl-body ul.links li {
+			background-image: url(theme/images/arrow_close-rtl.png);
+			background-position: 260px 15px !important;
+			padding-right: 16px !important;
+			padding-left: 0px !important;
+		}
+
+		.collapsed-li{
+			background-image: url(theme/images/arrow_down.png) !important;
+		}
+
+		#main-pop-up-body {
+			width: 430px;
+			height: 300px;
+		}
+
+		#main-pop-up-body .header {
+			width: 430px;
+			height: 300px;
+		}
+
+		#main_div {
+			height: 100%;
+		}
+	</style>
+	<script type="text/javascript" src="cookies.js"></script><script src="language/chkp/english/messages.js"></script><script src="language/custom/english/messages.js"></script>
+	<script type="text/javascript" src="theme/js/code.js"></script>
+	<script type="text/javascript">
+		var extender = null, help_win = null;
+		function activeXable()
+		{
+
+			var ua = window.navigator.userAgent;
+			var msie = ua.indexOf ( "MSIE " );
+
+			if (( msie > 0 ) && ( parseInt (ua.substring (msie+5, ua.indexOf (".", msie ))) > 4.69 )) // If Internet Explorer version 4.7 or higher, return 1
+				{
+				return 1;
+				}
+			else                 // If another browser or MSIE less then 4.7, return 0
+				{
+				return 0;
+				}
+		}
+		function open_win()
+		{
+			try {
+				if(activeXable())
+					extender = window.open('pre_login.html','pre_login','width=1,height=1,menubar=0,resizable=0,scrollbars=0,status=0,titlebar=no');
+				else
+					extender = window.open('extender.html','pre_login','width=438,height=324,menubar=0,resizable=0,scrollbars=0,status=0,titlebar=no');
+			} catch (e) {
+			}
+			if (extender == null)
+			{
+				document.getElementById("popup_div").style.display = "block";
+				alert(popup_blocked);
+			}
+		}
+
+		function HelpPopUp() 
+		{
+			help_win = window.open( "help.html", "Help", "toolbar=0,status=0,width=800,height=600,scrollbars=0,resizable=0" );
+			help_win.focus();
+		}
+
+		function set_initial_cookie()
+		{
+			try {
+				if(getCookie("language") == null)
+					setCookie("language","english");
+				if(getCookie("skin") == null)
+					setCookie("skin","skin1");
+			} catch (e) {}	
+		}
+
+		 function set_cookie_and_reload(name, value)
+		{
+			if (name == "language_second")
+				name = "language";
+			if (name == "skin_second")
+				name = "skin";
+			setCookie(name, value);
+			if (name == "language")
+			{
+				history.go(0);
+			}
+			if (name == "skin")
+			{
+				setStyleSheet(value);	
+				try {
+					setStyleSheet(value, extender.document);
+				} catch (e) {}
+				try {
+					setStyleSheet(value, extender.proxy_win.document);
+					} catch (e) {}
+					try {
+					setStyleSheet(value, extender.reauth_win.document);
+					} catch (e) {}
+					try {
+					setStyleSheet(value, extender.help_win.document);
+					setStyleSheet(value, extender.help_win.help_iframe.document);
+					} catch (e) {}
+					try {
+					setStyleSheet(value, help_win.document);
+					setStyleSheet(value, help_win.help_iframe.document);
+					} catch (e) {}
+				
+			}
+		}
+
+		function init_selects()
+		{
+			try {
+				if (getCookie("language") != null)
+				{
+					setSelectedCombo(document.getElementById("language"),getCookie("language"));
+					setSelectedCombo(document.getElementById("language_second"),getCookie("language"));
+				}
+				if (getSelectedCombo(document.getElementById("language")) != getCookie("language"))
+					set_cookie_and_reload("language", getSelectedCombo(document.getElementById("language")));
+				if (getCookie("skin") != null)
+				{
+					setSelectedCombo(document.getElementById("skin"),getCookie("skin"));
+					setSelectedCombo(document.getElementById("skin_second"),getCookie("skin"));
+				}
+				if (getSelectedCombo(document.getElementById("skin")) != getCookie("skin"))
+					set_cookie_and_reload("skin", getSelectedCombo(document.getElementById("skin")));
+			} catch (e) {}
+		}
+
+		function showCmdSnx()
+		{
+			var CmdSnx = document.getElementById("CmdSnx");
+			
+			if (CmdSnx.style.display=='none') {
+				CmdSnx.style.display = "inline";
+				
+				document.getElementById("collapsedLink").className = "collapsed-li";
+				document.getElementById("Cmd_Snx_Win").title = download_Cmd_Snx_Win_alt;
+			}
+			else {
+				CmdSnx.style.display = "none";
+				
+				document.getElementById("collapsedLink").className = "";
+				document.getElementById("Cmd_Snx_Win").title = '';
+			}
+		}
+
+		function Cmd_Snx_Win_press()
+		{
+			document.getElementById("Cmd_Snx_Win").click();
+		}
+	</script>
+</head> 
+
+<body onload="open_win(); set_initial_cookie(); init_selects();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<div id="main_div">
+	<div id="main-body">
+		<div class="header">
+			<img src="theme/images/cp_logo.png" alt="Company logo" border="0" style="margin-left: 20px;  max-width: 850px;max-height: 97px;">
+			
+			<div class="company_logo"></div>
+		</div>
+		<script>
+			if (CURRENT_DIRECTION=='rtl') {
+				document.write('<div id="inner-body" class="rtl-body">');
+			}
+			else {
+				document.write('<div id="inner-body">');
+			}
+		</script><div id="inner-body">
+			<div id="first-column">
+				<h1><script>document.write(snx)</script>SSL Network Extender</h1>
+				<p>
+					<script>document.write(activex_welcome_message)</script>Check Point SSL Network Extender requires the download of an ActiveX / Java control to your browser. The entire process will take approximately 1 minute, depending on your connection speed.</p><p>If a security box appears, you must click <b>Yes</b> to approve the security certificate to initiate the download of the required ActiveX / Java control.</p><p>Check Point SSL Network Extender will be displayed upon the completion of the ActiveX / Java control download and automatic installation.<br></p><br>
+				<p></p>
+				<div id="popup_div" style="display:none"> 
+					<p><input type="button" id="continue" onclick="open_win()" value="Open SSL Network Extender window"></p>
+					<script>document.getElementById("continue").value = open_popup</script>
+				</div>
+			</div>
+			<div id="vert-separator"></div>
+			<div id="second-column">
+				<script>writeLanguages(document,language_str, 'language')</script>Language&nbsp;<select id="language" onchange="set_cookie_and_reload(id, value)"><option value="english" selected="">English</option><option value="spanish">Español</option><option value="brazilian_portuguese">Português (BR)</option><option value="italian">Italiano</option><option value="german">Deutsch</option><option value="french">Français</option><option value="hebrew">עברית</option><option value="japanese">日本語</option><option value="simplified_chinese">简体中文</option><option value="traditional_chinese">繁体中文</option></select>
+				
+				<ul class="links">
+					<li>
+						<a class="right_menu" href="javascript:HelpPopUp()">
+							<script>document.write(help)</script>Help
+						</a>
+					</li>
+					<li>
+						<a class="right_menu" href="http://www.checkpoint.com/products/ssl_network_ext/information.html" target="_blank"> 
+							<script>document.write(find_out_more)</script>Find out more about securing<br>your personal computer
+						</a>
+					</li>
+					<li id="collapsedLink">
+						<a class="right_menu" href="javascript:showCmdSnx();">
+							<script>document.write(show_Cmd_Snx)</script>Download SSL Network Extender manual installation
+						</a>
+						<div id="CmdSnx" style="display: none;">
+							<ul class="links" style="margin-left: 20px;">
+								<li>
+									<a class="right_menu" href="CSHELL/cpextender.msi" target="_blank" id="Cmd_Snx_Win" title=""><script>document.write(download_Cmd_Snx_Win)</script>Download MSI installation package for <b>Windows</b></a>
+								</li>
+								<li>
+									<a class="right_menu" href="CSHELL/snx_install.sh" target="_blank"><script>document.write(download_Cmd_Snx_Lnx)</script>Download command line SNX for <b>Linux</b></a>
+								</li>
+								<li>
+									<a class="right_menu" href="CSHELL/snx_install_osx.sh" target="_blank"><script>document.write(download_Cmd_Snx_Mac)</script>Download command line SNX for <b>Macintosh</b></a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+				
+				
+				<!--
+				
+				  <tr> 
+					<td colspan="2">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td rowspan="3" valign="top"><br><a href="http://www.zonelabs.com/zasssslnetext"><img src="bottom1.gif" border="0"></a></td>
+
+				  </tr>
+				  <tr> 
+					<td>&nbsp;</td>
+					<td valign="top"> 
+					  <p><b><script>document.write(connected_big)</script></b></p>
+					  <p><b><script>document.write(connected_message)</script></b><br>
+						<br><script>document.write(can_be_closed)</script></p>
+					  <p><br>
+					  </p>
+					</td>
+					<td>&nbsp;</td>
+
+				  </tr>
+				
+				
+				-->
+				
+			</div>
+		</div>
+		<div class="push"></div>
+	</div>
+	<div id="footer">
+		<div id="footer-content">
+		© <script>document.write(copyright)</script>2015 Check Point Software Technologies Ltd.
+		</div>
+	</div>
+</div>
+
+
+       
+<script language="JavaScript">try { document.user_password.timestamp.value = "1649325196"; neo_upgrade_mode="1"; neo_upgrade_version="0"; neo_upgrade_url=""; neo_saa_guilibs=""; neo_saa_url=""; } catch (e) {} </script></body></html>

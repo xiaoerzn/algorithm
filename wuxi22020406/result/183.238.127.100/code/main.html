@@ -1,0 +1,338 @@
+<html dir="ltr"><head><script src="cookies.js"></script><script src="language/chkp/english/messages.js"></script><script src="language/custom/english/messages.js"></script>
+<script>document.write(conn_html)</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-control" content="max-age=0">
+<title>Check Point SSL Network Extender</title>
+<script>load_stylesheet("index.css")</script><link rel="Stylesheet" type="text/css" href="skin/chkp/skin1/index.css" title="skin1"><link rel="Stylesheet" type="text/css" href="skin/chkp/skin2/index.css" title="skin2" disabled=""><script>
+var extender = null, help_win = null;
+function activeXable()
+{
+
+	var ua = window.navigator.userAgent;
+	var msie = ua.indexOf ( "MSIE " );
+	var trident = ua.indexOf ( "Trident" );
+
+	if (( msie > 0 ) || ( trident > 0 )) // If Internet Explorer - return 1
+		{
+		return 1;
+		}
+	else                 // If another browser - return 0
+		{
+		return 0;
+		}
+}
+function open_win()
+{
+	try {
+		if(activeXable())
+			extender = window.open('pre_login.html','pre_login','width=438,height=324,menubar=0,resizable=1,scrollbars=0,status=0,titlebar=no');
+		else
+			extender = window.open('extender.html','pre_login','width=438,height=324,menubar=0,resizable=0,scrollbars=0,status=0,titlebar=no');
+	} catch (e) {
+	}
+	if (extender == null)
+	{
+		document.getElementById("popup_div").style.display = "block";
+		alert(popup_blocked);
+	}
+}
+
+function HelpPopUp() 
+{
+	help_win = window.open( "help.html", "Help", "toolbar=0,status=0,width=800,height=600,scrollbars=0,resizable=0" );
+	help_win.focus();
+}
+
+function set_initial_cookie()
+{
+	try {
+		if(getCookie("language") == null)
+			setCookie("language","english");
+		if(getCookie("skin") == null)
+			setCookie("skin","skin1");
+	} catch (e) {}	
+}
+
+ function set_cookie_and_reload(name, value)
+{
+	if (name == "language_second")
+		name = "language";
+	if (name == "skin_second")
+		name = "skin";
+	setCookie(name, value);
+	if (name == "language")
+	{
+		history.go(0);
+	}
+	if (name == "skin")
+	{
+		setStyleSheet(value);	
+		try {
+			setStyleSheet(value, extender.document);
+		} catch (e) {}
+		try {
+			setStyleSheet(value, extender.proxy_win.document);
+			} catch (e) {}
+			try {
+			setStyleSheet(value, extender.reauth_win.document);
+			} catch (e) {}
+			try {
+			setStyleSheet(value, extender.help_win.document);
+			setStyleSheet(value, extender.help_win.help_iframe.document);
+			} catch (e) {}
+			try {
+			setStyleSheet(value, help_win.document);
+			setStyleSheet(value, help_win.help_iframe.document);
+			} catch (e) {}
+		
+	}
+}
+
+function init_selects()
+{
+	try {
+		if (getCookie("language") != null)
+		{
+			setSelectedCombo(document.getElementById("language"),getCookie("language"));
+			setSelectedCombo(document.getElementById("language_second"),getCookie("language"));
+		}
+		if (getSelectedCombo(document.getElementById("language")) != getCookie("language"))
+			set_cookie_and_reload("language", getSelectedCombo(document.getElementById("language")));
+		if (getCookie("skin") != null)
+		{
+			setSelectedCombo(document.getElementById("skin"),getCookie("skin"));
+			setSelectedCombo(document.getElementById("skin_second"),getCookie("skin"));
+		}
+		if (getSelectedCombo(document.getElementById("skin")) != getCookie("skin"))
+			set_cookie_and_reload("skin", getSelectedCombo(document.getElementById("skin")));
+	} catch (e) {}
+}
+
+function showCmdSnx()
+{
+	document.getElementById("CmdSnx").style.display = "inline";
+	document.getElementById("Cmd_Snx_Win").title = download_Cmd_Snx_Win_alt;
+}
+
+function Cmd_Snx_Win_press()
+{
+	document.getElementById("Cmd_Snx_Win").click();
+}
+</script></head>
+
+
+<body onload="open_win(); set_initial_cookie(); init_selects();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!-- 
+************************************************************************
+	You can modify the following lines
+************************************************************************
+-->
+<div id="main_div">
+<table><tbody><tr>
+<td width="7%">&nbsp;</td>
+<td width="86%">
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td><img src="three.gif" width="1" height="1" border="0"></td>
+    <td><img src="three.gif" width="195" height="1" border="0"></td>
+    <td><img src="three.gif" width="29" height="1" border="0"></td>
+    <td><img src="three.gif" width="100" height="1" border="0"></td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td colspan="2">
+    <table>
+	<tbody><tr><td>
+		<a href="http://www.checkpoint.com" target="_blank"><img name="page_1_r1_c1" src="logo.gif" border="0"></a>
+		</td><td>
+		<div class="company_logo"></div>
+	</td></tr>
+	<tr><td colspan="2">&nbsp;</td></tr>
+	<tr><td colspan="2" class="snx_title">
+		<script>document.write(snx)</script>SSL Network Extender
+	</td></tr>
+    </tbody></table>
+    </td>
+    <td valign="bottom"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="right_menu">
+        <tbody><tr valign="top"> 
+          <td width="2%" height="35"><img src="arrow.gif" vspace="9">&nbsp;</td>
+          <td width="98%" height="35"><b><span>
+          <script>writeLanguages(document,language_str, 'language')</script>Language&nbsp;<select id="language" onchange="set_cookie_and_reload(id, value)"><option value="simplified_chinese">简体中文</option><option value="traditional_chinese">繁体中文</option><option value="brazilian_portuguese">Português (BR)</option><option value="german">Deutsch</option><option value="hebrew">עברית</option><option value="japanese">日本語</option><option value="spanish">Español</option><option value="italian">Italiano</option><option value="french">Français</option><option value="english" selected="">English</option></select>
+          </span></b></td>
+        </tr>
+        <tr valign="top"> 
+          <td width="2%" height="35"><img src="arrow.gif" vspace="9">&nbsp;</td>
+          <td width="98%" height="35"><b><span>
+          <script>writeSkins(document,skin_str, 'skin')</script>Skin&nbsp;<select id="skin" onchange="set_cookie_and_reload(id, value)"><option value="skin1">Skin 1</option><option value="skin2">Skin 2</option></select>
+          </span></b></td>
+        </tr>
+        <tr valign="top"> 
+          <td width="2%" height="35"><img src="arrow.gif" vspace="4">&nbsp;</td>
+          <td width="98%" height="35"><b><span><a class="right_menu" href="javascript:HelpPopUp()"><script>document.write(help)</script>Help</a></span></b></td>
+        </tr>
+        <tr valign="top"> 
+          <td width="2%" height="35" valign="top"><img src="arrow.gif" vspace="4">&nbsp;</td>
+          <td width="98%" height="35"><b><span><a class="right_menu" href="http://www.checkpoint.com/products/ssl_network_ext/information.html" target="_blank"> 
+            <script>document.write(find_out_more)</script>Find out more about securing<br>your personal computer</a></span></b></td>
+        </tr>
+		<tr><td height="8"></td></tr>
+        <tr valign="top"> 
+          <td width="2%" height="35" valign="top"><img src="arrow.gif" vspace="4">&nbsp;</td>
+          <td width="98%" height="35">
+		  	<b><span><a class="right_menu" href="javascript:showCmdSnx();"><script>document.write(show_Cmd_Snx)</script>Download SSL Network Extender manual installation</a></span></b><br>
+		  </td>
+        </tr>
+		<tr><td height="6"></td></tr>
+        <tr valign="top"> 
+          <td width="2%" height="35" valign="top">&nbsp;</td>
+          <td width="98%" height="35" style="padding-left:10px;">
+			<div id="CmdSnx" style="display: none;">
+				<a class="right_menu" href="CSHELL/cpextender.msi" target="_blank" id="Cmd_Snx_Win" title=""><script>document.write(download_Cmd_Snx_Win)</script>Download MSI installation package for <b>Windows</b></a><br><br>
+				<a class="right_menu" href="CSHELL/snx_install.sh" target="_blank"><script>document.write(download_Cmd_Snx_Lnx)</script>Download command line SNX for <b>Linux</b></a><br><br>
+				<a class="right_menu" href="CSHELL/snx_install_osx.sh" target="_blank"><script>document.write(download_Cmd_Snx_Mac)</script>Download command line SNX for <b>Macintosh</b></a><br>
+				<!--a href="CSHELL/San_Stifano.zip">San_Stifano.zip</a><br-->
+			</div>
+		  </td>
+        </tr>
+      </tbody></table>
+    </td>
+   
+  </tr>
+  <tr> 
+    <td colspan="4">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td valign="top">
+	<script>document.write(activex_welcome_message)</script>Check Point SSL Network Extender requires the download of an ActiveX / Java control to your browser. The entire process will take approximately 1 minute, depending on your connection speed.<p>If a security box appears, you must click <b>Yes</b> to approve the security certificate to initiate the download of the required ActiveX / Java control.</p><p>Check Point SSL Network Extender will be displayed upon the completion of the ActiveX / Java control download and automatic installation.<br></p><br>
+    </td>
+<td>&nbsp;</td>
+    
+
+  </tr>
+  
+  
+  <tr><td colspan="4" align="center">
+    <div id="popup_div" style="display:none"> 
+    <p><input type="button" id="continue" onclick="open_win()" value="Open SSL Network Extender window"></p>
+    <script>document.getElementById("continue").value = open_popup</script>
+    </div>
+    </td></tr>
+<tr>
+    <td colspan="5"><br>&nbsp;<br></td>
+  </tr>
+  <tr>
+    <td colspan="5"><br>&nbsp;<br></td>
+  </tr>
+</tbody></table>
+</td>
+<td width="5%">&nbsp;</td>
+</tr>
+</tbody></table>
+<center><div class="copyright_font">© <script>document.write(copyright)</script>2012 Check Point Software Technologies Ltd.</div></center>
+
+&nbsp;
+
+</div>
+<div id="commercial_div" style="display:none">
+<table><tbody><tr>
+<td width="7%">&nbsp;</td>
+<td width="86%">
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td><img src="three.gif" width="1" height="1" border="0"></td>
+    <td><img src="three.gif" width="195" height="1" border="0"></td>
+    <td><img src="three.gif" width="29" height="1" border="0"></td>
+    <td><img src="three.gif" width="100" height="1" border="0"></td>
+  </tr>
+  <tr> 
+    <td colspan="2">
+    <table><tbody><tr><td><a href="http://www.checkpoint.com" target="_blank"><img name="page_1_r1_c1" src="logo.gif" border="0"></a></td><td><div class="company_logo"></div></td></tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+	<tr><td colspan="2">
+		<div class="snx_title">SSL Network Extender</div>
+	</td></tr>
+	</tbody></table>
+    </td>
+    <td>&nbsp;</td>
+    <td valign="bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="right_menu">
+        <tbody><tr valign="top"> 
+          <td width="2%" height="35"><img src="arrow.gif" vspace="9">&nbsp;</td>
+          <td width="98%" height="35"><b><span>
+          <script>writeLanguages(document,language_str, 'language_second')</script>Language&nbsp;<select id="language_second" onchange="set_cookie_and_reload(id, value)"><option value="simplified_chinese">简体中文</option><option value="traditional_chinese">繁体中文</option><option value="brazilian_portuguese">Português (BR)</option><option value="german">Deutsch</option><option value="hebrew">עברית</option><option value="japanese">日本語</option><option value="spanish">Español</option><option value="italian">Italiano</option><option value="french">Français</option><option value="english" selected="">English</option></select>
+          </span></b></td>
+        </tr>
+        <tr valign="top"> 
+          <td width="2%" height="35"><img src="arrow.gif" vspace="9">&nbsp;</td>
+          <td width="98%" height="35"><b><span>
+          <script>writeSkins(document,skin_str, 'skin_second')</script>Skin&nbsp;<select id="skin_second" onchange="set_cookie_and_reload(id, value)"><option value="skin1">Skin 1</option><option value="skin2">Skin 2</option></select>
+          </span></b></td>
+        </tr>
+        <tr valign="top"> 
+          <td width="2%" height="35"><img src="arrow.gif" vspace="4">&nbsp;</td>
+          <td width="98%" height="35"><b><span><a class="right_menu" href="javascript:HelpPopUp()"><script>document.write(help)</script>Help</a></span></b></td>
+        </tr>
+        <tr valign="top"> 
+          <td width="2%" height="35" valign="top"><img src="arrow.gif" vspace="4">&nbsp;</td>
+          <td width="98%" height="35"> <b><span><a class="right_menu" href="http://www.checkpoint.com/products/ssl_network_ext/information.html" target="_blank"> 
+            <script>document.write(find_out_more)</script>Find out more about securing<br>your personal computer</a></span></b><br></td>
+        </tr>
+      </tbody></table>
+    </td>
+   
+  </tr>
+  <tr> 
+    <td colspan="2">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td rowspan="3" valign="top"><br><a href="http://www.zonelabs.com/zasssslnetext"><img src="bottom1.gif" border="0"></a></td>
+
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td valign="top"> 
+      <p><b><script>document.write(connected_big)</script>CONNECTED!</b></p>
+      <p><b><script>document.write(connected_message)</script>You are now connected via Check Point SSL Network Extender.</b><br>
+        <br><script>document.write(can_be_closed)</script>Closing this window will not affect the current session. The Check Point SSL Network Extender runs in a different window.</p>
+      <p><br>
+      </p>
+    </td>
+    <td>&nbsp;</td>
+
+  </tr>
+  <tr>
+    <td colspan="5"><br>&nbsp;<br></td>
+  </tr>
+  <tr>
+    <td colspan="5"><br>&nbsp;<br></td>
+  </tr>
+</tbody></table>
+</td>
+<td width="5%">&nbsp;</td>
+</tr>
+</tbody></table>
+<center><div class="copyright_font">© <script>document.write(copyright)</script>2012 Check Point Software Technologies Ltd.</div></center>	
+
+&nbsp;
+
+</div>
+<!-- 
+************************************************************************
+	End of modification area
+************************************************************************
+-->
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-control" content="max-age=0">
+
+       
+<script language="JavaScript">try { document.user_password.timestamp.value = "1649408604"; neo_upgrade_mode="0"; neo_upgrade_version="0"; neo_upgrade_url=""; neo_saa_guilibs=""; neo_saa_url=""; } catch (e) {} </script></body></html>

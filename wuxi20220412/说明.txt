@@ -1,0 +1,19 @@
+1、安装pytesseract库
+       pip install pytesseract 即可。
+
+2、安装pytesseract-ocr工具
+       pytesseract库是python的函数库，其依赖于tesseract-ocr工具的运行，因此需要下载安装tesseract-ocr，并将其与pytesseract库进行关联设置。
+
+       pytesseract-ocr工具下载地址：https://github.com/UB-Mannheim/tesseract/wiki   ，点击“tesseract-ocr-w64-setup-v4.0.0-beta.1.20180414.exe”/“tesseract-ocr-w32-setup-v4.0.0-beta.1.20180414.exe”下载安装。注意：安装时应该选中中文包！
+
+3、tesseract关联设置
+      在pytesseract安装路径下（路径一般为：“....../lib/site-packages\pytesseract\pytesseract.py”）找到pytesseract.py文件，打开文件修改如下语句：
+
+        # tesseract_cmd = 'tesseract'
+        tesseract_cmd = 'D:\Program Files (x86)\Tesseract-OCR\\tesseract.exe'
+
+       上面的路径是pytesseract-ocr工具的安装路径。
+4、配置环境变量
+       path    D:\Program Files\Tesseract-OCR
+
+       TESSDATA_PREFIX  D:\Program Files\Tesseract-OCR\tessdata

@@ -1,0 +1,58 @@
+<html class="main-app"><head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8; IE=EDGE">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1"><link href="/d40b886f10ab2feb0f5d575984a0876b/css/main-green.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+    (function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                try {
+                    window.fgt_lang = JSON.parse(xhr.responseText);
+                } catch (e) {
+                    console.error('Failed to parse language JSON');
+                }
+            }
+        };
+        xhr.open('GET', '/d40b886f10ab2feb0f5d575984a0876b/lang/en.json', false);
+        xhr.send();
+    })()
+;</script>
+<script language="JavaScript">
+if (top.location != window.location) top.location.reload();
+if (window.opener) {window.opener.top.location.reload(); self.close();}
+</script>
+</head>
+<body>
+<div class="view-container">
+<form class="prompt" onsubmit="return false;" method="get" name="login" autocomplete="off">
+<div class="content with-header">
+<div class="header">
+<f-icon class="ftnt-fortinet-grid icon-xl"></f-icon></div>
+<div class="sub-content">
+<div class="wide-inputs ">
+<div class="error-message" id="err_msg" style="display: none">
+  <f-icon class="fa-error"></f-icon>
+  <div class="message-content" id="err_msg_content"></div>
+</div>
+<div class="warning-message" id="warn_msg" style="display: none">
+  <f-icon class="fa-warning"></f-icon>
+  <div class="message-content" id="warn_msg_content"></div>
+</div>
+<input type="text" name="username" id="username" value="" maxlength="64" autocorrect="off" autocapitalize="off" placeholder="Username">
+<input type="password" autocomplete="off" name="secretkey" id="secretkey" placeholder="Password">
+<label id="token_msg" style="display: none;"></label>
+<input type="hidden" name="ftm_push_enabled" id="ftm_push_enabled" value="1"><input type="password" autocomplete="off" name="token_code" placeholder="Token Code" id="token_code" maxlength="128" style="display: none" disabled="">
+</div>
+<div class="button-actions wide">
+<button class="primary" name="login_button" id="login_button" type="button" onclick="try_login();">Login</button>
+</div></div></div></form></div>
+<script type="text/javascript" src="/d40b886f10ab2feb0f5d575984a0876b/js/login.js"></script>
+<script language="Javascript">
+document.onkeydown = key_pressdown;
+document.forms[0].username.focus();
+</script>
+
+
+</body></html>

@@ -1,0 +1,596 @@
+<html><head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-style-type" content="text/css">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="expires" content="-1">
+		<meta name="description" content="Streamline Portal">
+		<link rel="shortcut icon" href="/management/admin/imgs/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/management/admin/imgs/favicon.gif" type="image/gif">
+		<title>Local administrator login</title>
+		<!-- Don't change this title otherwise sessiontimeout handling will not work!!! -->
+<style type="text/css">
+html, body
+{
+	height:100%;
+	padding:0;
+	margin:0;
+	background-color:#2a3136;
+	min-height: 420px;
+	min-width: 575px;
+}
+
+.visible {
+	display: block;
+}
+
+.invisible {
+	display: none;
+}
+
+.button {
+	background: -moz-linear-gradient(center top , #FAFBFC, #D9DADA) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -ms-linear-gradient(top, #FAFBFC, #D9DADA);
+	background: -webkit-linear-gradient(top, #FAFBFC, #D9DADA);
+	border: 1px solid #B8B8B8;
+	color: #444444;
+	cursor: pointer;
+	font-weight: bold;
+	width:140px;
+	font-family: Harmony Sans,Open Sans,Arial;
+	height:24px;
+}
+
+.buttonOff {
+	background-color: #D9DADA;
+	border: 1px solid #B8B8B8;
+	color: #444444;
+	cursor: pointer;
+	width:140px;
+	font-family: Harmony Sans,Open Sans,Arial;
+	height:24px;
+}
+
+.button:active{
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
+}
+.button:hover, .buttonWiz:hover, .tabbutton:hover {
+	background: -moz-linear-gradient(center top , #D9DADA, #FAFBFC) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -ms-linear-gradient(top, #D9DADA, #FAFBFC);
+	background: -webkit-linear-gradient(top,#D9DADA, #FAFBFC);
+}
+
+#tblLang{
+	background-color:white;
+	font-family: Harmony Sans,Open Sans,Arial;
+	font-size: 10pt;
+	color:black;
+	position:fixed;
+	top:47px;
+	right:20px;
+	border-collapse:collapse;
+	display:none;
+}
+#tblLang tr{
+	background-color: rgba(0, 0, 0, 0);
+	cursor: pointer;
+}
+#tblLang tr:hover {
+	background-color: #f1f2f4;
+	border: 1px solid #628F2B;
+	color: #000000;
+}
+.btnLang{cursor: pointer;border-radius: 5px;width: 26px;height: 23px;text-align: center;font-family: Harmony Sans,Open Sans,Arial;font-size: 10pt;border: 2px solid #88c540;color: #88c540;padding-top: 3px;}.btnLanSel{cursor: pointer;border-radius: 5px;border: 2px solid #88c540;width: 26px;height: 23px;text-align: center;font-family: Harmony Sans,Open Sans,Arial;font-size: 10pt;padding-top: 3px;background-color: #88c540;color: white;}.btnLang:hover{background-color:#88c540;color:white;}
+
+.divBrowserInfo{
+	padding-left: 20px;
+	padding-top:20px;
+	clear:both;
+}
+
+.browserInfo {
+	background: url("./../../imgs/warn_msg14.png") no-repeat scroll 1em 0.55em #2a3136;;
+	border: 1px solid #2f7d00;
+	color: red;
+	font-family: Harmony Sans,Open Sans,Arial;
+	font-size: 10pt;
+	padding: 5px 36px 5px 40px;
+	text-align: left;
+	width:370px;
+}
+.systemTxt{
+	padding-left:20px;
+	font-family: Harmony Sans,Open Sans,Arial;
+	font-size: 32pt;
+	color:#88c540;
+}
+.loginTxt{
+	padding-left:20px;
+	padding-top:30px;
+	font-family: Harmony Sans,Open Sans,Arial;
+	font-size: 10pt;
+	color:white;
+}
+.inputTxt{
+	width:140px;
+	font-family: Harmony Sans,Open Sans,Arial;
+	color:black;
+	height:18px;
+}
+.divError{
+	padding-top: 10px;
+	font-family: Harmony Sans,Open Sans,Arial;
+	font-size: 10pt;
+	color: red;
+	display:none;
+}
+.divUserError{
+	padding-left: 20px;
+	padding-top: 100px;
+	font-family: Harmony Sans,Open Sans,Arial;
+	font-size: 10pt;
+	color: red;
+	clear: both;
+	padding-left: 20px;
+	padding-top: 15px;
+}
+.divJavaTxt{
+	width:190px;
+	float:right;
+	padding-top:5px;
+	padding-right:10px;
+	font-family: Harmony Sans,Open Sans,Arial;
+	font-size: 10pt;
+	color:white;
+}
+.divForgotten{
+	font-family: Harmony Sans,Open Sans,Arial;
+	font-size: 10pt;
+	color:white;
+	padding-top:5px;
+	clear:both;
+}
+</style>
+
+<script type="text/javascript">
+<!--
+/* SessionId = '15D713B9FF0CE5970A69200CF6764D79'; */
+var loccheckvalidkeymerker = false;
+var loclastnameerror = false;
+var locpassworderror = false;
+var locconfirmpassworderror = false;
+
+function localeChange(lang) 
+{
+	// call the same page again with new language settings
+	document.forms.loginform1.action = "SiteMain.jsp?localeSelected="+lang+"&errorusr="+"0";
+	document.forms.loginform1.submit();
+}
+
+function localeClose(){
+	document.getElementById("tblLang").style.display = "";
+	document.getElementById("btnLang").className= "btnLang";
+}
+
+function checkCookieSettings()
+{
+	if(navigator && navigator.cookieEnabled === false){
+		document.getElementById("tdErrorMsg").innerHTML="Warning: Your browser settings prevent cookies from being stored.<br>Administration via Web-Based Management will not be possible!";
+		document.getElementById("tdErrorMsg").style.display = "";
+	}
+}
+
+function checkJavaSettings()
+{
+	// since the navigator.javaEnabled() method seems to check only the Microsoft java VM not the plug-in, better avoid calling it
+	return;
+	/*
+	if(navigator && navigator.javaEnabled() === false){
+		alert("Warnung: Ihre Browser-Einstellungen verhindern das Starten von Java-Applets.\nAdministration über Web-Based Management ist deshalb nicht möglich.");
+	}
+	*/
+}
+/*
+function checkDbReady(){
+	var bReady = %=branding.isDbReady()%;
+	if (bReady == false){
+		document.getElementById("tdErrorMsg").innerHTML="%=rbLogin.getString("dbNotReady")%";
+		document.getElementById("tdErrorMsg").style.display = "";
+		document.getElementById("uname").disabled=true;
+		document.getElementById("upwd").disabled=true;
+		document.getElementById("submitButton").disabled=true;
+		window.setTimeout(function(){location.reload();}, 5000);
+	}else{
+		document.getElementById("uname").disabled=false;
+		document.getElementById("upwd").disabled=false;
+		document.getElementById("submitButton").disabled=false;
+	}
+}
+*/
+
+function checkBrowserSettings()
+{
+	checkCookieSettings();
+	if("true" == "false"){
+		
+		document.getElementById("uname").disabled=true;
+		document.getElementById("upwd").disabled=true;
+		document.getElementById("divForgotten").innerHTML="";
+		
+	}
+	//checkJavaSettings();
+	//checkDbReady();
+	//checkSystemType();
+}
+
+function getSystemType(){
+	return 5;
+}
+
+function checkSystemType(){
+	var sysType = getSystemType();
+	if (sysType == 0){
+		document.getElementById("tdErrorMsg").innerHTML="Error: Unknown system.<br>Administration via Web-Based Management will not be possible!";
+		document.getElementById("tdErrorMsg").style.display = "";
+		document.getElementById("uname").disabled=true;
+		document.getElementById("upwd").disabled=true;
+		document.getElementById("submitButton").disabled=true;
+	}
+}
+
+function selfFocus()
+{
+	if (window != window.top){
+		window.top.location.href = "/management/admin/locallogin.jsp";
+		return;
+	}
+}
+
+function hideJavascriptWarning()
+{
+	if(getSystemType() == 5 /* LX */ && document.URL.indexOf("/management/admin/locallogin.jsp")>=0){
+		window.close();
+	}
+	document.getElementById("tdErrorMsg").style.display = "none";
+}
+
+function checkUserLoginNameOfDigits(user)
+{
+	var chkZ = 0;
+	for (var i = 0; i < user.value.length; ++i){
+		if (user.value.charAt(i) >= "0" && user.value.charAt(i) <= "9"){
+			chkZ = chkZ + 1;
+		}
+	}
+	if (chkZ == 0){
+		return 1;
+	}else if (chkZ == user.value.length){
+		return 2;
+	}else{
+		return 0;
+	}
+}
+
+function checkNewPasswort(obj)
+{
+	var msg_err = "";
+	
+	if (obj.value == ""){
+		msg_err ="Please edit the password";
+		document.getElementById("UserPasswordErrorN").style.display="block";
+		document.getElementById("UserPasswordErrorN").innerHTML = msg_err;
+		return false;
+	}else{
+		if (obj.value.length < 8){
+				msg_err ="Please edit at least 8 characters";
+				document.getElementById("UserPasswordErrorN").style.display="block";
+				document.getElementById("UserPasswordErrorN").innerHTML = msg_err;
+				return false;
+		}else{
+				var ret = checkUserLoginNameOfDigits(obj);
+				switch (ret){
+					case 0:
+						document.getElementById("UserPasswordErrorN").style.display="none";
+						locpassworderror = false;
+						return true;
+					case 1:
+						msg_err ="Please edit at least 1 digit";
+						document.getElementById("UserPasswordErrorN").style.display="block";
+						document.getElementById("UserPasswordErrorN").innerHTML = msg_err;
+						return false;
+					case 2:
+						msg_err ="Please edit at least 1 character";
+						document.getElementById("UserPasswordErrorN").style.display="block";
+						document.getElementById("UserPasswordErrorN").innerHTML = msg_err;
+						return false;
+				}
+		}
+	}
+	return true;
+}
+
+function checkConfirmPasswort(obj){
+	var pwd = document.getElementById("upwdn");
+	var msg_err = "";
+	
+	if (obj.value == ""){
+		msg_err ="Please edit the confirm password";
+		document.getElementById("UserPasswordErrorB").style.display="block";
+		document.getElementById("UserPasswordErrorB").innerHTML = msg_err;
+		return false;
+	}else{
+		if (obj.value != pwd.value){
+			msg_err ="Confirm password does not match password";
+			document.getElementById("UserPasswordErrorB").style.display="block";
+			document.getElementById("UserPasswordErrorB").innerHTML = msg_err;
+			return false;
+		}else{
+			document.getElementById("UserPasswordErrorB").style.display="none";
+			return true;
+		}
+	}
+	return true;
+}
+
+function checkFields()
+{
+	var user = document.getElementById("uname");
+	var passwd = document.getElementById("upwd");
+	var error = false;
+	if (user.value == "") {
+		document.getElementById("UserNameError").style.display="block";
+		user.focus();
+		error = true;
+	} else {
+		document.getElementById("UserNameError").style.display="none";
+	}
+
+	if (passwd.value == "") {
+		document.getElementById("UserPasswordError").style.display="block";
+		if (!error) {
+			passwd.focus();
+		}
+		error = true;
+	} else {
+		document.getElementById("UserPasswordError").style.display="none";
+	}
+
+	if(0 == 2)
+	{
+		// correct handling of special chars for password fields
+		// Check Input fields for Password New 
+		var passwdn = document.getElementById("upwdn");
+		var passwdb = document.getElementById("upwdb");
+		if (passwdn.value == ""){
+			document.getElementById("UserPasswordErrorN").style.display="block";
+			if (!error){
+				passwdn.focus();
+			}
+			error = true;
+		}else{
+			if (loccheckvalidkeymerker === false){
+				if(!checkNewPasswort(passwdn)){
+					if (!error)	{
+						passwdn.focus();
+					}
+					error = true;
+				}else{
+					document.getElementById("UserPasswordErrorN").style.display="none";
+				}
+			}else{
+				document.getElementById("UserPasswordErrorN").style.display="none";
+				loccheckvalidkeymerker = false;
+			}
+		}
+		if (passwdb.value == ""){
+			document.getElementById("UserPasswordErrorB").style.display="block";
+			if (!error){
+				passwdb.focus();
+			}
+			error = true;
+		}else{
+			if (loccheckvalidkeymerker === false){
+				if(!checkConfirmPasswort(passwdb)){
+					if (!error){
+						passwdb.focus();
+					}
+					error = true;
+				}else{
+					document.getElementById("UserPasswordErrorB").style.display="none";
+				}
+			}else{
+				document.getElementById("UserPasswordErrorB").style.display="none";
+				loccheckvalidkeymerker = false;
+			}
+		}
+	}
+	
+	if (error === false){
+		document.forms.loginform1.submit();
+	}
+
+	return !error;
+}
+
+function reloadPage()
+{
+	window.top.location.href = "./../logoff.jsp";
+}
+
+function passwordOnChange(obj)
+{
+	if (false === checkNewPasswort(obj)){
+		obj.value = "";
+		locpassworderror = true;
+	}
+}
+
+function passwordOnFocus()
+{
+	if (locpassworderror === false){
+		if (loclastnameerror === false){
+			document.getElementById("UserPasswordError").style.display="none";
+		}
+	}
+}
+
+function confirmPasswordOnChange(obj)
+{
+	if (false === checkConfirmPasswort(obj)){
+		obj.focus();
+	}
+}
+
+function confirmPasswordOnFocus(obj)
+{
+	if (locconfirmpassworderror === false){
+		if (locpassworderror === false){
+			document.getElementById("UserPasswordErrorN").style.display="none";
+		}else{
+			obj.value = "";
+			obj.focus();
+		}
+	}
+}
+
+function setSelectionRange(input, selectionStart, selectionEnd){
+	if (input.setSelectionRange){
+		// for FireFox
+		input.focus();
+		input.setSelectionRange(selectionStart, selectionStart);
+	}else if (input.createTextRange){
+		// for IE Explorer
+		var range = input.createTextRange();
+		range.collapse(true);
+		range.moveEnd('character', selectionEnd);
+		range.moveStart('character', selectionStart);
+		range.select();
+	}
+}
+
+function checkValidKey(obj, IdErrorFieldName)
+{
+	var code;
+	var szNew = "";
+	var errpos;
+	var val = obj.value;
+	
+	for(var i=0; i<val.length;i++){
+		code = val.charCodeAt(i);
+		if ( (code == 33 /*!*/|| code == 35 /*#*/|| code == 37/*%*/|| code == 61/*=*/) ||
+				 (code >= 40        && code <= 42/*(-**/) ||
+				 (code >= 44        && code <= 59/*,-[*/) ||
+				 (code >= 63        && code <= 91)        ||
+				 (code >= 93        && code <= 126/*]-~*/)  )
+		{
+			szNew += val.charAt(i);
+		}else{
+			errpos = i;
+		}
+	}
+	
+	if (obj.value != szNew){
+		var msg_err ="Possible characters: [a-z][A-Z][0-9]!#%()*,-./:;=?@[]^_`{|}~";
+		var objErr = document.getElementById(IdErrorFieldName);
+		objErr.style.display="block";
+		objErr.innerHTML = msg_err;
+		errpos = 0; // then curser goes at first position H65272
+		obj.value = ""; // then input field is empty H65272
+		setSelectionRange(obj,errpos,errpos);
+		loccheckvalidkeymerker = true;
+	}
+	obj = null;
+}
+
+function processUserName(obj)
+{
+		var userName = obj.value;
+		if (userName.length > 0 && (userName.lastIndexOf("@") == -1) ) {
+			obj.value = userName + "@system";
+		}
+}
+
+function submitEnter(e)
+{
+	var keycode;
+	if (window.event){
+		keycode = window.event.keyCode;
+	}else if (e){
+		keycode = e.which;
+	}else{
+		return true;
+	}
+	if (keycode == 13){
+		checkFields();
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function showLangSelect(){
+	document.getElementById("btnLang").className = "btnLanSel";
+	document.getElementById("tblLang").style.display = "block";
+}
+//-->
+</script>
+
+</head>
+<body onload="hideJavascriptWarning(); selfFocus(); checkBrowserSettings();window.setTimeout('reloadPage()',1200000);">
+<div style="height:20%;">
+	<div style="float:right;padding-top:10px;padding-right:10px;">
+		<div id="btnLang" class="btnLang" onclick="showLangSelect();">EN</div>
+	</div>
+</div>
+<div style="height:50%;">
+	<div style="float:left;width:15%;">
+		<div style="float:right;">
+			<img style="height:212px;" alt="" src="./../imgs/icolumn.png">
+		</div>
+	</div>
+	<div style="float:left;">
+		<form method="post" name="loginform1" action="j_security_check">
+		<input id="errorInput" type="hidden" name="errorusr" value="0">
+		<div class="systemTxt"><img alt="OpenScape Business Assistant" src="./../imgs/lblOpenScape.png"></div>
+		<div class="loginTxt">Login</div>
+		<div style="padding-left:20px;padding-top:5px;">
+			<div style="float:left">
+				<input id="uname" name="j_username" class="inputTxt" type="text" tabindex="1" value="" placeholder="User name" onchange="processUserName(this);" onfocus="localeClose();">
+				<div id="UserNameError" class="divError">Mandatory field</div>
+			</div>
+			
+			
+			<div style="float:left;padding-left:10px;">
+				<div style="float:left;">
+					<input id="upwd" name="j_password" class="inputTxt" type="password" value="" tabindex="2" maxlength="50" placeholder="Password" onkeypress="submitEnter(event)">
+				</div>
+				<div style="float:left;padding-left:10px">
+					<input class="button" id="submitButton" type="button" value="Login" onclick="checkFields();" onkeyup="checkFields();" tabindex="4">
+
+				</div>
+				<div id="UserPasswordError" class="divError" style="clear:both;">Mandatory field</div>
+				
+				<div id="divForgotten" class="divForgotten">Password forgotten?<br>Please contact your system administrator</div>
+			</div>
+		</div>
+		<div id="tdErrorMsg" class="divUserError" style="display: none;">Warning: Your Browser settings prevent Javascript from being run. Administration via Web-Based Management will not be possible!</div>
+		
+		</form>
+	</div>
+</div>
+<div style="clear:both;height:5%;">&nbsp;</div>
+<div style="clear:both;height:15%;">
+	<div style="float:left;width:15%">&nbsp;</div>
+		<div style="float:left;padding-left:20px;"><img alt="" src="./../imgs/logo_unify.png"></div>
+</div>
+
+<table id="tblLang"><tbody><tr id="auttrde" onclick="localeChange(&quot;de&quot;)"><td style="padding-left:5px;"></td><td>de</td><td style="padding-left:5px;padding-right:5px;">German</td></tr><tr id="auttren" onclick="localeClose();"><td style="padding-left:5px;padding-right:5px;"><img alt="" src="./../imgs/check2.png"></td><td>en</td><td style="padding-left:5px;padding-right:5px;">English</td></tr><tr id="auttrfr" onclick="localeChange(&quot;fr&quot;)"><td style="padding-left:5px;"></td><td>fr</td><td style="padding-left:5px;padding-right:5px;">French</td></tr><tr id="auttrit" onclick="localeChange(&quot;it&quot;)"><td style="padding-left:5px;"></td><td>it</td><td style="padding-left:5px;padding-right:5px;">Italian</td></tr><tr id="auttrnl" onclick="localeChange(&quot;nl&quot;)"><td style="padding-left:5px;"></td><td>nl</td><td style="padding-left:5px;padding-right:5px;">Dutch</td></tr><tr id="auttrpt" onclick="localeChange(&quot;pt&quot;)"><td style="padding-left:5px;"></td><td>pt</td><td style="padding-left:5px;padding-right:5px;">Portuguese</td></tr><tr id="auttres" onclick="localeChange(&quot;es&quot;)"><td style="padding-left:5px;"></td><td>es</td><td style="padding-left:5px;padding-right:5px;">Spanish</td></tr></tbody></table>
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,53 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Authorization required</title>
+
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+
+<link href="../css/wildix-font.css" rel="stylesheet" type="text/css">
+<link href="../css/wildix-icons.css" rel="stylesheet" type="text/css">
+<link href="../css/jquery.loadmask.css" rel="stylesheet" type="text/css">
+
+<link href="../css/error_page.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/jquery-3.2.0.min.js?4.04.45335.48"></script>
+
+<script type="text/javascript" src="../js/jquery.loadmask.js"></script>
+<script type="text/javascript" src="../js/jquery.countdown360.js"></script>
+<script type="text/javascript" src="authorization.js" data-chromeapp="1"></script>
+</head>
+<body class="auth">
+	<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td align="center">
+			<div class="logo-wrapper">
+       			<a href="https://www.wildix.com/" target="_blank" class="logo"><img src="../images/wildix-logo.png"></a>
+    		</div>
+			<div class="box">
+				<label id="error"></label>
+				<form class="authForm" onsubmit="if(!auth()){return false;}" method="post">
+					<input placeholder="Login" class="form-field" type="text" id="u" required="required">
+					<input placeholder="Password" class="form-field" type="password" id="p" required="required">
+					<input type="checkbox" id="remember" name="remember"><label class="remember-label fa fa-clock-o fa-lg" for="remember" title="Remember me for 7 days. Allowed only in HTTPS mode"></label>
+					<button type="submit" title="Login" class="submit"><i class="fa fa-sign-in"></i></button>
+					<button type="button" title="Google Single Sign-On" class="submit button-sign-on google-sign-on fa-stack fa-lg"><i class="fa fa-square fa-stack-1x"></i><i class="fa fa-google fa-stack-1x fa-inverse"></i></button>
+					<button type="button" title="Office 365 Sign-On" class="submit button-sign-on office365-sign-on fa-stack fa-lg"><i class="fa fa-windows"></i></button>
+					<div style="clear:both;"></div>
+				</form>
+				<form class="twoFactorForm" onsubmit="if(!auth(true)){return false;}" method="post" style="display: none;">
+					<div class="description" style="margin-bottom: 10px;">
+						<!--Для входа воспользуйтесь кодом подтверждения, сгенерированным мобильным приложением.-->
+					</div>
+					<input placeholder="Code" class="form-field" type="text" id="code" required="required">
+                    <div class="countdown"></div>
+					<button type="submit" title="Login" class="submit"><i class="fa fa-sign-in"></i></button>
+					<div style="clear:both;"></div>
+				</form>
+			</div>
+		</td>
+	</tr>
+	</tbody></table>
+
+
+</body></html>
