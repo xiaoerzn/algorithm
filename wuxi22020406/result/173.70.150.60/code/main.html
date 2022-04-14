@@ -1,0 +1,163 @@
+<html lang="en" xmlns:ng="http://angularjs.org" id="ng-app" ng-app="vzui" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+    <meta charset="utf-8">
+    <title>Verizon Router</title>
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link rel="stylesheet" href="css/bootstrap.min.css?v=v1.0.415">
+    <link rel="stylesheet" href="css/bootstrap-select.min.css?v=v1.0.415">
+    <link rel="stylesheet" href="css/base.css?v=v1.0.415">
+    <link rel="stylesheet" href="css/wh_skin.css?v=v1.0.415">
+    <link rel="stylesheet" href="css/bhr5.css?v=v1.0.415">
+    <!--<link rel="stylesheet" href="css/bhr5_form_elements.css?v=v1.0.415"/>-->
+      <!--[if lte IE 7]>
+        <script>
+          document.createElement('ng-include');
+          window.onload = function() {
+            // init angular
+            angular.bootstrap(document)
+          };
+        </script>
+      <![endif]-->
+      <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/IE8.css?v=v1.0.415"/>
+      <![endif]-->
+
+      <!--[if IE 9]>
+        <link rel="stylesheet" href="css/IE9.css?v=v1.0.415"/>
+      <![endif]-->
+
+
+  </head>
+  <body>
+    <!-- ngView:  --><div id="bgimage" class="container ng-scope" ng-view=""><div class="ng-scope">
+  <div class="masthead" id="header">
+    <div class="navbar" id="main_navbar">
+      <div class="container">
+        <a href="index.html?v=v1.0.415">
+          <div class="brand"></div>
+        </a>
+      </div>
+    </div>
+    <div ng-show="loggingIn &amp;&amp; (selfhelp || selfhelp2)" class="content-panel-with-header-login ng-hide" id="login-div-self">
+      <table id="login-table">
+        <tbody>
+          <tr>
+            <td></td>
+            <td class="content selfhelptd"><span class="mLeft2 header1selfhelp ieLoginHead">Login to the Router</span></td>
+			<td rowspan="7"><div class="password_right selfhelp"></div></td>
+          </tr>
+          <tr ng-show="showError" class="">
+            <td></td>
+            <td class="txtAlignLeft mBold makeRel content selfhelp"><span class="makeAbs mLeft2 loginMsgTopCellContentBase ng-binding">Connection has expired, please login again:</span></td>
+          </tr>
+          <tr>
+            <td>User Name:</td>
+            <td class="content">
+              <input type="text" ng-model="username" ng-disabled="true" class="ie11loginW ng-pristine ng-valid" disabled="disabled">
+            </td>
+          </tr>
+          <tr ng-show="showPasswordForm" class="">
+            <td>Admin Password:</td>
+            <td class="content">
+              <input class="ie11loginW ng-pristine ng-valid" type="password" ng-model="password" ng-show="!showPassword" on-keyup="handleKeyPress($key)" ng-disabled="timeout24 || timeout1">
+              <input class="ie11loginW ng-pristine ng-valid ng-hide" type="text" ng-model="password" ng-show="showPassword" on-keyup="handleKeyPress($key)" ng-disabled="timeout24 || timeout1">
+            </td>
+          </tr>
+          <tr ng-show="showPasswordForm" class="">
+            <td></td>
+            <td class="txtAlignLeft content">
+                    <div class="checkbox checkbox-primary txtAlignLeft mLeft1">
+                        <input ng-model="showPassword" id="showpassword" type="checkbox" class="ng-pristine ng-valid">
+                        <label for="showpassword">
+                            Show Password
+                        </label>
+                    </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="txtAlignLeft content"><button class="bhr5PriBtn chevronRight mLeft1" ng-click="login()" ng-disabled="timeout24 || timeout1">OK</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div ng-show="loggingIn &amp;&amp; (!selfhelp &amp;&amp; !selfhelp2)" class="content-panel-with-header-login" id="login-div">
+      <div class="header1 mLeft171 ieLoginHead">Login</div>
+      <table id="login-table">
+        <tbody>
+          <tr ng-show="showError" class="">
+            <td></td>
+            <td class="txtAlignLeft mBold makeRel content"><span class="makeAbs mLeft2 loginMsgTopCellContentBase ng-binding">Connection has expired, please login again:</span></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="content"><span class="mLeft2">Unauthorized Access is Prohibited.</span></td>
+          </tr>
+          <tr>
+            <td>User Name:</td>
+            <td class="content">
+              <input type="text" ng-model="username" ng-disabled="true" class="ie11loginW ng-pristine ng-valid" disabled="disabled">
+            </td>
+          </tr>
+          <tr ng-show="showPasswordForm" class="">
+            <td>Password:</td>
+            <td class="content">
+              <input class="ie11loginW ng-pristine ng-valid" type="password" ng-model="password" ng-show="!showPassword" on-keyup="handleKeyPress($key)" ng-disabled="timeout24 || timeout1">
+              <input class="ie11loginW ng-pristine ng-valid ng-hide" type="text" ng-model="password" ng-show="showPassword" on-keyup="handleKeyPress($key)" ng-disabled="timeout24 || timeout1">
+            </td>
+          </tr>
+          <tr ng-show="showPasswordForm" class="">
+            <td></td>
+            <td class="txtAlignLeft content">
+                    <div class="checkbox checkbox-primary txtAlignLeft mLeft1">
+                        <input ng-model="showPassword" id="showpassword" type="checkbox" class="ng-pristine ng-valid">
+                        <label for="showpassword">
+                            Show Password
+                        </label>
+                    </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="txtAlignLeft content"><button class="bhr5PriBtn chevronRight mLeft1" ng-click="login()" ng-disabled="timeout24 || timeout1">OK</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div ng-show="isUrlError &amp;&amp; !cookiesEnabled" class="content-panel-with-header ng-hide">
+          <h1>Attention</h1>
+        Internet Explorer does not allow cookies when hostname/domain contains "_" character. <br>
+        Please ensure that the router's Hostname or Local Domain does not contain "_" and that cookies have not been blocked in the browser settings.
+    </div>
+    <div ng-show="!cookiesEnabled &amp;&amp; !isUrlError" class="content-panel-with-header ng-hide">
+      <h1>Attention</h1>
+      <div>Cookies are disabled.  Please enable cookies and try again.</div>
+      <div>
+        <button ng-click="retry()" class="bhr5PriBtn chevronRight">Retry</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+    <script src="js/jquery-3.6.0.min.js?v=v1.0.415"></script>
+    <script src="js/jquery-migrate-3.3.2.min.js?v=v1.0.415"></script>
+    <script src="js/moment.min.js?v=v1.0.415"></script>
+    <script src="js/moment-timezone.min.js?v=v1.0.415"></script>
+    <script src="js/siteJquery.js?v=v1.0.415"></script>
+    <script src="js/angular.min.js?v=v1.0.415"></script>
+    <script src="js/angular-resource.min.js?v=v1.0.415"></script>
+    <script src="js/angular-route.min.js?v=v1.0.415"></script>
+    <script src="js/ui-bootstrap-tpls-0.12.1.min.js?v=v1.0.415"></script>
+    <script src="js/bootstrap.min.js?v=v1.0.415"></script>
+    <script src="js/bootstrap-select.min.js?v=v1.0.415"></script>
+    <script src="js/d3.min.js?v=v1.0.415"></script>
+    <script src="js/app.js?v=v1.0.415"></script>
+    <script src="js/filters.js?v=v1.0.415"></script>
+    <script src="js/directives.js?v=v1.0.415"></script>
+    <script src="js/services.js?v=v1.0.415"></script>
+    <script src="js/rest.js?v=v1.0.415"></script>
+    <script src="js/ui.min.js?v=v1.0.415"></script>
+    <script src="js/sha512.js?v=v1.0.415"></script>
+  
+
+</body></html>

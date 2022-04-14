@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Pragma" content="no_cache">
+    <meta name="ATEN International Co Ltd." content="(c) ATEN International Co Ltd. 2010">
+    <title></title>
+<!--    <link rel="shortcut icon" href="../images/favicon.ico">	-->
+    <link rel="stylesheet" href="../css/basic.css" type="text/css">
+    <script language="JavaScript">
+	if (window != top)
+		top.location.href = "/";//location.href;
+    </script>
+    <script language="JavaScript" src="../js/utils.js"></script><script type="text/javascript" src="../js/prototype.js"></script>
+<script type="text/javascript" ,="" src="../js/lang/English/lang_str.js"></script>
+    <script language="JavaScript" type="text/javascript">
+    var lang_setting;
+    lang_setting = ReadCookie("language");
+    if (lang_setting == null)
+    {
+    	CreateCookie("langSetFlag","0");
+    	CreateCookie("language","English");
+    	lang_setting = "English";
+    }
+    document.write("<script type=\"text/javascript\", src = \"../js/lang/" + lang_setting + "/lang_str.js\"><\/script>");	
+	function checkform()
+	{
+		if(Trim(form1.name.value) == "")
+		{
+			alert(lang.LANG_LOGIN_INVALID_USERNAME);
+			form1.name.focus();
+			return;
+		}
+		if(Trim(form1.pwd.value) == "")
+		{
+			alert(lang.LANG_LOGIN_INVALID_PASSWORD);
+			form1.pwd.focus();
+			return;
+		}
+		document.form1.submit();
+		return;
+	}
+	function checkEnt(e)
+	{
+        var key = window.event ? e.keyCode : e.which;
+        if(key == 13) 
+        {
+
+            checkform();
+        }
+ 	}
+	function PageInit()
+	{
+		var msg = document.getElementById("login_word");
+		msg.setAttribute("value", lang.LANG_LOGIN_LOGIN);
+		return;
+	}
+</script><script type="text/javascript" ,="" src="../js/lang/English/lang_str.js"></script>
+</head>
+<body onload="PageInit()">
+	<table style="margin: 0px; height: 100%; width: 100%" border="0" background="#FFFFFF" cellpadding="0" cellspacing="0">
+		<tbody><tr>
+			<td style="height: 25%; vertical-align: bottom; text-align: center">
+				<table style="margin: 0 auto;" border="0" width="412px">
+					<tbody><tr>
+						<td>
+							<img src="../images/logo.gif" style="margin: 0px; padding: 0px;">
+						</td>
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+		<tr style="width: 100%">
+			<td style="height: 75%; vertical-align: top; text-align: center">
+				<table class="login">
+					<tbody><tr><td>
+					<h3><script>document.writeln(lang.LANG_LOGIN_PROMPT);</script>Please Login
+</h3>
+					<form name="form1" action="/cgi/login.cgi" method="post" autocomplete="off">
+           			<label style="width:85px; text-align:left; margin-right: 2px;"><script>document.writeln(lang.LANG_LOGIN_USERNAME)</script>Username
+</label><input name="name" size="20" maxlength="64" style="width:146px;" type="text" onkeydown="checkEnt(event)"><br><br>
+           			<label style="width:85px; text-align:left; margin-right: 2px;"><script>document.writeln(lang.LANG_LOGIN_PASSWORD)</script>Password
+</label><input name="pwd" size="20" maxlength="64" style="width:146px;" type="password" onkeydown="checkEnt(event)"><br><br>
+           			<input id="login_word" class="btnStyle" name="Login" type="button" onclick="javascript: checkform(this)" value="login">
+					</form>
+					</td></tr>
+				</tbody></table>
+			</td>
+		</tr>
+	</tbody></table>
+
+
+</body></html>

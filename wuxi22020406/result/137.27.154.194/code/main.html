@@ -1,0 +1,175 @@
+<html><head>
+<title>Control Loader</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="Content-Type" content="text/html">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript">var $j = jQuery.noConflict();</script>
+<script type="text/javascript" src="../script/showModalDialog.js"></script>
+<script type="text/javascript" src="../script/siteomat_global.js"></script>
+
+<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="../pumpnet/css/app.css" type="text/css">
+
+<script type="text/javascript">
+var customer_id = 213;
+
+$j(document).ready(function() {
+
+	if (customer_id == 115)
+	{
+	    $j("#theLogo").removeClass("login_logo");
+	    $j("#theLogo").addClass("login_logo_microsffer");
+	    $j("#app").css("background-color","#003C6E");
+	    $j("#loginBtn").css("background-color","#E76F00");
+	    $j("#password_change").css("color","#E76F00");
+	}
+  if (customer_id == 213)
+	{
+    $j("#theLogo").removeClass("login_logo");
+	  $j("#theLogo").addClass("login_logo_gasboy");
+  }
+
+	X = screen.width;
+	Y = screen.height;
+	window.moveTo(0,0);
+	window.resizeTo(X,Y)
+
+	$j("#User").focus();
+});
+
+function OnOverL(me)
+{
+   me.style.backgroundImage = "url(../images/but_rol.gif)" ;
+}
+
+function OffMeL(me)
+{
+  me.style.backgroundImage = "url(../images/but_dn.gif)" ;
+}
+
+
+function CheckLogin()
+{
+    if (document.getElementById('DBname').length > 1)
+    {
+        // There's at least one archive to choose from.
+        document.getElementById('UserLabel').style.top = 35 + "px";
+        document.getElementById('User').style.top=35 + "px";
+
+        document.getElementById('PasswordLabel').style.top = 60 + "px";
+        document.getElementById('Password').style.top=60 + "px";
+
+        document.getElementById('DBnameLabel').style.visibility = "";
+        document.getElementById('DBname').style.visibility = "";
+    }
+
+    var i;
+
+    var width=1000;
+    var height=670;
+
+
+
+    document.getElementById('User').focus();
+    var pt=GetCenterXY(width,height);
+
+    i= arguments[0];
+
+    if (document.all || document.layers)
+    {
+       w = screen.availWidth;
+       h = screen.availHeight;
+
+    }
+
+    //alert('w='+w+'h='+h);
+
+    if (i==2)
+    {
+        $j('.text-danger').html('Bad user or password!');
+        return;
+    }
+
+    if (i==4)
+    {
+        window.showModalDialog("force_pass_change.htm?ID=  ",
+	               window,"height= 185px; width= 395px;")
+	               .then(function(rc) {
+					    if (rc == 1)
+					      window.close();
+	               });
+
+    }
+    else
+        if (i==1)
+        {
+               openMainWindow();
+        }
+ }
+
+function openMainWindow()
+{
+	window.location.href ="main.htm?ID=  ";
+}
+
+function ChangePassword()
+{
+    window.showModalDialog("new_pass_change.htm?ID=  ",
+	          window,"height= 310px; width= 500px; ");
+}
+
+
+</script>
+
+</head>
+<body onload="CheckLogin(0)" id="login-page">
+
+<div class="app" id="app">
+
+<div class="container w-xxl w-auto-xs">
+	<div class="text-center m-t">
+		 <div id="theLogo" class="login_logo_gasboy"></div>
+	</div>
+	<div class="m-b-lg m-t">
+
+		<form name="Login" id="Login" action="/dologin.htm" method="post" class="form-validation" target="_top">
+			<div class="text-danger wrapper text-center" style="height: 40px;">
+
+			</div>
+			<div class="list-group list-group-sm">
+				<div class="list-group-item">
+					<input style="width:90%" maxlength="31" id="User" name="User" type="text" placeholder="User" class="form-control no-border">
+				</div>
+				<div class="list-group-item">
+					<input style="width:90%" maxlength="31" id="Password" name="Password" type="password" placeholder="Password" class="form-control no-border">
+				</div>
+			</div>
+
+			<div id="DBnameLabel" class="bWTexts" style="left: 15px; width: 110px; position: absolute; top: 85px; font-weight: bold; visibility: hidden;">
+              Database
+            </div>
+
+			 <select size="1" id="DBname" name="DBname" style="left:120px; top:85px; width: 180px; position:absolute; height:200px; visibility: hidden;">
+	             <option value="">(Default)</option>
+                 
+             </select>
+
+			<button type="submit" id="loginBtn" class="btn btn-lg btn-danger btn-block">Login</button>
+			<div class="text-center m-t m-b"><a href="javascript: void(0);" style="text-decoration: underline;" id="password_change" onclick="ChangePassword();">Change Pass</a></div>
+			<div class="line line-dashed"></div>
+
+		</form>
+	</div>
+	<div class="text-center"></div>
+</div>
+
+</div>
+
+
+
+
+</body></html>

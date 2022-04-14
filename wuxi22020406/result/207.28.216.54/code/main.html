@@ -1,0 +1,412 @@
+<html lang="en" class="cui-browser-desktop cui-browser-os-windows cui-browser-wk cui-browser-wk-537"><head><script src="https://207.28.216.54/include/js/local_ui/auth.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.colorbox.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.smooth-scroll.min.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.misc.js?v=current"></script><script src="https://207.28.216.54/include/js/tree.min.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery-ui-1.7.1.js?v=current"></script><script src="https://207.28.216.54/include/js/control_panel.js?v=current"></script><script src="https://207.28.216.54/include/js/modal_dialog.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.popover.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.eventdefer.min.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.cookie.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.animateSprite.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.json.min.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery-migrate.min.js?v=current"></script><script src="https://207.28.216.54/include/vendor/js/jquery/jquery.min.js?v=current"></script>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Version" content="current">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta id="session_id" content="">
+	<meta id="session_csrf_token" content="ecdf5a4ffd1ddc449deff08cf988826f19290732a22a0e6d16985bb311f263f3">
+	<link rel="shortcut icon" href="/cui/images/favicon.ico">
+
+	<title>Barracuda Networks</title>
+
+			<meta id="viewport" name="viewport" content="width=1024, maximum-scale=1.0">
+			<link rel="stylesheet" href="/cui/reset.css?v=">
+			<style type="text/css">
+				body { background: #999; }
+				#mobile_header_fallback { display: none; }
+			</style>
+			<!--[if lte IE 8]>
+				<link href="/cui/main.css?v=" rel="stylesheet" />
+			<![endif]-->
+			<!--[if gt IE 8]>
+				<link href="/cui/main.css?v=" rel="stylesheet" media="all" />
+				<link href="/cui/v2/main.css?v=" rel="stylesheet" media="all" />
+			<![endif]-->
+			<!--[if !IE]> -->
+				<link href="/cui/main.css?v=" rel="stylesheet" media="all">
+				<link href="/cui/v2/main.css?v=" rel="stylesheet" media="all">
+			<!-- <![endif]-->
+		    <link href="/cui/fancybox-2.1.5/source/jquery.fancybox.css" rel="stylesheet" media="all">	<link href="/include/css/local_ui/cui_overrides.css?v=.." rel="stylesheet">
+
+
+	<script>
+window.CUI_asset_path = '/cui';
+
+// show loading indicator after 100ms (if we're taking too long to load stuff)
+window.CUI = {
+	// default to a production environment
+	env: 'production',
+
+	// supports unlimited arguments in everything but IE8 & IE7
+	// only show logs when in development
+	log: function(arg1, arg2, arg3) {
+		var con = window.console;
+		CUI.env == 'development' && con && con['log'] && (con['log'].apply ?
+			con['log'].apply(con, arguments) :
+				con.log((arg1 || '') +' '+ (arg2 || '') +' '+ (arg3 || '')));
+	},
+
+	// CUI.ready() for pages to call instead of $.ready()
+	readyQueue: [],
+	readyPaused: true,
+	readyjQuery: null,
+	readyPause: function() {
+		CUI.log('Pausing readyQueue.');
+		this.readyPaused = true;
+	},
+	readyUnpause: function() {
+		CUI.log('Unpausing readyQueue.');
+		this.readyPaused = false;
+	},
+	ready: function(fn, jQuery) {
+		this.readyjQuery = jQuery;
+		// if (jQuery._cui_extended_ready) {
+		if (this.readyPaused)
+			this.readyQueue.push(fn);
+		else {
+			CUI.log('Executing JS immediately (readyQueue is not paused).');
+			fn.call(document, jQuery);
+		}
+		// }
+	},
+	readyGo: function() {
+		CUI.log('Preparing to execute', this.readyQueue.length, 'functions in readyQueue.');
+		this.readyUnpause();
+		while (this.readyQueue.length) {
+			var fn = this.readyQueue.shift();
+			CUI.log('Executing JS.');
+			fn.call(document, this.readyjQuery);
+		}
+	},
+	unloadQueue: [],
+	unload: function(fn, jQuery) {
+		this.unloadQueue.push(fn);
+	},
+	unloadGo: function() {
+		CUI.log('Preparing to execute', this.unloadQueue.length, 'functions in unloadQueue.');
+		var result = true;
+
+		for (var i = 0; i < this.unloadQueue.length; i++) {
+			var fn = this.unloadQueue[i];
+			CUI.log('Executing JS.');
+
+			// Set result to false if any of the unloadQueue functions returned a false. This implies the user should not be able to
+			// navigate away from their page.
+			if (fn.call(document, this.readyjQuery) === false) {
+				result = false;
+			}
+		}
+
+		// If none of the unloadQueue functions returned a false, we clear the queue and continue with the page navigation.
+		// We want to keep the functions in the unloadQueue if result is false in order to run them again when the user go to navigate away
+		if (result) {
+			this.unloadQueue = [];
+		}
+
+		return result;
+	},
+},
+	_loaderInterval = setInterval(function() {
+		if (document.getElementById('cui-global-loading-indicator')) {
+			clearInterval(_loaderInterval);
+		}
+	}, 50);
+
+less = { env: 'production' };
+
+</script>
+<script src="/cui/lib.min.js?v="></script>
+<script src="/cui/highcharts.js?v="></script><script src="/cui/LAB.js?v="></script>
+<script src="/cui/fancybox-2.1.5/source/jquery.fancybox.pack.js"></script>
+<script>
+// don't step on other jQuerys
+CUI.jQuery = CUI.$ = $.noConflict(true);
+
+// add OS-specific classes for targeting a whole set of browser on one OS.
+// please don't use these classes for anything where feature detection would suffice
+CUI.$('html').addClass('cui-browser-os-'+ (
+	navigator.userAgent.match(/Macintosh/) ? 'macos' :
+	navigator.userAgent.match(/Windows/) ? 'windows' :
+	navigator.userAgent.match(/Linux/) ? 'linux' :
+	'unknown')
+)
+// now add more general browser classes for targeting all version of any one browser. IE disabled since conditional comments added.
+.addClass('cui-browser-'+ (
+	CUI.$.browser.msie    ? 'ie' :
+	CUI.$.browser.mozilla ? 'ff' :
+	CUI.$.browser.webkit  ? 'wk' :
+	CUI.$.browser.opera   ? 'op' :
+	'unknown')
+)
+// make the classes more concise than the tokens jQuery returns, also add version
+.addClass('cui-browser-'+ (
+	CUI.$.browser.msie    ? 'ie-' + (navigator.userAgent.match(/MSIE ([\d]+)/     )||[])[1] :
+	CUI.$.browser.mozilla ? 'ff-' + (navigator.userAgent.match(/Firefox\/(\d+\.\d?)/)||[])[1] :
+	CUI.$.browser.webkit  ? 'wk-' + (navigator.userAgent.match(/WebKit\/(\d+)/)||[])[1] :
+	CUI.$.browser.opera   ? 'op-' + (navigator.userAgent.match(/Version\/([\d.]+)/)||[])[1] :
+	'unknown').replace('.', '-')
+);
+</script>
+<!--[if IE]>
+<script src="/cui/pie.js?v="></script>
+<script src="/cui/bind.js?v="></script>
+<![endif]-->
+<script src="/cui/main.min.js?v="></script>
+<script>
+CUI.$(function() {
+	try {
+		// add class to body if mobile
+		// if (navigator.userAgent.match(/iPhone OS/))
+		// 	CUI.$('html').removeClass('cui-browser-desktop').addClass('cui-browser-iphone');
+
+		if (navigator.userAgent.match(/Firefox/)) CUI.$('html').addClass('cui-browser-gecko');
+		if (navigator.appName.match('Microsoft Internet Explorer')) CUI.$('html').addClass('cui-browser-msie');
+
+		CUI.less = Less = less; // glue
+
+			CUI.Highcharts = Highcharts; // glue
+
+		CUI.PIE = (typeof PIE !== 'undefined' ? PIE : null); // glue
+		CUI.Layout.init(); // start the app
+	} catch(e) {
+		CUI.log('Error:', '('+e.line+')', e);
+	}
+});
+</script>
+
+	<script src="/include/vendor/js/jquery/jquery.min.js?v=.."></script>
+<script src="/include/vendor/js/jquery/jquery-migrate.min.js?v=.."></script>
+<script src="/include/js/local_ui/local_ui.js?v=.."></script>
+<script src="/include/js/control_panel.js?v=.."></script>
+<script src="/include/js/ultraform.js?v=.."></script>
+<script src="/include/vendor/js/jquery/jquery.bootstrap.modal.js?v=.."></script>
+<script src="/include/vendor/js/jquery/jquery.popover.js?v=.."></script>
+
+
+	<!-- IE8 redirection -->
+	<!--[if lte IE 8]>
+	<meta http-equiv="refresh" content="0; url=/auth/old_browser/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+	window.top.location = '/auth/old_browser/';
+	/* ]]> */
+	</script>
+	<![endif]-->
+<style type="text/css">.fancybox-margin{margin-right:0px;}</style></head>
+<body class="cui x-cui-mobile-c-source ajax-navigation   no-source  cui-signin-screen-styles  no-search  backup_localui" data-no-cui-mobile="true">
+	<div id="cui-mobile-header-fallback">
+		<a href="#" id="cui-mobile-back">Back</a>
+		<!-- <a href="#" id="cui-mobile-services">Services</a> -->
+		<span>Barracuda</span>
+	</div>
+
+
+
+<div id="cui-body" class="">
+		<div id="cui-logo-wrapper"><a id="cui-logo-backup" href="/status/">Barracuda Networks</a></div>
+
+		<div id="cui-header">
+			<div id="cui-label">Backup</div>
+			<div id="cui-auth">
+				
+									<span> </span><a href=""></a>
+				<select id="cui-language-selector" href="/locale/?r=__redirect_url__&amp;l=__language_code__">
+<option value="en_US">English (US)</option><option value="ca_CA">Catalan</option><option value="cs_CZ">Čeština</option><option value="da_DK">Dansk</option><option value="de_DE">Deutsch</option><option value="es_ES">Español (España)</option><option value="fr_FR">Français (France)</option><option value="hu_HU">Magyar</option><option value="ja_JP">日本語</option><option value="ko_KR">한국어</option><option value="nl_NL">Nederlands</option><option value="pl_PL">Polski</option><option value="pt_BR">Português (Brasil)</option><option value="ru_RU">Русский</option><option value="zh_CN" selected="selected">中文(简体)</option><option value="zh_TW">中文(台灣)</option>									</select>
+			</div>
+			<div id="cui-nav">
+				<div id="nav_level_2_background" style="height: 0px;"></div>
+<ul id="backuplocalui_nav" style="display: block;">
+		<li class=""><a href="/status/" id="status_link" rel="ajax" data-url-select="\/status/.*"><span class="spinner"></span><span class="title">系统状态</span></a>
+			<div class="nav_level_2" style="padding: 0; height: 19px;">
+				<ul>
+				</ul>
+			</div>
+		</li>
+		<li class=""><a href="/system/" id="system_link" rel="ajax" data-url-select="\/system/.*"><span class="spinner"></span><span class="title">系统</span></a>
+			<div class="nav_level_2">
+				<ul>
+					<li class="">
+						<a href="/system/firmware/" rel="ajax" data-url-select="/system/firmware" class="">Firmware Settings</a>
+						<div class="nav_level_3" style="visibility: hidden;">
+							<ul>
+							</ul>
+						</div>
+					</li>
+					<li class="">
+						<a href="/system/device/" rel="ajax" data-url-select="/system/device" class="">Device Information</a>
+						<div class="nav_level_3" style="visibility: hidden;">
+							<ul>
+							</ul>
+						</div>
+					</li>
+					<li class="">
+						<a href="/system/software/" rel="ajax" data-url-select="/system/software" class="">软件下载</a>
+						<div class="nav_level_3" style="visibility: hidden;">
+							<ul>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</li>
+</ul>
+
+			</div>
+			<form rel="ajax" id="cui-search">
+				<input type="search" results="10" placeholder="Search online help topics">
+				<input type="submit" value="Go">
+			</form>
+		</div>
+
+		<div id="cui-source" class="ui-resizable">
+			
+		<div class="ui-resizable-handle ui-resizable-e"></div></div>
+
+	<div id="cui-content" style="top: 0px;">
+		<div id="hui-content-loading-indicator"></div>
+		<div id="cui-content-loading-indicator"><span style="display: inline;">Loading</span></div>
+		
+	<div id="i18n-default-js-strings" data-default-error-title="错误" data-default-success-title="Success" data-default-confirm-label="是" data-default-cancel-label="取消" data-rate-symbol-bits="bit/s" data-rate-symbol-kbits="kb/s" data-rate-symbol-mbits="Mb/s" data-rate-symbol-gbits="Gb/s" data-rate-symbol-tbits="Tb/s" data-rate-symbol-bytes="B/s" data-rate-symbol-kbytes="kB/s" data-rate-symbol-mbytes="MB/s" data-rate-symbol-gbytes="GB/s" data-rate-symbol-tbytes="TB/s" data-expandable-expand-label="扩展" data-expandable-collapse-label="Collapse" data-expandable-show-details-label="Show details" data-expandable-hide-details-label="Hide details"></div>
+
+		<div id="cui-content-inner">
+			<!-- cui-title: Barracuda Networks -->
+<!-- cui-css: /include/css/control_panel/common.css -->
+<!-- cui-css-ie9: /include/css/control_panel/common.ie9.css -->
+<!-- cui-css-ie8: /include/css/control_panel/common.ie8.css -->
+<!-- cui-css-ie7: /include/css/control_panel/common.ie7.css -->
+<!-- cui-css: /include/css/cpanel_settings.css -->
+<!-- cui-css: /include/jqueryui/themes/barracuda-dark/ui.custom.css -->
+<!-- cui-css: /include/css/tree.css -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.min.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery-migrate.min.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.json.min.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.animateSprite.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.cookie.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.eventdefer.min.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.popover.js -->
+<!-- cui-js: /include/js/modal_dialog.js -->
+<!-- cui-js: /include/js/control_panel.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery-ui-1.7.1.js -->
+<!-- cui-js: /include/js/tree.min.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.misc.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.smooth-scroll.min.js -->
+<!-- cui-js: /include/vendor/js/jquery/jquery.colorbox.js -->
+<!-- cui-css: /include/css/local_ui/auth.css --><!-- cui-js: /include/js/local_ui/auth.js -->
+<div class="cui-form-signin-backup-logo"></div>
+
+<table class="cui-form-signin-outer"><tbody><tr>
+	<td class="cui-form-signin-wrapper">
+		<div class="cui-form-signin">
+			<div class="cui-form-signin-bitemark"></div>
+
+
+			
+
+
+			<div class="cui-page-content" id="" style="top: 0px;">
+
+								
+								
+				<div id="" class="cui-page-module page_module   ">
+				
+					<form method="post" action="/auth/ajax/signin/" rel="ajax" name="" onsubmit="return false;" data-action="/auth/ajax/signin/" data-before-submit="" data-method="post">
+				
+						<div class="page_module_frontdrop"></div>
+				
+				
+						<div class="message"></div>
+				
+						<div class="buttons">
+				
+							<div class="status">
+								<div class="error"></div>
+								<div class="spinner"></div>
+							</div>
+				
+											
+				
+						</div>
+				
+						
+				
+																					
+							<div id="" class="cui-dl cui-group-wide " data-validation="" data-info="">
+								
+								<div class="cui-dt"></div>
+								<div class="cui-dd">
+																				<input type="text" name="username" id="username" value="" class="cui-field-text   " data-error-text="" data-value-original="" placeholder="邮件地址">
+																				<input type="password" name="password" id="password" value="" class="cui-field-password " data-value-original="" placeholder="登入密码" autocomplete="off">
+								</div>
+								
+								<div class="cui-group-info">
+									
+								</div>
+								
+								<div class="cui-group-error">
+									
+								</div>
+							
+								<div style="clear: both;"></div>
+							</div>
+																					
+							<div id="" class="cui-dl cui-group-wide " data-validation="" data-info="">
+								
+								<div class="cui-dt"></div>
+								<div class="cui-dd">
+																				<input type="submit" name="submit" id="submit" value="Sign In" class="cui-field-submit cui-field-align-right" data-action="" data-confirmation="">										<input type="hidden" name="forgot_password" id="forgot_password" data-value-original="" value="">								</div>
+								
+								<div class="cui-group-info">
+									
+								</div>
+								
+								<div class="cui-group-error">
+									
+								</div>
+							
+								<div style="clear: both;"></div>
+							</div>
+				
+				
+						
+				
+						<input name="form" type="hidden" value="">
+						<input name="csrf_token" type="hidden" id="csrf_token" value="">
+						<input type="submit" name="submit" class="cui-hidden-submit-button">
+					</form>
+				</div>
+
+			</div>
+
+		</div>
+	</td>
+</tr></tbody></table>
+		</div>
+	</div>
+
+	<div id="hui-content-loading-indicator"></div>
+
+		<div id="cui-footer">
+			© 2022 <a target="_blank" href="http://www.barracudanetworks.com/">Barracuda Networks, Inc</a>. All rights reserved. <a target="_blank" href="http://www.barracudanetworks.com/privacy/">Privacy Policy</a>
+		</div>
+
+
+<!-- Google Analytics -->
+<script type="text/plain" class="optanon-category-C0002">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-34944404-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+</div></body></html>

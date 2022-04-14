@@ -1,0 +1,196 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><title>
+	Matrix Rates Payment System : Login
+</title><link href="../App_Themes/Default/Default.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/grid.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/html.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/images/ams.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/images/vs.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/Loginscreen.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/pop_html.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/screen.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/Tabcontrol.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Default/toastr.min.css" type="text/css" rel="stylesheet"></head>
+<body>
+    <form name="form1" method="post" action="login.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTQyMDQ1MzAyOGRk+2mAF590cKuNWnLxJBs5EwBz6DngiFl+be3818hKtIk=">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=jrGiWQlSDQmjoyN89B73m02BDyRkfhY1PyZOLxo-4l7WLt4P1531nt9HKvOvuOWbvgPJq0r-ytlM13CUJONzCk96_PM7MoQ3Mj9Ju-l5gv81&amp;t=635301846267533025" type="text/javascript"></script>
+
+
+<script src="/WebResource.axd?d=JzcP-rsiCDkstas6UilfrhAMYGoFvqsYHWXuTb5U2KBtHp_c70fgm_Hh5XoDm_5vBAR4EkNgwW8FJS0lqL7b9rEyXgBp61FaGdfvdUdHZ1Y1&amp;t=635301846267533025" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAARYRHFLowKsed4JdHC3mPkVePD35ryNm+41/1rVn7tp23Y2+Mc6SrnAqio3oCKbxYainihG6d/Xh3PZm3b5AoMQ+EWDmSp5U6nlPgSsUH71GGIGAcRRJ7jdwP9CwsDK6Is=">
+</div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <table cellspacing="0" cellpadding="0" id="login-main-table">
+        <tbody><tr>
+            <td valign="middle" align="center" class="rightcol-maintable">
+                <div id="pnllogin" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'btnLogin')">
+	
+                    <table cellspacing="0" cellpadding="0" id="Login-table" class="RoundCr">
+                        <tbody><tr>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="login-table-row1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="login-table-row2">
+                                <div class="signin-heading">
+                                    Sign In</div>
+                                <table width="100%" cellpadding="2" cellspacing="2" align="center">
+                                    <tbody><tr>
+                                        <td width="30%" class="fieldPrompt" align="right">
+                                            <span id="lblUserID" class="AspLabelDefault"> User ID: </span>
+                                        </td>
+                                        <td>
+                                            <input name="txtLoginId" type="text" maxlength="100" size="35" id="txtLoginId" class="TextBoxDefault" autocomplete="off" style="font-family:Arial,Helvetica,sans-serif;font-size:Small;height:20px;width:200px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fieldPrompt" align="right">
+                                            Password:
+                                        </td>
+                                        <td>
+                                            <input name="txtPassword" type="password" maxlength="20" size="20" id="txtPassword" class="TextBoxDefault" style="font-family:Arial,Helvetica,sans-serif;height:20px;width:200px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td width="164px">
+                                            <span id="valSignIn" class="validator" style="display:inline-block;color:Red;width:170px;display:none;">UserId or Password is not correct. Please make sure that you have correctly entered your Login details.</span>
+                                            <span id="valLockOut" class="validator" style="display:inline-block;color:Red;width:170px;display:none;"><br>Due to security concerns about your account, it has been locked due to too many failed login attempts.  Please contact your School administrator to reactivate your account.</span>
+                                            <span id="valTrialExpired" class="validator" style="display:inline-block;color:Red;width:170px;display:none;"><br>Failed To Login. Please contact Vendor/Administrator.</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdBlankLogin">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="center">
+                                            
+                                            <input type="submit" name="btnLogin" value="Login" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;btnLogin&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="btnLogin" title="click to login." class="linkButton1">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                
+</div>
+            </td>
+        </tr>
+        <tr>
+            <td valign="middle" align="center">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+               
+            </td>
+        </tr>
+    </tbody></table>
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("valSignIn"), document.getElementById("valLockOut"), document.getElementById("valTrialExpired"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var valSignIn = document.all ? document.all["valSignIn"] : document.getElementById("valSignIn");
+valSignIn.errormessage = "UserId or Password is not correct. Please make sure that you have correctly entered your Login details.";
+valSignIn.display = "Dynamic";
+valSignIn.evaluationfunction = "CustomValidatorEvaluateIsValid";
+var valLockOut = document.all ? document.all["valLockOut"] : document.getElementById("valLockOut");
+valLockOut.errormessage = "<br>Due to security concerns about your account, it has been locked due to too many failed login attempts.  Please contact your School administrator to reactivate your account.";
+valLockOut.display = "Dynamic";
+valLockOut.evaluationfunction = "CustomValidatorEvaluateIsValid";
+var valTrialExpired = document.all ? document.all["valTrialExpired"] : document.getElementById("valTrialExpired");
+valTrialExpired.errormessage = "<br>Failed To Login. Please contact Vendor/Administrator.";
+valTrialExpired.display = "Dynamic";
+valTrialExpired.evaluationfunction = "CustomValidatorEvaluateIsValid";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+
+
+</body></html>

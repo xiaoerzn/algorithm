@@ -1,0 +1,354 @@
+<html lang=""><head>
+		<title>
+			MARVECS networks
+		</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" type="text/css" href="./../../resources/skins/base/css/general.css">
+		<link rel="stylesheet" type="text/css" href="./../../resources/skins/base/css/default.css">
+		<link rel="stylesheet" type="text/css" href="./../../resources/skins/base/css/calendar.css">
+	    <link rel="stylesheet" href="./../../resources/font-awesome/css/font-awesome.min.css">
+        <!-- Maybe we need to find better criterias depending on the devices to support. -->
+	    <link rel="stylesheet" type="text/css" href="./../../resources/responsiveCss/image-mapping.css">
+    	<link rel="stylesheet" type="text/css" media="screen and (max-device-height : 1439px)" href="./../../resources/responsiveCss/desktop.css">
+	    <link rel="stylesheet" type="text/css" media="screen and (min-device-height : 1440px)" href="./../../resources/responsiveCss/touch.css">
+    <script language="text/javascript" type="text/javascript" src="./templates/scripts/common.js"></script>
+		<script language="text/javascript" type="text/javascript" src="./templates/scripts/calendar.js"></script>
+		<script language="text/javascript" type="text/javascript" src="./templates/scripts/layers.js"></script>
+		<script language="text/javascript" type="text/javascript" src="./templates/scripts/calendar/browserSniffer.js"></script>
+		<script language="text/javascript" type="text/javascript" src="./templates/scripts/calendar/dynCalendar.js"></script>		
+		<script type="text/javascript">
+		<!--
+		function submitenter(myfield, e)
+		{
+		var keycode;
+		if (window.event) keycode = window.event.keyCode;
+		else if (e) keycode = e.which;
+		else return true;
+
+		if (keycode == 13)
+		   {
+		   myfield.form.searchCriteria_button_clicked.value=true;
+		   myfield.form.submit();
+		   return false;
+		   }
+		else
+		   return true;
+		}
+		
+		function _body_onload()
+		{
+			loff();
+		}
+		
+		function _body_onunload()
+		{
+			lon();
+		}
+		//-->
+		</script>	
+	</head>	
+	<body onload="_body_onload();" onunload="_body_onunload();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+		<table border="0" cellspacing="0" cellpadding="0" id="loaderContainer" onclick="return false;" style="display: none;">
+			<tbody><tr>
+				<td id="loaderContainerWH" background="./../../resources/semi-transparent.gif">
+					<div id="loader">
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							<tbody><tr>
+								<td>
+                  <p>
+                  <table>
+                    <tbody><tr>
+                      <td>
+                        <i class="fa fa-spin fa-3x fa-refresh img-loading"></i>
+                      </td>
+                      <td>
+                        <strong>
+                          Bitte warten ...<br>
+                          Die Seite wird geladen ...
+                        </strong>
+                      </td>
+                    </tr>
+                  </tbody></table>
+                  </p>
+								</td>
+							</tr>
+						</tbody></table>
+					</div>
+				</td>
+			</tr>
+		</tbody></table>
+				
+		
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+	<tbody><tr>
+		<td height="110" colspan="2" align="right" valign="bottom">
+			<table width="100%" height="110" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td valign="middle">
+			<img src="./../../resources/skins/marvecsclassic/logo.gif">
+		</td>
+	</tr>
+	<tr>
+		<td height="1" class="pageTitleLine"></td>
+	</tr>	
+</tbody></table>		
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" class="navigation-column">
+			<table cellpadding="0" cellspacing="0" width="100%" height="100%">
+				<tbody><tr height="449">
+					<td valign="top" width="15%" align="center" style="background:url(./../../resources/skins/base/backgrounds/l_nav.gif) no-repeat center top">
+						<br><br>
+						
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" width="15%" background="./../../resources/skins/base/backgrounds/l_nav_2.png">
+						&nbsp;
+					</td>
+				</tr>
+			</tbody></table>
+		</td>
+		<td height="100%" valign="top">
+			<table class="formTable" cellpadding="10" cellspacing="10" width="100%" height="100%">
+				<tbody><tr>
+					<td valign="top" height="100%" width="100%">
+<style>
+	div.tab-body {
+		background: white; 
+		border: 1px solid black; 
+		padding: 10px; 
+	}
+</style>
+<script language="JavaScript">
+	
+	tabCount = 1;
+	selectedTab = 0;
+	
+	function activateTab(i) {
+		document.getElementById( "tab-left:"+i ).src="./../../resources/skins/base/icons/tabpane/tab-left_active.gif";
+		document.getElementById( "tab-bg:"+i ).style.background="url(./../../resources/skins/base/icons/tabpane/tab-bg_active.gif)";
+		document.getElementById( "tab-right:"+i ).src="./../../resources/skins/base/icons/tabpane/tab-right_active.gif";
+		document.getElementById( "tab-body:"+i ).style.display='block';
+	}
+	function deactivateTab(i) {
+		document.getElementById( "tab-left:"+i ).src="./../../resources/skins/base/icons/tabpane/tab-left_inactive.gif";
+		document.getElementById( "tab-bg:"+i ).style.background="url(./../../resources/skins/base/icons/tabpane/tab-bg_inactive.gif)";
+		document.getElementById( "tab-right:"+i ).src="./../../resources/skins/base/icons/tabpane/tab-right_inactive.gif";
+		document.getElementById( "tab-body:"+i ).style.display='none';
+	}
+	function changeActiveTab(i) {
+		selectedTab = i;
+		for( j=0; j < tabCount; ++j ) {
+			if( j==i ) {
+				activateTab(j);
+			} else {
+				deactivateTab(j);
+			}
+		}
+	}
+	function getSelectedTab() {
+		return selectedTab;
+	}
+	function setReportIdForTab(id) {
+		var hiddenReportIdFields = document.getElementsByClassName("submitReport");
+		for (index = 0; index < hiddenReportIdFields.length; index++)
+		{
+			var hiddenField = hiddenReportIdFields[index];
+			if(hiddenField.id == "report_trigger_"+id) {
+				hiddenField.value = id;
+			} else {
+				// reset other values, to prevent all reports to be build
+				hiddenField.value = '';
+			}
+		}
+	}
+</script>
+
+						<div>
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td width="6"><img src="./../../resources/skins/base/icons/tabpane/tab-left_active.gif" border="0" id="tab-left:0"></td>
+									<td align="center" id="tab-bg:0" style="cursor: pointer; background: url(./../../resources/skins/base/icons/tabpane/tab-bg_active.gif)" onclick="changeActiveTab(0)">Login</td>
+									<td width="6"><img src="./../../resources/skins/base/icons/tabpane/tab-right_active.gif" border="0" id="tab-right:0"></td>
+								</tr>
+							</tbody></table>
+						</div>
+					
+<div>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tbody><tr>
+			<td height="8" background="./../../resources/skins/base/icons/tabpane/tab-hr.gif">
+			</td>
+		</tr>
+	</tbody></table>
+</div>
+<div id="tab-body:0" class="tab-body" style="display:block;">
+	<div class="corner-box">
+		<table width="98%" cellspacing="0" cellpadding="0" border="0">
+			<tbody><tr>
+				<td>
+					<form name="login" method="post">
+						<table width="100%">
+							<tbody><tr>
+								<td colspan="10"></td>
+							</tr>
+						</tbody></table>
+						<table>
+							<tbody><tr>
+								<td valign="top" width="1">
+                  <i class="fa fa-4x fa-user img-login"></i>
+                </td>
+								<td valign="top">
+									<table>								
+										<tbody><tr>
+											<td class="formLabel">
+												Benutzername
+											</td>
+											<td>
+												<input type="text" size="25" name="loginUsr" value="" class="text" style="background-image:url(./../../resources/skins/base/backgrounds/inputbackground.gif)">
+											</td>
+										</tr>
+										<tr>
+											<td class="formLabel">
+												Passwort 
+											</td>
+											<td>
+												<input type="password" size="25" name="loginPwd" value="" class="text" style="background-image:url(./../../resources/skins/base/backgrounds/inputbackground.gif)">											
+											</td>
+										</tr>
+										<tr>
+											<td class="formLabel">
+												Anmelden an
+											</td>
+											<td>
+												<style type="text/css"></style><select name="switchProject" style="width:150">
+								<option value="Server1_10357">10357</option>
+							
+								<option value="Server1_10788">10788</option>
+							
+								<option value="Server1_10955">10955</option>
+							
+								<option value="Server1_11103">11103</option>
+							
+								<option value="Server1_11349">11349</option>
+							
+								<option value="Server1_11390">11390</option>
+							
+								<option value="Server1_11400">11400</option>
+							
+								<option value="Server1_11400-2">11400-2</option>
+							
+								<option value="Server1_11425">11425</option>
+							
+								<option value="Server1_11457">11457</option>
+							
+								<option value="Server1_11463">11463</option>
+							
+								<option value="Server1_11471">11471</option>
+							
+								<option value="Server1_11471-2019">11471-2019</option>
+							
+								<option value="Server1_11492">11492</option>
+							
+								<option value="Server1_11550">11550</option>
+							
+								<option value="Server1_11550_Backup_20220114">11550_Backup_20220114</option>
+							
+								<option value="Server1_11588">11588</option>
+							
+								<option value="Server1_20042">20042</option>
+							
+								<option value="Server1_20071">20071</option>
+							
+								<option value="Server1_20079">20079</option>
+							
+								<option value="Server1_20083">20083</option>
+							
+								<option value="Server1_20086">20086</option>
+							
+								<option value="Server1_20097">20097</option>
+							
+								<option value="Server1_20103">20103</option>
+							
+								<option value="Server1_20111">20111</option>
+							
+								<option value="Server1_20122">20122</option>
+							
+								<option value="Server1_20128">20128</option>
+							
+								<option value="Server1_20159">20159</option>
+							
+								<option value="Server1_20162">20162</option>
+							
+								<option value="Server1_20173">20173</option>
+							
+								<option value="Server1_20180">20180</option>
+							
+								<option value="Server1_20180-v2">20180-v2</option>
+							
+								<option value="Server1_20270">20270</option>
+							
+								<option value="Server1_20271">20271</option>
+							
+								<option value="Server1_20452">20452</option>
+							
+								<option value="Server1_20459">20459</option>
+							
+								<option value="Server1_20463">20463</option>
+							
+								<option value="Server1_20470">20470</option>
+							
+								<option value="Server1_20583">20583</option>
+							
+								<option value="Server1_4711">4711</option>
+							
+								<option value="Server1_7825">7825</option>
+							
+								<option value="Server1_7946">7946</option>
+							
+								<option value="Server1_8966">8966</option>
+							
+								<option value="Server1_9999">9999</option>
+							
+								<option value="Server1_ETMS_DL_VORLAGE">ETMS_DL_VORLAGE</option>
+							
+								<option value="Server1_marvecs-demo-anue">marvecs-demo-anue</option>
+							
+								<option value="Server1_marvecs-demo-dl">marvecs-demo-dl</option>
+							
+					</select>
+				
+											</td>
+										</tr>									
+										<tr>
+											<td></td>
+											<td>
+												<input type="hidden" name="go" value="start.Start">
+												<input type="submit" onclick="lon();" class="button" name="doLogin" style="width:150" value="Anmelden">
+												<input type="hidden" name="doLogin" value="Anmelden">
+											</td>
+										</tr>									
+									</tbody></table>
+								</td>
+							</tr>
+						</tbody></table>
+					</form>
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+</div>
+						</td>
+				</tr>				
+			</tbody></table>
+		</td>
+	</tr>
+</tbody></table>
+	<script language="text/javascript" type="text/javascript" src="./templates/scripts/wz_tooltip.js"></script>		
+	<script language="text/javascript" type="text/javascript">
+	
+	</script>
+			
+</body></html>

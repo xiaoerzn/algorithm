@@ -1,0 +1,69 @@
+<html><head>
+<meta charset="UTF-8">
+<title>81.14.225.248 | STARFACE VoIP Software</title>
+<link rel="shortcut icon" href="/theme/default/img/icons/favi.ico">
+<script>
+/*<![CDATA[*/
+window.language = 'de';
+/*]]>*/
+</script>
+
+
+<script>
+var ajaxToken = '1649397468070';
+var starfacetopwindow = window;
+</script>
+<script src="/js/lib/jquery/jquery-min.js?v=udec4817a"></script>
+<script src="/js/lib/underscore/underscore-min.js?v=udec4817a"></script>
+<script src="/js/standard.js?v=udec4817a"></script>
+<script src="/js/init.js?v=udec4817a">
+</script>
+
+<script>
+var userphones = [];
+var logReason = '';
+
+if (window.opener) {
+	jQuery(window.opener).on('unload', window.opener.closeContent || starface.emptyFunction);
+}
+
+var resourceKeys = {};
+resourceKeys[window.language] = {
+	'popup.blocked': 'Sie müssen in Ihrem Browser Popups für <span class="bolddark">' + window.location.hostname + '</span> zulassen, um diese Funktion zu verwenden.',
+	'jsp.error.choose.file': 'Es wurde keine Datei ausgewählt!'
+};
+</script>
+<style>
+html, body, iframe {
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+}
+
+iframe {
+	background-color: transparent;
+	border: 0;
+	position: absolute;
+	width: 100%;
+}
+
+#mainframe {
+	overflow: auto;
+}
+
+#callerframe {
+	bottom: 0;
+	display: none;
+	height: 15px;
+}
+</style>
+
+</head>
+
+<body>
+<iframe id="mainframe" name="mainframe" src="/start.jsp"></iframe>
+<iframe id="callerframe" name="callerframe" src="blank.html"></iframe>
+
+
+</body></html>

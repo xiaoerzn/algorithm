@@ -1,0 +1,102 @@
+<html lang="de"><head>
+    <meta charset="UTF-8">
+    <title>Maintenance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        section {
+            background-color: #f2ede7;
+            border-radius: 120px;
+            border: 40px solid #f07d00;
+            font-family: 'Trebuchet MS', Verdana, Helvetica, Arial, sans-serif;
+            margin: 2rem auto;
+            max-width: 45rem;
+            min-height: 33rem;
+            padding: 0;
+            position: relative;
+        }
+
+        .overlay {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 3rem 1rem;
+            position: absolute;
+        }
+
+        .logo {
+            text-align: right;
+        }
+
+        .logo img {
+            margin-top: 2%;
+            margin-right: 4rem;
+            width: 8rem;
+        }
+
+        .text {
+            margin: 9% 2rem 2rem;
+        }
+
+        .text h1 {
+            font-size: 4rem;
+            margin-top: .3rem;
+        }
+
+        .text h3 {
+            line-height: 1.7;
+        }
+
+        .svg-image {
+            opacity: .2;
+            width: 100%;
+        }
+
+        @media screen and (max-width: 500px) {
+            section {
+                border-radius: 50px;
+                border-width: 20px;
+                min-height: 25rem;
+            }
+            .overlay {
+                padding: 1rem .4rem;
+            }
+
+            .overlay .logo {
+                text-align: center;
+            }
+
+            .overlay .logo img {
+                margin-right: 0;
+            }
+
+            .text {
+                margin: 5% 1rem 1rem;
+            }
+
+            .text h1 {
+                font-size: 2.5rem;
+                margin-top: .3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<section>
+    <img class="svg-image" alt="" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNTAwcHgiIGhlaWdodD0iNTAwcHgiIHZpZXdCb3g9IjAgMCA1MDAgNTAwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA1NS4yICg3ODE4MSkgLSBodHRwczovL3NrZXRjaGFwcC5jb20gLS0+CiAgICA8dGl0bGU+NDA0PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IjQwNCI+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIHN0cm9rZT0iI0ZGRkZGRiIgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI0OTkiIGhlaWdodD0iNDk5IiByeD0iNTgiPjwvcmVjdD4KICAgICAgICAgICAgPHBhdGggZD0iTTE1NS4yNSwxODkuMDgzOTg0IEwxNTUuMjUsMzAyLjczNjMyOCBMMTY3LjYwMzUxNiwzMDIuNzM2MzI4IEwxNjcuNjAzNTE2LDMzMi4zODQ3NjYgTDE1NS4yNSwzMzIuMzg0NzY2IEwxNTUuMjUsMzYzIEwxMTEuODUxNTYyLDM2MyBMMTExLjg1MTU2MiwzMzIuMzg0NzY2IEw2MC4yODkwNjI1LDMzMi4zODQ3NjYgTDYwLjI4OTA2MjUsMzAyLjczNjMyOCBMOTcuNzc5Mjk2OSwxODkuMDgzOTg0IEwxNTUuMjUsMTg5LjA4Mzk4NCBaIE0xMTEuODUxNTYyLDMwMi43MzYzMjggTDExMS44NTE1NjIsMjI4LjcyMjY1NiBMOTIuNzMwNDY4OCwzMDIuNzM2MzI4IEwxMTEuODUxNTYyLDMwMi43MzYzMjggWiBNMjk5LDI0Ny45NTExNzIgTDI5OSwzMDUuOTU4OTg0IEMyOTksMzE5LjEzNjEzNCAyOTguMjgzODYxLDMyOC43MzIzOTIgMjk2Ljg1MTU2MiwzMzQuNzQ4MDQ3IEMyOTUuNDE5MjY0LDM0MC43NjM3MDIgMjkyLjQ0NzI4OCwzNDYuMzg1MzkxIDI4Ny45MzU1NDcsMzUxLjYxMzI4MSBDMjgzLjQyMzgwNiwzNTYuODQxMTcyIDI3Ny45ODExNTIsMzYwLjYwMDkgMjcxLjYwNzQyMiwzNjIuODkyNTc4IEMyNjUuMjMzNjkyLDM2NS4xODQyNTYgMjU4LjEwODExMiwzNjYuMzMwMDc4IDI1MC4yMzA0NjksMzY2LjMzMDA3OCBDMjM5Ljg0NjMwMiwzNjYuMzMwMDc4IDIzMS4yMTY4MzEsMzY1LjEzMDU0NiAyMjQuMzQxNzk3LDM2Mi43MzE0NDUgQzIxNy40NjY3NjMsMzYwLjMzMjM0NSAyMTEuOTg4MzAyLDM1Ni41OTA1MiAyMDcuOTA2MjUsMzUxLjUwNTg1OSBDMjAzLjgyNDE5OCwzNDYuNDIxMTk5IDIwMC45MjM4MzcsMzQxLjA2ODA2MiAxOTkuMjA1MDc4LDMzNS40NDYyODkgQzE5Ny40ODYzMiwzMjkuODI0NTE2IDE5Ni42MjY5NTMsMzIwLjg5MDY4NiAxOTYuNjI2OTUzLDMwOC42NDQ1MzEgTDE5Ni42MjY5NTMsMjQ3Ljk1MTE3MiBDMTk2LjYyNjk1MywyMzEuOTgxMDQgMTk4LjAwNTUyLDIyMC4wMjE1MjQgMjAwLjc2MjY5NSwyMTIuMDcyMjY2IEMyMDMuNTE5ODcxLDIwNC4xMjMwMDcgMjA4Ljk5ODMzMSwxOTcuNzQ5MzczIDIxNy4xOTgyNDIsMTkyLjk1MTE3MiBDMjI1LjM5ODE1MywxODguMTUyOTcxIDIzNS4zMzQ1NzcsMTg1Ljc1MzkwNiAyNDcuMDA3ODEyLDE4NS43NTM5MDYgQzI1Ni41MzI2LDE4NS43NTM5MDYgMjY1LjA1NDY1LDE4Ny40MTg5MjkgMjcyLjU3NDIxOSwxOTAuNzQ5MDIzIEMyODAuMDkzNzg4LDE5NC4wNzkxMTggMjg1LjcxNTQ3NiwxOTguMTQzMjA1IDI4OS40Mzk0NTMsMjAyLjk0MTQwNiBDMjkzLjE2MzQzLDIwNy43Mzk2MDcgMjk1LjY4NzgxOSwyMTMuMTQ2NDU0IDI5Ny4wMTI2OTUsMjE5LjE2MjEwOSBDMjk4LjMzNzU3MiwyMjUuMTc3NzY0IDI5OSwyMzQuNzc0MDIzIDI5OSwyNDcuOTUxMTcyIFogTTI1NS42MDE1NjIsMjMzLjM0MTc5NyBDMjU1LjYwMTU2MiwyMjQuMTAzNDY5IDI1NS4xNTM5NzYsMjE4LjMyMDY1IDI1NC4yNTg3ODksMjE1Ljk5MzE2NCBDMjUzLjM2MzYwMiwyMTMuNjY1Njc4IDI1MS4yNjg4OTcsMjEyLjUwMTk1MyAyNDcuOTc0NjA5LDIxMi41MDE5NTMgQzI0NC43NTE5MzcsMjEyLjUwMTk1MyAyNDIuNjIxNDI0LDIxMy43MzcyOTIgMjQxLjU4MzAwOCwyMTYuMjA4MDA4IEMyNDAuNTQ0NTkxLDIxOC42Nzg3MjMgMjQwLjAyNTM5MSwyMjQuMzg5OTI5IDI0MC4wMjUzOTEsMjMzLjM0MTc5NyBMMjQwLjAyNTM5MSwzMTguMjA1MDc4IEMyNDAuMDI1MzkxLDMyOC4zMDI3ODUgMjQwLjUwODc4NCwzMzQuMzg5OTY0IDI0MS40NzU1ODYsMzM2LjQ2Njc5NyBDMjQyLjQ0MjM4OCwzMzguNTQzNjMgMjQ0LjUzNzA5MywzMzkuNTgyMDMxIDI0Ny43NTk3NjYsMzM5LjU4MjAzMSBDMjUwLjk4MjQzOCwzMzkuNTgyMDMxIDI1My4wOTUwNDcsMzM4LjM2NDU5NiAyNTQuMDk3NjU2LDMzNS45Mjk2ODggQzI1NS4xMDAyNjUsMzMzLjQ5NDc3OSAyNTUuNjAxNTYyLDMyOC4wMTYzMTkgMjU1LjYwMTU2MiwzMTkuNDk0MTQxIEwyNTUuNjAxNTYyLDIzMy4zNDE3OTcgWiBNNDIzLjA5MTc5NywxODkuMDgzOTg0IEw0MjMuMDkxNzk3LDMwMi43MzYzMjggTDQzNS40NDUzMTIsMzAyLjczNjMyOCBMNDM1LjQ0NTMxMiwzMzIuMzg0NzY2IEw0MjMuMDkxNzk3LDMzMi4zODQ3NjYgTDQyMy4wOTE3OTcsMzYzIEwzNzkuNjkzMzU5LDM2MyBMMzc5LjY5MzM1OSwzMzIuMzg0NzY2IEwzMjguMTMwODU5LDMzMi4zODQ3NjYgTDMyOC4xMzA4NTksMzAyLjczNjMyOCBMMzY1LjYyMTA5NCwxODkuMDgzOTg0IEw0MjMuMDkxNzk3LDE4OS4wODM5ODQgWiBNMzc5LjY5MzM1OSwzMDIuNzM2MzI4IEwzNzkuNjkzMzU5LDIyOC43MjI2NTYgTDM2MC41NzIyNjYsMzAyLjczNjMyOCBMMzc5LjY5MzM1OSwzMDIuNzM2MzI4IFoiIGZpbGw9IiNGMDdEMDAiIGZpbGwtcnVsZT0ibm9uemVybyI+PC9wYXRoPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+">
+    <div class="overlay">
+        <div class="logo">
+            <a href="https://eledia.de/" title="Maintenance" rel="home" id="logo">
+                <img src="https://eledia.de/sites/default/files/logo.png" alt="Startseite">
+            </a>
+        </div>
+        <div class="text">
+            <h1>Seite nicht gefunden</h1>
+            <h3>Entschuldigen Sie bitte, die Seite, die Sie aufgerufen haben, konnte nicht gefunden
+                werden.</h3>
+        </div>
+    </div>
+</section>
+
+
+</body></html>

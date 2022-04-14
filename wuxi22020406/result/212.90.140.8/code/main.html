@@ -1,0 +1,198 @@
+<html lang="" class="hide-dialog-titlebar-buttons phablet"><head>
+        <meta http-equiv="PRAGMA" content="NO-CACHE">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=1"> <!--320-->
+        <title>Securepoint UTM v11 - User Interface - 11.8.10 (ae13611)</title>
+
+        <link href="css/yui3/reset.css" rel="stylesheet">
+        <link href="css/yui3/grids.css" rel="stylesheet">
+        <link href="css/yui3/grids-ext.css" rel="stylesheet">
+
+        <link href="images/icons/glyphicons/glyphicons/glyphicons.css" rel="stylesheet">
+        <link href="images/icons/glyphicons/halflings/glyphicons-halflings.css" rel="stylesheet">
+
+        <link href="css/aristo/jquery-ui-1.8.7.custom.css" rel="stylesheet">
+
+        <link href="css/bootstrap.css" rel="stylesheet">
+
+        <link href="css/base.css" rel="stylesheet">
+
+        <style id="branding-css" type="text/css">/* Securepoint Firewall Branding CSS
+ *
+ * use css/branding/shared-files and css/branding/default for relative paths
+ */
+
+html {
+    background: url("css/branding/default/background.svg") no-repeat scroll 50% 0 #e74c3c;
+    background-size: 100% auto;
+}
+
+#branding-login-tile-container {
+    background-color: #e84d3d;
+}
+
+#branding-login-tile {
+    background-image: url("css/branding/shared-files/userinterface-tile-securepoint.svg");
+}
+
+#branding-login-tile-admin {
+    background-image: url("css/branding/shared-files/admininterface-tile-securepoint.svg");
+}
+
+#branding-nav-image {
+    height: 48px;
+    margin-left: 8px;
+    background-image: url("css/branding/shared-files/logo-securepoint.svg");
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+#branding-login-image {
+    width: 320px;
+    height: 85px;
+    cursor: pointer;
+    border: 0;
+    background-image: url("css/branding/shared-files/logo-login-securepoint.svg");
+    background-repeat: no-repeat;
+    background-position-y: 35px;
+}
+</style>
+
+        <script src="js/_phase1.js"></script>
+
+        <script src="js/base/Stately.js"></script>
+        <script src="js/base/Timer.js"></script>
+        <script src="js/base/Lambda.js"></script>
+        <!-- important: load raphael before require.js -->
+        <script src="js/base/raphael.js"></script>
+        <script src="js/base/g.raphael.js"></script>
+        <script src="js/base/g.pie.js"></script>
+        <script src="js/base/htmlparser.js"></script>
+        <script src="js/base/firebug-shim.js"></script>
+        <script src="js/base/html5-shim.js"></script>
+        <script src="js/base/augment.js"></script>
+        <script src="js/base/setImmediate.js"></script>
+        <script src="js/base/json2.js"></script>
+        <script src="js/base/jsonselect.js"></script>
+        <script src="js/base/json-schema.js"></script>
+        <script src="js/base/base32.js"></script>
+        <script src="js/base/base64.js"></script>
+        <script src="js/base/sprintf.js"></script>
+        <script src="js/base/ipaddr.js"></script>
+
+        <script src="js/base/jlinq.js"></script>
+        <script src="js/base/jlinq-ext.js"></script>
+
+        <script src="js/jquery/jquery.js"></script>
+        <script src="js/jquery/jquery-ui.js"></script>
+        <script src="js/jquery/jquery-ui-i18n.js"></script>
+        <script src="js/jquery/jquery-mobile.js"></script>
+
+        <script src="js/base/shortcuts.js"></script>
+        <script src="js/base/biginteger.js"></script>
+
+        <script src="js/base/i18n/i18n.js"></script>
+        <script src="js/base/i18n/dict.de.js"></script>
+        <script src="js/base/i18n/dict.en.js"></script>
+
+        <script src="js/jquery/plugins/moment/moment.js"></script>
+        <script src="js/jquery/plugins/moment/moment.lang.de.js"></script>
+        <script src="js/jquery/plugins/moment/moment.lang.en.js"></script>
+        <script src="js/jquery/plugins/moment/moment.lang.es.js"></script>
+        <script src="js/jquery/plugins/moment/moment.lang.fr.js"></script>
+
+        <script src="js/jquery/plugins/placeholder/jquery.placeholder.js"></script>
+        <script src="js/jquery/plugins/keyremainup/jquery.keyremainup.js"></script>
+        <script src="js/jquery/plugins/dataobject/jquery.dataobject.js"></script>
+        <script src="js/jquery/plugins/livequery/jquery.livequery.js"></script>
+        <script src="js/jquery/plugins/behavior/jquery.behavior.js"></script>
+        <script src="js/jquery/plugins/customevents/jquery.customevents.js"></script>
+        <script src="js/jquery/plugins/spinnerbutton/jquery.spinnerbutton.js"></script>
+        <script src="js/jquery/plugins/mousewheel/jquery.mousewheel.js"></script>
+        <script src="js/jquery/plugins/overlaps/jquery.overlaps.js"></script>
+        <script src="js/jquery/plugins/scrollto/jquery.scrollTo.js"></script>
+        <script src="js/jquery/plugins/qrcode/jquery.qrcode.js"></script>
+        <script src="js/jquery/plugins/touchpunch/jquery.touch-punch.js"></script>
+        <script src="js/jquery/plugins/throttle-debounce/jquery.throttle-debounce.js"></script>
+        <script src="js/jquery/plugins/inputmask/jquery.inputmask.bundle.js"></script>
+
+        <script src="js/jquery/plugins/select2/select2.full.js"></script>
+        <script src="js/jquery/plugins/select2/i18n/de.js"></script>
+        <script src="js/jquery/plugins/select2/i18n/en.js"></script>
+        <link href="js/jquery/plugins/select2/select2.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/ui/ui.js"></script>
+        <link href="js/jquery/plugins/ui/ui.css" rel="stylesheet">
+        <link href="js/jquery/plugins/ui/ui-ext.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/wijmo/javascript/jquery.wijmo.wijdialog.js"></script>
+        <link href="js/jquery/plugins/wijmo/css/jquery.wijmo.wijdialog.css" rel="stylesheet">
+        <script src="js/jquery/plugins/wijmo/javascript/jquery.wijmo.wijutil.js"></script>
+        <link href="js/jquery/plugins/wijmo/css/jquery.wijmo.wijutil.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/timepicker/javascript/jquery-ui-timepicker-addon.js"></script>
+        <script src="js/jquery/plugins/timepicker/javascript/localization/jquery-ui-timepicker-de.js"></script>
+        <link href="js/jquery/plugins/timepicker/css/jquery-ui-timepicker-addon.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/spinner/javascript/jquery.ui.spinner.js"></script>
+        <link href="js/jquery/plugins/spinner/css/jquery.ui.spinner.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/ipaddress/javascript/jquery.face.ipaddress.js"></script>
+        <link href="js/jquery/plugins/ipaddress/css/jquery.face.ipaddress.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/hopscotch/hopscotch.js"></script>
+        <link href="js/jquery/plugins/hopscotch/hopscotch.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/dataTables/javascript/jquery.dataTables.js"></script>
+        <script src="js/jquery/plugins/dataTables/javascript/jquery.face.dataTablesExtExt.js"></script>
+        <link href="js/jquery/plugins/dataTables/css/jquery.dataTables.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/jorgchart/javascript/jquery.jOrgChart.js"></script>
+        <link href="js/jquery/plugins/jorgchart/css/jquery.jOrgChart.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/terminal/javascript/jquery.terminal.js"></script>
+        <link href="js/jquery/plugins/terminal/css/jquery.terminal.css" rel="stylesheet">
+        <link href="js/jquery/plugins/terminal/css/jquery.terminal-custom.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/wizard/javascript/jquery.face.wizard.js"></script>
+        <link href="js/jquery/plugins/wizard/css/jquery.face.wizard.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/cockpitGrid/javascript/jquery.face.cockpitGrid.js"></script>
+        <link href="js/jquery/plugins/cockpitGrid/css/jquery.face.cockpitGrid.css" rel="stylesheet">
+
+        <script src="js/jquery/plugins/protohacks/protohacks.js"></script>
+
+        <script src="js/base/require.js"></script>
+
+        <script src="js/_phase2.js"></script>
+
+    <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/branding/Branding" src="/js/module/branding/Branding.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/behaviors/Behaviors.js" src="js/module/behaviors/Behaviors.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/login/Login" src="/js/module/login/Login.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="text" src="js/base/text.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/spcgi/Spcgi" src="/js/module/spcgi/Spcgi.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/navigation/Navigation" src="/js/module/navigation/Navigation.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/notification/Notification" src="/js/module/notification/Notification.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/cockpit/Cockpit" src="/js/module/cockpit/Cockpit.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/userinterface/cockpit/Cockpit" src="/js/module/userinterface/cockpit/Cockpit.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/features/Features" src="/js/module/features/Features.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/userstorage/UserStorage" src="/js/module/userstorage/UserStorage.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/idletimer/IdleTimer" src="/js/module/idletimer/IdleTimer.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/dialog/Dialog" src="/js/module/dialog/Dialog.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/navigation/Menus" src="/js/module/navigation/Menus.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/userinterface/navigation/Menus" src="/js/module/userinterface/navigation/Menus.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/systeminfo/SystemInfo" src="/js/module/systeminfo/SystemInfo.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/keyboardshortcuts/KeyboardShortcuts.js" src="js/module/keyboardshortcuts/KeyboardShortcuts.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/config/Config" src="/js/module/config/Config.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/block/Block" src="/js/module/block/Block.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/jquery/plugins/hotkeys/jquery.hotkeys.js" src="js/jquery/plugins/hotkeys/jquery.hotkeys.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/jquery/plugins/idletimer/jquery.idle-timer.js" src="js/jquery/plugins/idletimer/jquery.idle-timer.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/cockpit/Portlets" src="/js/module/cockpit/Portlets.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/commonutils/CommonUtils" src="/js/module/commonutils/CommonUtils.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/upload/Upload" src="/js/module/upload/Upload.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/jquery/plugins/blockui/jquery.blockUI.js" src="js/jquery/plugins/blockui/jquery.blockUI.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/module/commonutils/UntrustedDomains" src="/js/module/commonutils/UntrustedDomains.js"></script></head>
+    <body class="branding-background">
+        <div class="container">
+            <noscript>
+                <div class="noscript">
+                    <p><strong>We detected that JavaScript seem to be disabled.</strong></p>
+                    <p>You must have JavaScript enabled in your browser to utilize the functionality of this website.</p>
+                </div>
+            </noscript>
+            <nav style="display: none;">
+                <div>
+                    <div id="branding-nav-image" class="hidden-phone hidden-phablet hidden-tablet"></div>
+                    <div id="branding-nav-hr" class="hidden-phone hidden-phablet hidden-tablet ui-widget ui-widget-content hr"></div>
+                </div>
+                <!-- nav content here -->
+            </nav><!-- /nav -->
+            <div id="cockpit-container">
+                <div id="cockpit-switch" translate="translate">
+                </div><!-- /div#cockpit-switch -->
+                <div id="cockpit">
+                </div><!-- /div#cockpit -->
+            </div>
+            <footer>
+                <!-- footer content here -->
+            </footer><!-- /footer -->
+        </div><!-- /div.container -->
+    
+
+<ul id="notifications"></ul></body></html>

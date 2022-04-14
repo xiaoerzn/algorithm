@@ -1,0 +1,143 @@
+<html><head>
+<title>USG60</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="requiresActiveX=true">
+<link rel="shortcut icon" href="/images/favicon.ico?v=210703235405" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="/ext-js/app/view/login/images/login.css?v=210703235405">
+<link rel="stylesheet" type="text/css" href="/logo/custmiz_page.css?v=210703235405">
+<script type="text/javascript" src="/lang/language_panel.js?v=210703235405"></script>
+<script language="JavaScript">
+	var ns, ie;
+	if (navigator.appName == "Netscape") {
+		ns = true; ie = false;
+	} else if (navigator.appName == "Microsoft Internet Explorer") {
+		ie = true; ns = false;
+	} else {
+		 ns = false; ie = false;
+	}
+	if (top.location != self.location) {
+		top.location.href = "/";
+		top.location.pathname = "/";
+	}
+	function loginDomain(isLoginDomain){
+		var buttonDiv = document.getElementById("buttonDiv");
+		if(isLoginDomain)
+	    	var divStr = '<input title="Login SSL VPN portal" type="button" value="' + mplang['_SSL_VPN_Login'] + '" name="LoginSSL" onclick=\'setData(true)\' />';
+		else
+			var divStr = '<input title="Login to access network" type="button" value="' + mplang['_Login'] + '" name="Login" onclick=\'setData(false)\' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="Login SSL VPN portal" type="button" value="SSL VPN" name="LoginSSL" onclick=\'setData(true)\' />';
+		buttonDiv.innerHTML = divStr;
+	}
+	function setData(isSSL){
+		document.f.loginTosslvpn.value = isSSL;		
+		document.f.password.value = document.f.pwd.value+document.f.pwd_r.value;
+		document.f.submit();
+	}
+	function checkKey(evt){
+		if(ns){
+			if(evt.which == 13) /* Enter */
+				setData(false);
+		} else {
+			if(evt.keyCode == 13) /* Enter */
+				setData(false);
+		}
+	}
+	function multi_lingual(wording, filename){
+		document.write(mplang[wording]);
+	}
+	/*function initLogin(){
+		document.getElementById("title").innerHTML = (DYNAMIC_GUEST_ACCOUNT_PHONE_USER_SUPPORT && Phone_User_Support) ? mplang['_Enter_Phone_User'] : mplang['_Enter_User'];
+		document.getElementById("userspan").innerHTML = (DYNAMIC_GUEST_ACCOUNT_PHONE_USER_SUPPORT && Phone_User_Support) ? mplang['_Phone_Number'] : mplang['_User_Name'];
+		if(Terms_of_Service){
+			document.getElementById("terms").style.display = "block";
+			document.getElementById("termslink").innerHTML = mplang['_Terms_of_Service_Link'];
+		}
+		if(DYNAMIC_GUEST_ACCOUNT_PHONE_USER_SUPPORT && Phone_User_Support){
+			var wavecom = document.getElementById("wavecom");
+			wavecom.style.display = "block";
+			wavecom.innerHTML = "<input name=\"GetPassword\" type=\"button\" value=\""+mplang['_Get_Password']+"\" title=\""+mplang['_Get_Password']+"\" onclick=\'getPassword()\'>";
+		}
+	}*/
+	function getY(v){
+		var r=0;
+		while (v !=null) {
+			r += v.offsetTop;
+			v = v.offsetParent;
+		}
+		return r;
+	}
+	function fix_cmsg_cont() {
+		var i = 0;
+		var fsize = ["16px", "14px", "12px", "10px", "8px" ];
+		var _c = document.getElementById("model");
+		
+		while(i < fsize.length) {
+			if ((getY(_c) + _c.offsetHeight) > getY(document.getElementById("symb"))) {
+				_c.style.fontSize = fsize[i];
+				i++;
+			} else {
+				break;
+			}
+		}
+	}
+</script>
+</head>
+
+<body id="login_body" onload="loginDomain(false);fix_cmsg_cont();">
+<form name="f" action="/" enctype="application/x-www-form-urlencoded" method="post" autocomplete="off">
+<div class="l-wrap">
+    <div class="login_bg">
+        <div class="related">
+            <div class="logo"><img src="/logo/logo?v=210703235405" style="width:103px; height:29px"></div>
+			<div class="model" id="model" name="model">USG60</div>
+        </div>
+        <div class="usg_icon" id="symb" name="symb"></div>
+        <div class="content_bg"><div class="section_bg"> </div></div>
+        <div class="section">
+            <!-- show login section beginning -->
+            <div id="loginpart">
+                <div id="title" class="title"><script>multi_lingual("_Enter_User", "_login")</script>Enter User Name/Password and click to login.</div>
+                <span class="content_line"><img src="/ext-js/images/usg/others/dotspace.gif?v=210703235405"></span>
+                <br>
+                <div class="inputbox">
+                    <ul>
+                        <li><span class="left" id="userspan"><script>multi_lingual("_User_Name", "_login")</script>User Name:</span><span class="right">
+                            <input name="username" type="text" maxlength="31" size="16">
+                            </span>
+                        </li>
+                        <li><span class="left"><script>multi_lingual("_Password", "_login")</script>Password:</span><span class="right">
+                            <input name="pwd" type="password" maxlength="63" size="16" onkeypress="checkKey(event);"> 
+                            </span>
+                        </li>
+                        <li><span class="left"><script>multi_lingual("_One_Time", "_login")</script>One-Time Password:</span><span class="right">
+                            <input name="pwd_r" type="password" maxlength="63" size="16" onkeypress="checkKey(event);">
+                            <script>multi_lingual("_Optional", "_login")</script>(Optional)
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <br class="clearfloat">
+                <div class="limit"><script>multi_lingual("_max_alphanumeric", "_login")</script>( max. 63 alphanumeric, printable characters and no spaces )</div>
+                <div class="btn"><div id="buttonDiv" name="buttonDiv"><input title="Login to access network" type="button" value="Login" name="Login" onclick="setData(false)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input title="Login SSL VPN portal" type="button" value="SSL VPN" name="LoginSSL" onclick="setData(true)"></div></div>
+                <div id="alert_div" class="showerror"></div>
+                <div><input type="hidden" name="password"><input name="loginTosslvpn" type="hidden" style="display:none;"></div>
+                <div class="note_m">
+                    <div class="note"><script>multi_lingual("_Note", "_login")</script>Note:</div>
+                    <script>multi_lingual("_Turn_on", "_login")</script>1. Turn on Javascript and Cookie setting in your web browser.<br>
+                    <script>multi_lingual("_Turn_off", "_login")</script>2. Turn off Popup Window Blocking in your web browser.<br>
+                    <script>multi_lingual("_JRE_on", "_login")</script>3. Turn on Java Runtime Environment (JRE) in your web browser.<br>
+				<script>multi_lingual("_Gears_Allow", "_login")</script>4. Allow Gears if you are using Google Chrome.<br>
+                    
+                </div>
+            </div>
+            <!-- show login section ending -->
+        </div>
+    </div>
+</div>
+</form>
+<script language="JavaScript">
+	document.forms[0].username.select();
+	document.forms[0].username.focus();
+</script>
+
+
+</body></html>

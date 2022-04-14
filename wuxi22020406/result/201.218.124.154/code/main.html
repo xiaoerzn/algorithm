@@ -1,121 +1,57 @@
-<html lang="en" class="main-app"><head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=8; IE=EDGE">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="apple-itunes-app" content="app-id=1157004084, app-argument={{::host_addr}}">
-        <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="angular" src="/14a46325e9c5a8ea636a403f42130ef0/ng/ng_all.js"></script><base href="/ng/">
-        <title ng-bind="::state.model_name + ' - ' + state.hostname"></title>
-
-        <script>
-            function login_redirect() {
-                'use strict';
-                var url = window.location.pathname + window.location.search + window.location.hash;
-                window.location.href = '/login?redir=' + encodeURIComponent(url);
-            }
-
-            /**
-             * Install a global error handler which can be used to report JS errors back to the
-             * FortiGate for inclusion in the httpsd debug log.
-             *
-             * The global error handler is loaded here because:
-             *    - It needs to be set prior to the other scripts loading.
-             *    - If it's installed in the context of another script, the error reporting only
-             *      applies to script errors in that script file (i.e. fweb_all.js).
-             */
-            window.onerror = function(message, source, lineno, colno, error) {
-                'use strict';
-                if (fweb && fweb.log && fweb.log.error) {
-                    fweb.log.error(error);
-                }
-            };
-            window.onunhandledrejection = function(rejectionEvent) {
-                'use strict';
-                if (fweb && fweb.log && fweb.log.warn) {
-                    fweb.log.warn(`Unhandled promise rejection: "${rejectionEvent.reason}"`);
+<html class="main-app"><head>
+<meta http-equiv="X-UA-Compatible" content="IE=8; IE=EDGE">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1"><link href="/14a46325e9c5a8ea636a403f42130ef0/css/main-green.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+    (function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                try {
+                    window.fgt_lang = JSON.parse(xhr.responseText);
+                } catch (e) {
+                    console.error('Failed to parse language JSON');
                 }
             }
-        </script>
+        };
+        xhr.open('GET', '/14a46325e9c5a8ea636a403f42130ef0/lang/en.json', false);
+        xhr.send();
+    })()
+;</script>
+<script language="JavaScript">
+if (top.location != window.location) top.location.reload();
+if (window.opener) {window.opener.top.location.reload(); self.close();}
+</script>
+</head>
+<body>
+<div class="view-container">
+<form class="prompt" onsubmit="return false;" method="get" name="login" autocomplete="off">
+<div class="content with-header">
+<div class="header">
+<f-icon class="ftnt-fortinet-grid icon-xl"></f-icon></div>
+<div class="sub-content">
+<div class="wide-inputs ">
+<div class="error-message" id="err_msg" style="display: none">
+  <f-icon class="fa-error"></f-icon>
+  <div class="message-content" id="err_msg_content"></div>
+</div>
+<div class="warning-message" id="warn_msg" style="display: none">
+  <f-icon class="fa-warning"></f-icon>
+  <div class="message-content" id="warn_msg_content"></div>
+</div>
+<input type="text" name="username" id="username" value="" maxlength="35" autocorrect="off" autocapitalize="off" placeholder="Username">
+<input type="password" autocomplete="off" name="secretkey" id="secretkey" placeholder="Password">
+<label id="token_msg" style="display: none;"></label>
+<input type="hidden" name="ftm_push_enabled" id="ftm_push_enabled" value="1"><input type="password" autocomplete="off" name="token_code" placeholder="Token Code" id="token_code" maxlength="128" style="display: none" disabled="">
+</div>
+<div class="button-actions wide">
+<button class="primary" name="login_button" id="login_button" type="button" onclick="try_login();">Login</button>
+</div></div></div></form></div>
+<script type="text/javascript" src="/14a46325e9c5a8ea636a403f42130ef0/js/login.js"></script>
+<script language="Javascript">
+document.onkeydown = key_pressdown;
+document.forms[0].username.focus();
+</script>
 
-        <script>
-            // Early access to CONFIG_GUI_NO for scripts that load before fweb_all
-            // (fweb_build_partial to be specific) has loaded.
-            window.CONFIG_GUI_NO = '14a46325e9c5a8ea636a403f42130ef0';
-        </script>
-
-        <!-- If we fail to load any of these scripts then redirect to the login page. Note that
-             these checks alone are not sufficient as they may be cached. Similiar logic exists
-             in requireJS, $http interceptor, and jQuery.ajax -->
-         
-             <script src="/14a46325e9c5a8ea636a403f42130ef0/js/require_all.js" onerror="login_redirect()"></script>
-         
-             <script src="/14a46325e9c5a8ea636a403f42130ef0/ng/ng_all.js" onerror="login_redirect()"></script>
-         
-
-        <script>
-            (function() {
-                'use strict';
-                var isTop = window.top === window;
-                var isViewOnly = /(\?viewOnly|&viewOnly)/.test(window.location.search);
-
-                // Only bootstrap the app if this is the top window or the viewOnly search param
-                // flag has been set. Otherwise we should show an error message. This is necessary
-                // since some embeddded pages may redirect to an angular page and we don't want to
-                // bootstrap another app before the main app has detected the location change via
-                // the onload listener.
-                if (isTop || isViewOnly) {
-                    // Language file must be loaded before any other components
-                    require(['angular', 'early_state!', 'fgt_lang!'], function(angular, stateResponse) {
-                        var state = stateResponse.results;
-
-                        // Load system theme
-                        var link = document.createElement('link');
-                        link.setAttribute('id', 'theme');
-                        link.setAttribute('href', '/14a46325e9c5a8ea636a403f42130ef0/css/main-' + state.theme + '.css');
-                        link.setAttribute('rel', 'stylesheet');
-                        link.setAttribute('type', 'text/css');
-                        link.setAttribute('data-theme', state.theme);
-                        document.head.appendChild(link);
-                        document.body.setAttribute('data-theme', state.theme);
-
-                        // Require and bootstrap the app.
-                        require(['ng/app', 'fweb', 'ng/fv/scripts/main'], function(app, fweb) {
-                            var $html = angular.element(document.documentElement);
-                            angular.element(document).ready(function() {
-                                var injector = angular.bootstrap($html, [app.name]);
-                                
-                            });
-
-                            
-                         });
-                    });
-                } else {
-                    window.addEventListener('load', function() {
-                        // Delay the error message so that it doesn't show before the main app
-                        // has detected the embedded page location change.
-                        window.setTimeout(function() {
-                            var body = document.getElementsByTagName('body')[0];
-                            body.className = '';
-                            body.innerHTML = '<div class="error-message">' +
-                                'Cannot embed page without the "viewOnly" search parameter' +
-                                '</div>';
-                        }, 4000);
-                    });
-                }
-            })();
-        </script>
-    </head>
-    <body class="ng-cloak" ng-controller="App">
-        <header ng-if="!structure.isViewOnly &amp;&amp; !structure.isFullscreen" ng-class="{error: state.platform_errors.length}" ng-include="headerTemplate || '/ng/structure/partials/header.html' | cache_path">
-        </header>
-
-        <f-disconnection-notice></f-disconnection-notice>
-        <f-shortcuts-help></f-shortcuts-help>
-        <f-firmware-upgrade></f-firmware-upgrade>
-        <f-feedback-button></f-feedback-button>
-        <f-debugger-capture-notice></f-debugger-capture-notice>
-
-        <section id="navbar-view-section" ng-include="'/ng/structure/partials/section.html' | cache_path">
-        </section>
-    
 
 </body></html>

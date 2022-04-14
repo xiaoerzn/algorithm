@@ -1,0 +1,129 @@
+<html><head>
+	<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<title>CHI-OOB - Opengear Management Console</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<link href="/css/management.css?v=184376513" rel="stylesheet" type="text/css">
+		<link href="/pixmaps/fav.ico" rel="shortcut icon">
+	</head>
+	<body>
+<!-- Start: Header -->
+
+<table class="top">
+<tbody><tr>
+	<td class="top-logo">
+		<a href="?form=index"><img src="/pixmaps/logo.png" title="Go back to the main page" border="0"></a>
+	</td>
+	<td class="status">
+		
+	</td>
+	
+	<td class="top-button">
+		<a href="?form=login&amp;action=logout"><img src="/pixmaps/icon-logout.png" title="Log Out" border="0"></a><br><a href="?form=login&amp;action=logout" onclick="javascript:navTo('?form=login&amp;action=logout'); return false;">Log&nbsp;Out</a>
+	</td>
+</tr>
+<tr>
+	<td class="motd" colspan="99">==============================================================
+This device is part of the THG service provider network.
+Unauthorized or improper use of this device may result in
+administrative disciplinary action and civil and criminal
+penalties. All commands issued on this device are monitored
+and recorded. By continuing to use this system you indicate
+your awareness of and consent to these terms and conditions.
+
+Do not login if you are not authorised by the network
+operations team and/or proper authority.
+==============================================================
+You are attempting to login to: CHI-OOB
+</td>
+</tr>
+</tbody></table>
+
+<table id="loading-table" class="hidden" width="100%">
+<tbody><tr>
+	<td id="content"><p>Loading, please wait...</p><br></td>
+</tr>
+</tbody></table>
+
+<table id="main-table" class="main">
+
+<script type="text/javascript">
+/* Hide main table while rendering */
+document.getElementById('main-table').className = 'hidden';
+
+/* Show loading message for pages that take a while render */
+function loadingMessage() {
+	document.getElementById('loading-table').className = 'main';
+}
+var load_to = setTimeout(function() { loadingMessage() }, 500);
+
+/* Don't "load forever" on partially rendered pages */
+function showMain() {
+	document.getElementById('loading-table').className = 'hidden';
+	document.getElementById('main-table').className = 'main';
+}
+var main_to = setTimeout(function() { showMain() }, 30000);
+</script>
+
+<tbody><tr>
+	<td class="header-text" colspan="2">
+		<h1 class="branch-label">System:</h1>&nbsp;<h1 class="leaf-label">Login</h1>
+	</td>
+</tr>
+<tr>
+	<td id="related-column">
+		
+	</td>
+	<td id="content">
+
+<!-- End: Header -->
+
+<form method="post" name="login">
+<table width="100%" class="form-table" border="0" cellpadding="6" cellspacing="0">
+<tbody><tr class="form-table">
+<td class="field-label" valign="top" width="22%">
+Username&nbsp;</td>
+<td class="field-input" valign="top" width="78%">
+<input type="text" class="formfield" name="username" size="25" autocomplete="off"><br>&nbsp;</td>
+</tr>
+<tr class="form-table">
+<td class="field-label" valign="top" width="22%">
+Password/Passcode&nbsp;</td>
+<td class="field-input" valign="top" width="78%">
+<input type="password" class="formfield" name="password" size="25" autocomplete="off"><br>&nbsp;</td>
+</tr>
+<tr class="form-table">
+<td colspan="2" valign="top" width="78%">
+<input name="apply" class="formbtn" value="Submit" type="submit">
+&nbsp;</td>
+</tr>
+</tbody></table>
+<input name="action" value="login_userpass" type="hidden">
+<input name="form" value="login" type="hidden">
+</form>
+
+<!-- Start: Tail -->
+
+	</td>
+</tr>
+<tr>
+	<td colspan="2">&nbsp;</td>
+</tr>
+</tbody></table>
+
+<script type="text/javascript">
+clearTimeout(load_to);
+clearTimeout(main_to);
+showMain();
+</script>
+
+<table id="footer"><tbody><tr><td>
+	<a href="http://www.Opengear.com" build="_new">© Opengear 2016</a> |
+	<a href="http://www.Opengear.com/support.html" build="_new">Customer Support Site</a>
+</td></tr></tbody></table>
+
+
+
+<!-- End: Tail -->
+	
+
+</body></html>

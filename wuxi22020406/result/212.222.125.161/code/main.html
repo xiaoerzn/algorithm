@@ -1,0 +1,190 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Cache-control" content="no-cache">
+
+<title>wePresent</title>
+<link href="/css/AwDownload.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/js/jquery-1.2.6.pack.js"></script>
+<script type="text/javascript" src="/js/AwAjax.js?ver=0021"></script>
+<script type="text/javascript">
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+	var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+	var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) 
+	{
+    	d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);
+	}
+	if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+		for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  	if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+	var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+	if ((x=MM_findObj(a[i]))!=null)
+		{document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+    
+$(function(){
+		// 預設顯示第一個 Tab
+		var _showTab = 0;
+		var $defaultLi = $('ul.tabs li').eq(_showTab).addClass('active');
+		$($defaultLi.find('a').attr('href')).siblings().hide();
+		
+		// 當 li 頁籤被點擊時...
+		// 若要改成滑鼠移到 li 頁籤就切換時, 把 click 改成 mouseover
+		$('ul.tabs li').click(function() {
+			// 找出 li 中的超連結 href(#id)
+			var $this = $(this),
+				_clickTab = $this.find('a').attr('href');
+			// 把目前點擊到的 li 頁籤加上 .active
+			// 並把兄弟元素中有 .active 的都移除 class
+			$this.addClass('active').siblings('.active').removeClass('active');
+			// 淡入相對應的內容並隱藏兄弟元素
+			$(_clickTab).stop(false, true).fadeIn().siblings().hide();
+
+			return false;
+		}).find('a').focus(function(){
+			this.blur();
+		});
+});
+    
+function langswitch(obj)
+{
+     isolang = new Array("en","zh-tw","zh-cn","ja","ko","fr");
+     var index=obj.selectedIndex;
+     location.replace("/cgi-bin/web_index.cgi?lang="+isolang[index]+"&src=AwLoginDownload.html");
+}
+   
+window.onload = function(){
+	document.formWin.action = "http://" + window.location.hostname + "/cgi-bin/login.cgi?lang=zh-cn";
+ 	document.formMac.action = "http://" + window.location.hostname + "/cgi-bin/login.cgi?lang=zh-cn";
+ 	document.formWinEx.action = "http://" + window.location.hostname + "/cgi-bin/login.cgi?lang=zh-cn";
+	document.formMacEx.action = "http://" + window.location.hostname + "/cgi-bin/login.cgi?lang=zh-cn";
+	document.formDevPro.action = "http://" + window.location.hostname + "/cgi-bin/login.cgi?lang=zh-cn";
+}
+</script>
+</head>
+
+<body class="GRADIENT_BG" style="background-color: #e1e5e8;" onload="MM_preloadImages('/images/btn_conference_press.png')">
+
+<div class="container">
+    <div class="header">
+    	<img src="/images/wp-logo_400x70@2x_1600w.png" width="400" height="70" id="Insert_logo" style="background-color: #59cbe8; display: block; height:70px;">
+    </div><!-- end .header -->
+    <div class="topmenu">	<!-- Login , select language -->
+        <div class="pic_login"> <img src="/images/ico_admin.png" alt="login" width="24" height="24"></div>    
+        <div class="str_login"> <a href="#" style="color:#FFF" onclick="RedirectHttpsURL('/cgi-bin/login.cgi?lang=zh-cn&amp;src=AwLoginAdmin.html')"> &nbsp; 管理画面</a> </div>
+        <div class="select_lang">
+         <select name="language" style="height:20px; border-right:3px solid #000000;" onchange="langswitch(this);">
+                <script language="Javascript">
+                    lang = new Array("English","Traditional Chinese","Simplified Chinese","Japanese","Korean","French");
+                    isolang = new Array("en","zh-tw","zh-cn","ja","ko","fr");
+                    str = new String();
+                    for(i=0; i<lang.length; i++)
+                    {
+                        if( isolang[i] == "zh-cn" )
+                            str = "selected";
+                        else
+                            str = "";
+                        document.write("<option "+str+" value=\""+i+"\">"+lang[i]+"</option>");
+                    }
+               </script><option value="0">English</option><option value="1">Traditional Chinese</option><option selected="" value="2">Simplified Chinese</option><option value="3">Japanese</option><option value="4">Korean</option><option value="5">French</option>
+            </select>
+        </div>
+    </div><!-- end .topmenu -->  
+	<div class="content">
+        <div class="top_content">	<!-- select GUEST/INSTALL ul li -->
+            <ul class="tabs">
+                <li class="download_li active"> <a href="#install_tab"> 安装版 </a></li>
+                <li class="download_li"> <a href="#guest_tab"> 访客 </a></li>
+            </ul> 
+        </div>
+		<div class="center_content"> 	<!-- select GUEST/INSTAL content -->
+        <div id="guest_tab" class="main_content" style="display: none;">
+       		<!---<div class="content_logo"><img src="/images/ico_MirrorOpsender.png" width="94" height="94" /></div>--->
+        	<p><span class="h1">下载MirrorOp程式 (免安装版)</span></p>
+			<p><span class="h2">基本投影功能</span></p>
+            <div class="download_div">
+                <div class="btn_winEX" onclick="document.formWinEx.submit();"> 
+           	        <input type="image" class="btn_winEX" onclick="document.formWinEx.submit();"> 
+				    <form name="formWinEx" method="post" action="/cgi-bin/login.cgi?lang=zh-cn">
+				    <input name="windowsEx" value="client" type="hidden">
+				    <input name="Login" type="submit" style="display:none" onclick="window.location.href='/WPS.exe'" value="Download">
+				    </form>
+                </div>
+                <div class="btn_macEX" onclick="document.formMacEx.submit();">
+				    <form name="formMacEx" method="post" action="/cgi-bin/login.cgi?lang=zh-cn"> 
+				    <input name="macEx" value="client" type="hidden">^
+				    <input name="Login" type="submit" style="display:none" onclick="window.location.href='/mac.dmg'" value="Download">
+				    </form>
+                </div>
+			</div><!-- end .download_div -->
+        </div><!-- end .guest_tab -->
+        <div id="install_tab" class="main_content">
+       		<!----<div class="content_logo"><img src="/images/ico_MirrorOpsender.png" width="94" height="94" /></div> ---> <!-- end .content_logo -->
+        	<p><span class="h1">下载MirrorOp程式</span></p>
+			<p><span class="h2">完整MirrorOp功能</span></p>
+            <div class="download_div">
+				<div class="btn_winEX" onclick="document.formWin.submit();"> 
+           	        <input type="image" class="btn_winEX" onclick="document.formWin.submit();"> 
+				    <form name="formWin" method="post" action="/cgi-bin/login.cgi?lang=zh-cn">
+                    <input name="windows" value="client" type="hidden" size="8" maxlength="8">
+                    <input name="Login" type="submit" style="display:none" onclick="window.location.href='/WPS.exe'" value="Download">
+                   </form>
+				</div>
+				<div class="btn_macEX" onclick="document.formMac.submit();">
+					<form name="formMac" method="post" action="/cgi-bin/login.cgi?lang=zh-cn"> 
+                    <input name="mac" value="client" type="hidden" size="8" maxlength="8">
+                    <input name="Login" type="submit" style="display:none" onclick="window.location.href='/mac.dmg'" value="Download">
+                    </form>
+				</div>
+			</div><!-- end .download_div -->
+  	  	</div><!-- end . install_tab -->   
+		</div><!-- end .center_content -->
+		<div class="buttom_content">
+			<div class="profileDiv"> 
+        		<span class="profileDiv_pic"><img src="/images/ico_deviceprofile.png" width="14" height="14"></span>
+        		<span>
+					<form name="formDevPro" method="post" action="/cgi-bin/login.cgi?lang=zh-cn">
+						<input name="devProfile" value="client" type="hidden" size="8" maxlength="8">
+           				<input name="Login2" type="submit" style="color: #000000 ; text-align:left ; font-size:12px " onclick="window.location.href='/mac.dmg'" value="装置关联档 >">
+	  				</form> 
+            		</span>
+			</div>
+        	<div class="ConferenceDiv"> 
+            	<a href="#" onclick="RedirectHttpsURL('/cgi-bin/login.cgi?lang=zh-cn&amp;src=AwLoginTrainer.html')" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('btn_conference','','/images/btn_conference_press.png',1)">
+        		<span> 
+        		 <img src="/images/btn_conference.png" alt="Conference" width="36" height="36" id="btn_conference"> </span>
+				<span style="vertical-align:60%;">会议控制 &gt; </span></a> 
+        	</div>
+        	<div class="webslideDiv"> 
+        		<a href="#" onclick="RedirectHttpsURL('/cgi-bin/web_index.cgi?lang=zh-cn&amp;src=AwLoginBS.html')" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('btn_webslide','','/images/btn_wedslide_press.png',1)">	 
+				<span style="margin-left:30px"><img src="/images/btn_wedslide.png" alt="btn_webslide" width="36" height="36" id="btn_webslide"> </span>
+				<span style="vertical-align:60%;"> WEBSLIDES &gt; </span>
+				</a>
+			</div>
+		</div><!-- end .buttom_content -->
+    </div><!-- end .content -->
+
+  <div>
+    <iframe src="/copyright.html" scrolling="No" frameborder="0" width="100%" height="65"></iframe>
+  </div>
+<!--------------    
+<div class="footer">
+        <p><script language="JavaScript">
+        var d = new Date();
+        document.write("Copyright © "+d.getFullYear()+". All Rights Reserved");
+        </script></p></div>
+---------------->
+</div><!-- end .container -->
+
+
+</body></html>

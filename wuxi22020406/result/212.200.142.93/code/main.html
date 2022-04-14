@@ -1,0 +1,56 @@
+<html><!--
+	Copyright (c) 2015-2018 by Cisco Systems, Inc.
+	All rights reserved.
+	--><head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title id="loginTitle"></title>
+		<script src="/webui/login/redirect.js"></script>
+		<link rel="stylesheet" href="/webui/login/assets/styles/login.css">
+	</head>
+	<body>
+		<div class="container main-container">
+			<div class="mainLoginDiv">
+			<img src="/webui/login/assets/images/companylogo.png" id="companylogo" alt="logo">
+			<div class="webui-centerpanel login-panel col-sm-4 col-sm-offset-4">
+				
+				<h2 id="LoginTitle" style="">LOGIN</h2>
+				<h1 class="webui-centerpanel-title" id="authmsg"></h1>
+				<h1 class="webui-centerpanel-title" id="bannerHead">
+				<span id="show_banner_text" class="More"></span>
+				</h1>
+				<form class="form-horizontal login-form" id="myloginform" autocomplete="off">
+					<!-- insert code for text boxes here -->
+					<div class="form-group">
+
+						<input class="k-textbox form-control" name="Username" id="username" placeholder="Username" value="" maxlength="64">
+
+					</div>
+					<div class="form-group">
+
+						<input type="password" class="k-textbox form-control" name="Password" id="password" placeholder="Password" maxlength="127">
+
+					</div>
+					<div class="form-group">
+						<div id="plang" class="langInline langLabel" style="padding-right: 0.5rem;">Language:</div>
+						<div class="langInline langLinkCSS" langvalue="en"><a href="javascript://">English</a></div>
+						<div class="langInline itemSeperator"> | </div>
+						<div class="langInline langLinkCSS" langvalue="ja"><a href="javascript://">日本語</a></div>
+					</div>
+					<div>
+						<input type="submit" class="btn btn-primary k-button" id="login" value="LOGIN NOW">
+					</div>
+				</form>
+			</div>
+			<div class="configLoginCopyright" id="copyrightmsg">
+				© 2005-2018
+				-   <span id="copyrightmsg2"></span>
+			</div>
+			</div>
+		</div>
+		<script src="/webui/login/login.js"></script>
+	
+
+
+
+</body></html>

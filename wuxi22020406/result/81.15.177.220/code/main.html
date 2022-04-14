@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">var ADESCOM_WEBMANAGER_VERSION="";var loadedfileextension = "?version=" + ADESCOM_WEBMANAGER_VERSION;</script>        <meta name="robots" content="index, follow">
+        <title>Panel Operatora</title>
+                <script type="text/javascript" src="/js/prototype/prototype.js?version="></script>
+<script type="text/javascript" src="/js/prototype/builder.js?version="></script>
+<script type="text/javascript" src="/js/prototype/effects.js?version="></script>
+<script type="text/javascript" src="/js/prototype/scriptaculous.js?version="></script><script type="text/javascript" src="https://81.15.177.220/js/prototype/builder.js?version="></script><script type="text/javascript" src="https://81.15.177.220/js/prototype/effects.js?version="></script><script type="text/javascript" src="https://81.15.177.220/js/prototype/dragdrop.js?version="></script><script type="text/javascript" src="https://81.15.177.220/js/prototype/controls.js?version="></script><script type="text/javascript" src="https://81.15.177.220/js/prototype/slider.js?version="></script><script type="text/javascript" src="https://81.15.177.220/js/prototype/sound.js?version="></script>
+<script type="text/javascript" src="/js/prototype/slider.js?version="></script>
+<script type="text/javascript" src="/js/prototype/dragdrop.js?version="></script>
+<script type="text/javascript" src="/js/prototype/custom.js?version="></script>
+<script type="text/javascript" src="/js/ajaxHistory.js?version="></script>
+<script type="text/javascript" src="/js/updaterJSON.js?version="></script>
+<script type="text/javascript" src="/js/jsHelpers.js?version="></script>
+<script type="text/javascript" src="/js/controls.js?version="></script>
+<script type="text/javascript" src="/js/menu.js?version="></script>
+<script type="text/javascript" src="/js/tabbed.js?version="></script>
+<script type="text/javascript" src="/js/layout.js?version="></script>
+<script type="text/javascript" src="/js/changesMonitor.js?version="></script>
+<script type="text/javascript" src="/js/calendar_eu.js?version="></script>
+<script type="text/javascript" src="/js/maskEdit.js?version="></script>
+<script type="text/javascript" src="/js/dialogs.js?version="></script>
+<script type="text/javascript" src="/js/json2.js?version="></script>
+<script type="text/javascript" src="/js/jstparser.js?version="></script>
+<script type="text/javascript" src="/js/ivr/ivrController.js?version="></script>
+<script type="text/javascript" src="/js/ivr/ivrDialogs.js?version="></script>
+<script type="text/javascript" src="/js/ivr/ivrModels.js?version="></script>
+<script type="text/javascript" src="/js/ivr/ivrViews.js?version="></script>
+<script type="text/javascript" src="/js/ivr/ivrConst.js?version="></script>
+<script type="text/javascript" src="/js/base64.js?version="></script>
+<script type="text/javascript" src="/js/monitoring/monitoringController.js?version="></script>
+<script type="text/javascript" src="/js/monitoring/monitoringDialogs.js?version="></script>
+<script type="text/javascript" src="/js/monitoring/monitoringData.js?version="></script>
+<script type="text/javascript" src="/js/resizable.js?version="></script>
+<script type="text/javascript" src="/js/jscolor/jscolor.js?version="></script>
+<script type="text/javascript" src="/js/multibarColorPicker/multibarColorPicker.js?version="></script>
+<script type="text/javascript" src="/js/websockets.js?version="></script>
+<script type="text/javascript" src="/js/event_simulate.js?version="></script>
+<script type="text/javascript" src="/js/tristate_checkbox/tristate.js?version="></script>
+<script type="text/javascript" src="/js/AudioPlayer.js?version="></script>
+<script type="text/javascript" src="/js/widgetSearch.js?version="></script>
+<script type="text/javascript" src="/js/queueSearch.js?version="></script>
+<script type="text/javascript" src="/js/conditionBuilder.js?version="></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/_common/css/pagination.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/_common/css/calendar.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/_common/css/audioplayer.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/_common/css/dialogs.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/_common/css/autocomplete.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/standard/css/layout.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/standard/css/tables.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/standard/css/forms.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/_common/standard/css/tabs.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/frontend/css/dialogs.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/frontend/css/main.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/frontend/css/ivr.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/frontend/skins/blue/css/main.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/frontend/skins/blue/css/dialogs.css?version=">
+<link rel="stylesheet" type="text/css" media="screen" href="/apps/frontend/css/soundnodes.css?version=">
+</head>
+    <body>
+        <form onsubmit="return false;" id="__FORM" method="post" onkeypress="return TriggerDefault(event);">
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="">            <input type="hidden" name="__DEFAULT" id="__DEFAULT" value="login">
+<script language="JavaScript" type="text/javascript">
+    document.title = "Panel Operatora";
+    function ExecuteLogin()
+    {
+        var divElement = document.createElement("DIV");
+
+        divElement.id = 'login_page_busybox';
+
+        var parentElement = $('message');
+
+        parentElement.innerHTML = '';
+        parentElement.appendChild(divElement);
+
+        var options = new Object();
+
+        options.withPost = '';
+        options.ignoreChanges = true;
+
+        AjaxRequest(null, '/index.php/home/login/1', options);
+    }
+</script>
+
+<div id="login_form">
+    <div id="login_header"></div>
+    <div id="login_main">
+        <div id="username">
+            Nazwa użytkownika            <br>
+            <input class="textbox" type="text" name="user[username]" id="user_username">        </div>
+        <div id="password">
+            Hasło            <br>
+            <input class="textbox" type="password" name="user[password]" autocomplete="off" id="user_password">        </div>
+        <div id="skin">
+            <div id="skin_control">
+                Skórka                <br>
+                <div id="user_skin_combo" class="combobox_wrapper" style="" onclick="ShowDropdown(event, $('user_skin_combo'), 'user_skin', 'auto'); ; "><div class="combobox_control_wrapper" style=""><input type="text" name="user_skin_text" id="user_skin_text" value="Blue" class="combobox_text" style="" readonly="readonly"><div id="user_skin_arrow" class="combobox_arrow">&nbsp;</div></div><input type="hidden" name="user[skin]" id="user_skin" value="blue"><div id="user_skin_content_wrapper" style="display: none"><div id="user_skin_content" style="" class="combobox_content" onmousedown="CancelEvent(event)"><div id="user_skin_added"><div id="user_skin_content" class="combobox_content combobox_item_selected combobox_added" onmousedown="CancelEvent(event)"><a href="#" onclick="HideDropdown(); return false;">Blue&nbsp;<hr></a></div></div><br><a id="user_skin_choice_blue" name="user_skin_choice" class="combobox_item combobox_item_selected" href="#" onclick="SetComboValueInternal(this, 'user_skin', 'blue', this.innerHTML); return false;">Blue</a><br></div></div></div>            </div>
+        </div>
+        <div id="message"></div>    
+        <div id="button">
+            <input id="login" type="image" onclick="ExecuteLogin()" name="login" src="/apps/_common/standard/images/pl_PL/button_login.png"><br><a style="color: #fff" href="#" onclick="AjaxRequest(this, '/index.php/home/recoverPassword/1'); return false;">Odzyskaj hasło</a>        </div>
+    </div>
+</div>
+
+        </form>
+    
+
+
+<div id="toolTipMainWindow" class="toolTipWindow" style="display: none;"></div></body></html>

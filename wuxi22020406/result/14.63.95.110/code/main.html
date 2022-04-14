@@ -1,0 +1,442 @@
+<html><head>
+    <!-- Start a_common.ssi -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE"> 
+    <link rel="stylesheet" href="sabre.css" type="text/css">
+    <script language="JavaScript" src="u_xmlHttp.js"></script>
+    <script language="JavaScript" src="u_ajax.js"></script>
+    <script language="JavaScript" src="u_poll.js"></script>
+    <script language="JavaScript" src="u_common.js"></script>
+    <script language="JavaScript" src="u_taffy.js"></script>
+    <script language="JavaScript" src="u_security-levels-matrix.js"></script>
+    <script>
+      var g_direction = "ltr"
+      if (currentLanguage == "AR")
+      {
+        g_direction = "rtl"
+        document.write('<link rel="stylesheet" href="arabic.css" type="text/css">')
+      }
+      document.write('<meta http-equiv="content-Language" content="'
+        +currentLanguage.toLowerCase ()+'">')
+    </script><meta http-equiv="content-Language" content="zh">
+    <script>ReloadNav(window.top.forceReloadNav, "80")</script>
+    <script language="JavaScript" src="u_document.js"></script>
+    <script language="JavaScript" src="u_screen.js"></script>
+    <script language="JavaScript" src="u_page.js"></script>
+    <script language="JavaScript" src="u_datavalidation.js"></script>
+    <script>
+      var kAllowDirectHTMLFileAccess = false;
+      var g_WebPort = "80";
+
+      // This function is created here and not in a js file because of the
+      // variable substituion that is being done.
+      function getUTF8Name()
+      {
+        switch("EnglishUS")
+        {
+          case "Arabic": return "";
+          case "Japanese": return "";
+          case "Chinese": return "";
+          case "ChineseT": return "";
+          case "Korean": return "";
+          case "Russian": return "";
+          default: return sysName;
+        }
+      }
+
+      // Global variable setup
+      // System Info 
+      var g_SessionsEnabled = "False" == "True"; 
+      var kIpAddress = "192.168.2.2";
+      var isOOB = "False" == "True";
+      var isUserLogin = "False" == "True";
+      //isOOB = true /* For testing */
+      // if we just loaded a page and we are now in OOB but the parent (navigation)
+      // believes that we are not in OOB then put the web in OOB mode.
+      if (isOOB && !parent.isOOB) RunOOB ()
+      var sysName = "Air Liquide Korea - Video Conference";
+      var utf8Name = getUTF8Name ();
+      if (utf8Name == "") utf8Name = sysName;
+      var useCallLog = "True" == "True";
+      var isStereoEnabled = "False" == "True";
+        
+      // Current call data
+      var callCount = parseInt("0");
+      var model = "HDX 8000 HD";   // Model Type
+      var boardrev = ("2");
+      var isRevC = (boardrev == "3");
+      var isRevD = (boardrev == "4");
+      var hdaccelerator = "BrutusDI";   // Accecerator Type
+      // model = "HDX 4000" // For Test
+      var titleModel = model.match(/7000e/i) ? model : model.match(/V.*0+/);
+      
+      // H320 Interface Type
+      var iface="NONE";
+      //iface = "PRI" // For Test
+      // Set the winodw title
+      document.write ('<title>'+sysName+' - Polycom '+GetCurrentPageName ()+'</title>')
+      var g_securityProfile="Off"
+    </script><title>Air Liquide Korea - Video Conference - Polycom HDX 8000 HD</title>
+    <script language="JavaScript" src="u_iface.js"></script>
+    <script language="JavaScript" src="u_models.js"></script>
+    <script>
+      LoadScript("languages/" + GetLanguageFile() + ((isHDX) ? ".js" : ".properties"))
+    </script><script src="languages/languages_zh.js" type="text/JavaScript"></script>
+    <script>
+      // This test is performed to ensure that if an unsupported empty web language file is used, web will default to English. 
+      try
+      {
+        var test = MAKEACALL
+      }
+      catch (e)
+      {
+        LoadScript("languages/languages_en" + ((isHDX) ? ".js" : ".properties"))
+      }
+    </script>
+    <script language="JavaScript" src="u_temp_strings.js"></script>
+    <script language="JavaScript" src="u_featurset.js"></script>
+    <script>
+      var doesSupportEncryption = IsTrue ("True");
+      var isSecure = (IsFIPSSupported () && IsTrue ("True"));
+      CheckSecurity (top.location.pathname, g_WebPort)
+      var isH323Enabled = IsTrue ("True");
+      var isUseRoomPassword = IsTrue ("False");
+      var isSipEnabled = IsTrue ("False");
+	var isIceEnabled = IsTrue ("");
+      var isMaxResEnabled = IsTrue ("");
+      var isH320Enabled = (!IsIPOnly () &&  IsTrue ("False"));
+      var isH320GatewayEnabled = (isH323Enabled && IsTrue ("False"));
+      var isVoiceOverISDNEnabled = IsTrue ("False");
+      var isPotsEnabled = (isPOTSCapable () &&  IsTrue ("False"));
+      var isH323GatewayEnabled = "False" == "True";
+      //Check if telepresence system
+      var isRMXFeature = ("NONE" != "NONE")  && !IsTrue ("True");
+      var isSpeeddialFeature = ("NONE" != "NONE");
+      var g_IsPNAvail = "False" == "True";
+      var g_IsAdHocMode = IsTrue ("");
+      //var g_bFoundProvisioningServer = IsTrue ("")
+      var g_bFoundProvisioningServer = "" != "";
+      var bsecurityLevel = "Off" ;
+      //g_bFoundProvisioningServer = false
+      //var bProvisioningAuth = IsTrue ("FAILURE")
+      //var bProvisionServerResp = IsTrue("")
+      var bProvisionLoginSuccess = IsTrue("FAILURE")
+      var bProvisioningEnabled = IsTrue ("False")
+      var provisionedObjects = new Array ()
+      var usbObjects = ''.split ("|")
+      var bIsTouchPanelAttached= (IsTrue ("True") && IsTrue (""));
+      var bIsTIPEnable = IsTrue ("False")//Tip Implementation
+	  var bIsTIPOptionEnabled = IsTrue ("False")
+      var bIsAuthAdsEnabled = IsTrue("False")
+	  var bIsDiagnosticModeEnabled = IsTrue("False")
+
+      if (AreSessionVarsSupported ())
+      {
+        var doesSupportEncryption = IsTrue ("True")
+        var g_IsMP4Enabled = IsTrue ("False")
+        var g_IsMP8Enabled = IsTrue ("False")
+        var g_IsEnternalMP = (!isG3 && IsTrue ("False")) || g_IsMP4Enabled || g_IsMP8Enabled
+        var g_IsHDVideoIOEnabled = IsTrue ("True")
+        var g_IsPPCIPContentEnabled = IsTrue ("True")
+        var g_IsAudioMixerAttached = IsTrue ("False")
+        var g_Is2ndMonitorEnabled = IsTrue ("True")
+      }
+      else
+      {
+        var doesSupportEncryption = ("" != "False");
+      }
+      // Rabbit Eye stuff
+      var hasRabbitEye = IsTrue ("True")
+      
+      // Change the following to true if you wish to be able to accesse files outsite of the
+      // menu frame work. If you do this you will have no menu navigation.
+    </script>
+    <script language="JavaScript" src="u_domscripts.js"></script>
+    <!-- End a_common.ssi -->
+
+    <script>if (isOOB) RunOOB ()</script>
+    <script language="JavaScript" src="u_navigation.js"></script>
+    <script language="JavaScript" src="u_menu.js"></script>
+    <script language="JavaScript" src="u_tree.js"></script>
+    <script language="JavaScript" src="u_apicmd.js"></script>
+    <script language="JavaScript" src="u_dhtml.js"></script>
+    <script language="JavaScript" src="u_submodal.js"></script>
+	<link rel="stylesheet" type="text/css" href="submodal.css">
+    <link rel="shortcut icon" href="favicon.ICO" type="image/x-icon">
+    <link rel="icon" href="favicon.ICO" type="image/x-icon">
+    <script>
+      // Override the default page titles
+      document.title = sysName+' - Polycom '+model
+      var mainMenu = new Menu ("topNavMenu", "sideMenu");
+
+      var searchParams = GetSearchParams();
+
+      setWildcardMenu("none", "none", "none");
+
+      if (searchParams)
+      {
+        if (searchParams.startpage) mainMenu.SetStartPage (searchParams.startpage);
+        if (searchParams.startmenu) mainMenu.SetStartMenu (searchParams.startmenu);
+      }
+      var kStatusURL = "u_status.xml"
+      var kPollInterval = 2
+      var kPollTimeout = 15
+
+      function GetData ()
+      {
+        Poll.init (kStatusURL, kPollInterval, kPollTimeout,
+                   ProcessXMLData, null, "text")
+        //Poll.start ()
+      }
+
+function Initialize ()
+{
+    gPopupMask = document.getElementById("popupMask");
+    gPopupContainer = document.getElementById("popupContainer");
+    gPopFrame = document.getElementById("popupFrame");
+}
+
+function showCallStatus ()
+{
+  document.getElementById ("headerTheRest").innerHTML =
+   (callCount > 0) ? '<image src="InACall.png"><br/>'+INACALL_YES_MSG_1 : ""
+}
+
+function ProcessXMLData(data)
+{
+  try
+  {
+    eval (data)
+    showCallStatus ()
+  }
+  catch (e) {}
+}
+
+function LoadKeepAliveFrame()
+{
+	var kFrame = document.getElementById("keepaliveFrame");
+	if(kFrame)
+	{
+		kFrame.contentWindow.location = "u_keepalive.htm";
+	}
+}
+    </script>
+  </head>
+  <body onload="FillInPage (); Initialize();LoadKeepAliveFrame();">
+    <table class="navigation"><tbody>
+      <!-- Top navigation menu -->
+      <tr>
+        <td colspan="6" class="header">
+          <a href="http://www.polycom.com" target="_blank">
+            <table class="header"><tbody>
+              <tr class="header">
+                <td class="headerLogo"><img src="Header_Logo.jpg"></td>
+                <td id="headerTheRest" class="headerTheRest">
+                </td>
+                <td class="headerWater"><img src="Header_Water.jpg"></td>
+              </tr>
+              <tr><td colspan="3" class="dropShadow"></td></tr>
+            </tbody></table>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6" class="topNavigation">
+          <table class="topNavigation"><tbody>
+            <tr id="topNavMenu" class="topNavigation"><td nowrap="" id="main_0" class="topNavigationNotSelected" width="20%"><img id="Image_main_0" class="mainMenuImage" src="https://14.63.95.110/MakeACall_web.png"> 拨打电话</td><td nowrap="" id="main_1" class="topNavigationNotSelected" width="20%"><img id="Image_main_1" class="mainMenuImage" src="https://14.63.95.110/AdminSetup_web.png"> 管理设置</td><td nowrap="" id="main_2" class="topNavigationNotSelected" width="20%"><img id="Image_main_2" class="mainMenuImage" src="https://14.63.95.110/Diagnostics_web.png"> 诊断</td><td nowrap="" id="main_3" class="topNavigationNotSelected" width="20%"><img id="Image_main_3" class="mainMenuImage" src="https://14.63.95.110/Utilities_web.png"> 实用程序</td><td nowrap="" id="main_4" class="topNavigationSelected" width="20%"><img id="Image_main_4" class="mainMenuImage" src="https://14.63.95.110/UserSetup_web_o.png"> 主屏幕</td></tr>
+            <tr><td colspan="5" class="pageSeperator"></td></tr>
+          </tbody></table>
+        </td>
+      </tr>
+      <!-- Page description -->
+      <tr>
+        <td colspan="6" class="helpText" id="helpText"> </td>
+      </tr>
+      <tr>
+        <!-- Side navigation and main iframe -->
+        <!-- <td><table><tr> -->
+        <td class="sideNavigation" id="sideMenu"><div class="sideNavigation0" id="divChildren_home" style="display: block;"><div class="sideNavigation0"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_welcome')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_welcome')" onclick="mainMenu.GetCurrentTree().selectNode('home_welcome');">
+<td id="home_welcome" name="home_welcome" class="treeIndent0Selected" width="10px"><img id="home_welcometbimage0" name="home_welcometbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_welcome" name="home_welcome" class="treeIndent0Selected" nowrap="">欢迎</td></tr>
+</tbody></table>
+</div><div class="sideNavigation0"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan')" onclick="mainMenu.GetCurrentTree().toggleExpand('home_weblan');">
+<td id="home_weblan" name="home_weblan" class="treeIndent0" width="10px"><img src="https://14.63.95.110/arrow_r.gif" border="0" hspace="1" id="imgPM_home_weblan"></td><td id="home_weblan" name="home_weblan" class="treeIndent0" nowrap="">Web 语言</td></tr>
+</tbody></table>
+<div class="" id="divChildren_home_weblan" style="display: none;"><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_en')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_en')" onclick="MM_OnLanguageChange('EN')">
+<td id="home_weblan_en" name="home_weblan_en" class="treeIndent1" width="10px">
+<img id="home_weblan_entbimage" name="home_weblan_entbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_en" name="home_weblan_en" class="treeIndent1" width="10px"><img id="home_weblan_entbimage0" name="home_weblan_entbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_en" name="home_weblan_en" class="treeIndent1" nowrap="">American English</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_ar')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_ar')" onclick="MM_OnLanguageChange('AR')">
+<td id="home_weblan_ar" name="home_weblan_ar" class="treeIndent1" width="10px">
+<img id="home_weblan_artbimage" name="home_weblan_artbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_ar" name="home_weblan_ar" class="treeIndent1" width="10px"><img id="home_weblan_artbimage0" name="home_weblan_artbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_ar" name="home_weblan_ar" class="treeIndent1"><img hspace="1" src="Arabic.png" border="0" align="absmiddle"></td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_ek')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_ek')" onclick="MM_OnLanguageChange('EK')">
+<td id="home_weblan_ek" name="home_weblan_ek" class="treeIndent1" width="10px">
+<img id="home_weblan_ektbimage" name="home_weblan_ektbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_ek" name="home_weblan_ek" class="treeIndent1" width="10px"><img id="home_weblan_ektbimage0" name="home_weblan_ektbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_ek" name="home_weblan_ek" class="treeIndent1" nowrap="">British English</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_de')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_de')" onclick="MM_OnLanguageChange('DE')">
+<td id="home_weblan_de" name="home_weblan_de" class="treeIndent1" width="10px">
+<img id="home_weblan_detbimage" name="home_weblan_detbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_de" name="home_weblan_de" class="treeIndent1" width="10px"><img id="home_weblan_detbimage0" name="home_weblan_detbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_de" name="home_weblan_de" class="treeIndent1" nowrap="">Deutsch</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_sp')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_sp')" onclick="MM_OnLanguageChange('SP')">
+<td id="home_weblan_sp" name="home_weblan_sp" class="treeIndent1" width="10px">
+<img id="home_weblan_sptbimage" name="home_weblan_sptbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_sp" name="home_weblan_sp" class="treeIndent1" width="10px"><img id="home_weblan_sptbimage0" name="home_weblan_sptbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_sp" name="home_weblan_sp" class="treeIndent1" nowrap="">Español</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_fr')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_fr')" onclick="MM_OnLanguageChange('FR')">
+<td id="home_weblan_fr" name="home_weblan_fr" class="treeIndent1" width="10px">
+<img id="home_weblan_frtbimage" name="home_weblan_frtbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_fr" name="home_weblan_fr" class="treeIndent1" width="10px"><img id="home_weblan_frtbimage0" name="home_weblan_frtbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_fr" name="home_weblan_fr" class="treeIndent1" nowrap="">Français</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_it')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_it')" onclick="MM_OnLanguageChange('IT')">
+<td id="home_weblan_it" name="home_weblan_it" class="treeIndent1" width="10px">
+<img id="home_weblan_ittbimage" name="home_weblan_ittbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_it" name="home_weblan_it" class="treeIndent1" width="10px"><img id="home_weblan_ittbimage0" name="home_weblan_ittbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_it" name="home_weblan_it" class="treeIndent1" nowrap="">Italiano</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_ja')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_ja')" onclick="MM_OnLanguageChange('JA')">
+<td id="home_weblan_ja" name="home_weblan_ja" class="treeIndent1" width="10px">
+<img id="home_weblan_jatbimage" name="home_weblan_jatbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_ja" name="home_weblan_ja" class="treeIndent1" width="10px"><img id="home_weblan_jatbimage0" name="home_weblan_jatbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_ja" name="home_weblan_ja" class="treeIndent1"><img hspace="1" src="Japanese.gif" border="0" align="absmiddle"></td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_ko')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_ko')" onclick="MM_OnLanguageChange('KO')">
+<td id="home_weblan_ko" name="home_weblan_ko" class="treeIndent1" width="10px">
+<img id="home_weblan_kotbimage" name="home_weblan_kotbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_ko" name="home_weblan_ko" class="treeIndent1" width="10px"><img id="home_weblan_kotbimage0" name="home_weblan_kotbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_ko" name="home_weblan_ko" class="treeIndent1"><img hspace="1" src="Korean.gif" border="0" align="absmiddle"></td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_hu')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_hu')" onclick="MM_OnLanguageChange('HU')">
+<td id="home_weblan_hu" name="home_weblan_hu" class="treeIndent1" width="10px">
+<img id="home_weblan_hutbimage" name="home_weblan_hutbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_hu" name="home_weblan_hu" class="treeIndent1" width="10px"><img id="home_weblan_hutbimage0" name="home_weblan_hutbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_hu" name="home_weblan_hu" class="treeIndent1" nowrap="">Magyar</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_no')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_no')" onclick="MM_OnLanguageChange('NO')">
+<td id="home_weblan_no" name="home_weblan_no" class="treeIndent1" width="10px">
+<img id="home_weblan_notbimage" name="home_weblan_notbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_no" name="home_weblan_no" class="treeIndent1" width="10px"><img id="home_weblan_notbimage0" name="home_weblan_notbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_no" name="home_weblan_no" class="treeIndent1" nowrap="">Norsk</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_pl')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_pl')" onclick="MM_OnLanguageChange('PL')">
+<td id="home_weblan_pl" name="home_weblan_pl" class="treeIndent1" width="10px">
+<img id="home_weblan_pltbimage" name="home_weblan_pltbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_pl" name="home_weblan_pl" class="treeIndent1" width="10px"><img id="home_weblan_pltbimage0" name="home_weblan_pltbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_pl" name="home_weblan_pl" class="treeIndent1" nowrap="">Polski</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_pt')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_pt')" onclick="MM_OnLanguageChange('PT')">
+<td id="home_weblan_pt" name="home_weblan_pt" class="treeIndent1" width="10px">
+<img id="home_weblan_pttbimage" name="home_weblan_pttbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_pt" name="home_weblan_pt" class="treeIndent1" width="10px"><img id="home_weblan_pttbimage0" name="home_weblan_pttbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_pt" name="home_weblan_pt" class="treeIndent1" nowrap="">Português</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_ru')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_ru')" onclick="MM_OnLanguageChange('RU')">
+<td id="home_weblan_ru" name="home_weblan_ru" class="treeIndent1" width="10px">
+<img id="home_weblan_rutbimage" name="home_weblan_rutbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_ru" name="home_weblan_ru" class="treeIndent1" width="10px"><img id="home_weblan_rutbimage0" name="home_weblan_rutbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_ru" name="home_weblan_ru" class="treeIndent1"><img hspace="1" src="Russian.gif" border="0" align="absmiddle"></td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_zh')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_zh')" onclick="MM_OnLanguageChange('ZH')">
+<td id="home_weblan_zh" name="home_weblan_zh" class="treeIndent1" width="10px">
+<img id="home_weblan_zhtbimage" name="home_weblan_zhtbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_zh" name="home_weblan_zh" class="treeIndent1" width="10px"><img id="home_weblan_zhtbimage0" name="home_weblan_zhtbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_zh" name="home_weblan_zh" class="treeIndent1"><img hspace="1" src="Chinese.gif" border="0" align="absmiddle"></td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_weblan_zht')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_weblan_zht')" onclick="MM_OnLanguageChange('ZHT')">
+<td id="home_weblan_zht" name="home_weblan_zht" class="treeIndent1" width="10px">
+<img id="home_weblan_zhttbimage" name="home_weblan_zhttbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_weblan_zht" name="home_weblan_zht" class="treeIndent1" width="10px"><img id="home_weblan_zhttbimage0" name="home_weblan_zhttbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_weblan_zht" name="home_weblan_zht" class="treeIndent1"><img hspace="1" src="ChineseTraditional.gif" border="0" align="absmiddle"></td></tr>
+</tbody></table>
+</div></div></div><div class="sideNavigation0"><table class="sideNavigation">
+<tbody><tr><td class="treeSeperator"></td></tr>
+</tbody></table></div><div class="sideNavigation0"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_tools')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_tools')" onclick="mainMenu.GetCurrentTree().toggleExpand('home_tools');">
+<td id="home_tools" name="home_tools" class="treeIndent0" width="10px"><img src="https://14.63.95.110/arrow_r.gif" border="0" hspace="1" id="imgPM_home_tools"></td><td id="home_tools" name="home_tools" class="treeIndent0" nowrap="">工具</td></tr>
+</tbody></table>
+<div class="" id="divChildren_home_tools" style="display: none;"><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_tools_info')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_tools_info')" onclick="mainMenu.GetCurrentTree().selectNode('home_tools_info');">
+<td id="home_tools_info" name="home_tools_info" class="treeIndent1" width="10px">
+<img id="home_tools_infotbimage" name="home_tools_infotbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_tools_info" name="home_tools_info" class="treeIndent1" width="10px"><img id="home_tools_infotbimage0" name="home_tools_infotbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_tools_info" name="home_tools_info" class="treeIndent1" nowrap="">系统信息</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_tools_docs')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_tools_docs')" onclick="MM_openBrWindow('http://www.polycom.com/videodocumentation','docs','')">
+<td id="home_tools_docs" name="home_tools_docs" class="treeIndent1" width="10px">
+<img id="home_tools_docstbimage" name="home_tools_docstbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_tools_docs" name="home_tools_docs" class="treeIndent1" width="10px"><img id="home_tools_docstbimage0" name="home_tools_docstbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_tools_docs" name="home_tools_docs" class="treeIndent1" nowrap="">产品文档</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_tools_map')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_tools_map')" onclick="mainMenu.GetCurrentTree().selectNode('home_tools_map');">
+<td id="home_tools_map" name="home_tools_map" class="treeIndent1" width="10px">
+<img id="home_tools_maptbimage" name="home_tools_maptbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_tools_map" name="home_tools_map" class="treeIndent1" width="10px"><img id="home_tools_maptbimage0" name="home_tools_maptbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_tools_map" name="home_tools_map" class="treeIndent1" nowrap="">站点地图</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_tools_remote')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_tools_remote')" onclick="MM_openBrWindow('a_remotecontrol.htm','remote','width=161,height=620')">
+<td id="home_tools_remote" name="home_tools_remote" class="treeIndent1" width="10px">
+<img id="home_tools_remotetbimage" name="home_tools_remotetbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_tools_remote" name="home_tools_remote" class="treeIndent1" width="10px"><img id="home_tools_remotetbimage0" name="home_tools_remotetbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_tools_remote" name="home_tools_remote" class="treeIndent1" nowrap="">遥控器</td></tr>
+</tbody></table>
+</div><div class="sideNavigation1"><table class="sideNavigation">
+<tbody><tr class="tree" onmouseout="mainMenu.GetCurrentTree().OnMouseOut('home_tools_monitoring')" onmouseover="mainMenu.GetCurrentTree().OnMouseOver('home_tools_monitoring')" onclick="MM_openBrWindow('a_tvmon.htm','tvmon','width=720,height=300')">
+<td id="home_tools_monitoring" name="home_tools_monitoring" class="treeIndent1" width="10px">
+<img id="home_tools_monitoringtbimage" name="home_tools_monitoringtbimage" src="TransparentBox.png" border="0" hspace="1"></td>
+<td id="home_tools_monitoring" name="home_tools_monitoring" class="treeIndent1" width="10px"><img id="home_tools_monitoringtbimage0" name="home_tools_monitoringtbimage0" src="TransparentBox.png" border="0" hspace="1"></td><td id="home_tools_monitoring" name="home_tools_monitoring" class="treeIndent1" nowrap="">远程监视</td></tr>
+</tbody></table>
+</div></div></div></div></td>
+        <!-- </tr></table></td> -->
+        <td class="content" id="content" colspan="5">
+          <table class="content"><tbody>
+            <tr><td><script>AddHeaderRow ();</script><table width="100%" border="0" cellspacing="0" cellpadding="2"><tbody><tr class="pageTitle"><td class="pageTitle" id="pageTitle"></td><td class="buttons" name="buttons" id="buttons"></td><td class="logout" name="logouttd" id="logouttd"></td></tr><tr class="headerText"><td class="headerText" id="pageHeader" colspan="3"></td></tr></tbody></table></td></tr>
+            <tr>
+              <td height="100%">
+                <iframe src="" name="contentFrame" scrolling="auto" class="content" id="contentFrame" frameborder="no"></iframe>
+              </td>
+            </tr>
+          </tbody></table>
+        </td>
+      </tr>
+<!--      <tr>-->
+<!--	      <td colspan="2" width="100%" height="2px">-->
+<!--    		<iframe src="" name="keepaliveFrame" scrolling="auto" frameborder="no" id ="keepaliveFrame"></iframe>-->
+<!--	      </td>-->
+<!--      </tr>-->
+    </tbody></table>
+    <table width="100%" height="2">
+	    <tbody>
+	    	<tr>
+		      <td>
+	    		<iframe src="" width="100%" height="1" name="keepaliveFrame" scrolling="auto" frameborder="no" id="keepaliveFrame"></iframe>
+		      </td>
+	    	</tr>
+	    </tbody>
+    </table>
+        <div id="popupMask">
+    
+    <div id="popupContainer">
+        <div id="popupInner">
+            <div id="popupTitleBar">
+                <div id="popupTitle"></div>
+                <div id="popupControls">
+                    <img src="close.gif" onclick="hidePopWin(false);" id="popCloseBox">
+                </div>
+            </div>
+            <iframe src="" style="width:100%;height:100%;background-color:transparent;" scrolling="auto" frameborder="0" allowtransparency="true" id="popupFrame" name="popupFrame" width="100%" height="100%"></iframe>
+        </div>
+    </div>
+
+  
+
+</div></body></html>

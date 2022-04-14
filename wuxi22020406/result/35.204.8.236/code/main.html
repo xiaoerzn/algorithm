@@ -1,0 +1,580 @@
+<html class="without-secondary"><head>
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="Новости для сотрудников">
+
+ <title>Войти в Стафф</title>
+ <link rel="shortcut icon" href="/favicon/team.embria.com.ico?v=3">
+
+ <link rel="mask-icon" href="/favicon/icon.svg" color="#e96045">
+ <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://login-team.embria.com/static/logo/staff_icon-76.png">
+ <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://login-team.embria.com/static/logo/staff_icon-120.png">
+ <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://login-team.embria.com/static/logo/staff_icon-152.png">
+ <link rel="apple-touch-icon-precomposed" sizes="167x167" href="https://login-team.embria.com/static/logo/staff_icon-167.png">
+ <link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://login-team.embria.com/static/logo/staff_icon-180.png">
+
+ <link rel="icon" sizes="192x192" href="https://login-team.embria.com/static/logo/staff_icon-192.png">
+ <link rel="icon" sizes="180x180" href="https://login-team.embria.com/static/logo/staff_icon-180.png">
+
+ <meta name="msapplication-TileImage" content="https://login-team.embria.com/static/logo/staff_icon-192.png">
+
+ <link rel="stylesheet" type="text/css" media="all" href="https://login-team.embria.com/static/bower_components/fancybox/dist/__v1505750312.jquery.fancybox.min.css">
+ <link rel="stylesheet" type="text/css" media="all" href="https://login-team.embria.com/static/base/css/__v1648756562.base.min.css">
+ <link rel="stylesheet" type="text/css" media="all" href="https://login-team.embria.com/static/app/team/css/__v1635152411.base.css">
+
+ 
+ <script>
+ var PRODUCTION = 1,
+ LANG = 'ru',
+ CKEDITOR_BASEPATH = "https://login-team.embria.com/static/base/ckeditor/release/",
+ browserPageStartTime = (new Date()).valueOf(),
+ serverPageStartTime = '1649329502.02389400',
+ staticDomain = 'https://login-team.embria.com/static',
+ projectDomain = 'login-team.embria.com',
+ jsFiles = [],
+ cssFiles = [],
+ currentUser = { id: 0 },
+ staffUpdate = {};
+
+ staffUpdate.onreceive = function(data){ if (data.needToReload) { st(function() { window.location.reload(true) }, 100) } };
+ </script>
+
+ <script type="text/javascript" src="https://login-team.embria.com/static/bower_components/jquery/dist/__v1614705114.jquery.min.js"></script>
+ <script type="text/javascript" src="https://login-team.embria.com/static/bower_components/jquery.cookie/__v1398629235.jquery.cookie.js"></script>
+ <script type="text/javascript" src="https://login-team.embria.com/static/bower_components/fancybox/dist/__v1505750312.jquery.fancybox.min.js"></script>
+ <script type="text/javascript" src="https://login-team.embria.com/static/bower_components/requirejs/__v1535350765.require.js"></script>
+ <script type="text/javascript" src="https://login-team.embria.com/static/__v1635148058.require-config.min.js"></script>
+
+ <!--[if IE 7]>
+ <script type="text/javascript" src="https://login-team.embria.com/static/base/js/__v1547113596.ie.js"></script>
+ <![endif]-->
+
+ 
+ <script type="text/javascript" src="https://login-team.embria.com/static/base/js/__v1638569230.init.min.js"></script>
+ 
+ <script type="text/javascript" src="https://login-team.embria.com/static/app/team/js/__v1605123313.base.min.js"></script>
+
+ <script>
+ // onresize
+ (function(w, d, t, n, sn){
+ var resize = function(){
+ if (d.clientWidth < 1000) { if (!t.hasClass(sn)) t.addClass(sn); } else { if (t.hasClass(sn)) t.removeClass(sn); }
+ if (d.clientWidth < 1240) { if (!t.hasClass(n)) t.addClass(n); } else { if (t.hasClass(n)) t.removeClass(n); }
+ };
+
+ $(d).ready(resize);
+ $(w).resize(resize);
+
+ })(window, document.documentElement, $(document.documentElement), 'without-secondary', 'unfixed');
+
+ fsLang.config = { id : 1, name : "ru", unknown : "&hellip;", intRules : [[100,[11,12,13,14],3],[10,[1],1],[10,[2,3,4],2],["*",0,3]], floatRules : 2, sexRules :[[["w",1],1],["*",0]] };
+
+ $.extend(true, $.fancybox.defaults, {
+ buttons: [
+ 'slideShow',
+ 'fullScreen',
+ 'thumbs',
+ 'close'
+ ],
+ backFocus: false,
+ trapFocus: false,
+ animationEffect: 'fade',
+ clickContent: 'nextOrClose',
+ parentEl: '#node-heap',
+ lang: LANG,
+ i18n: {
+ ru: {
+ CLOSE: 'Закрыть',
+ NEXT: 'Следующая',
+ PREV: 'Предыдущая',
+ ERROR: '<p class="center"><i class="icn icn-pulse icn-gray"></i> Файл недоступен, попробуйте позже.</div>',
+ PLAY_START: 'Запустить слайдшоу',
+ PLAY_STOP: 'Завершить слайдшоу',
+ FULL_SCREEN: 'Полный экран',
+ THUMBS: 'Эскизы',
+ DOWNLOAD: 'Скачать',
+ SHARE: 'Поделиться',
+ ZOOM: 'Увеличить'
+ }
+ }
+ });
+
+ uiHelper.location = "https://login-team.embria.com/static/lang/tutorial/";
+ uiHelper.sources = {};
+
+ </script>
+
+ 
+ <link rel="stylesheet" type="text/css" media="all" href="https://login-team.embria.com/static/base/css/__v1547113596.bootstrap-datetimepicker-standalone.css">
+ <link rel="stylesheet" type="text/css" media="all" href="https://login-team.embria.com/static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/__v1488292322.bootstrap-datetimepicker.min.css">
+
+ 
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="cleave" src="/static/bower_components/cleave-js/dist/cleave.min.js?v=1648756523986"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="cleave.i18n" src="/static/bower_components/cleave-js/src/addons/phone-type-formatter.i18n.js?v=1648756523986"></script></head>
+<body class="team-domain staff-header">
+
+<script type="text/javascript">_booter.domStarted();</script>
+<div style="position:absolute;top:-9000px;" id="system_service"></div>
+
+ <div id="header-wrap" class="fixed blur" style="top: auto;">
+ <div id="team-header" class="header-team">
+ <div id="logo-wrap" class="team-logo-wrap fl-l">
+ <a href="/news/my/">
+ <img src="/logo/team.embria.com.png?v=3" height="42">
+ </a>
+ </div>
+
+ </div>
+ </div>
+<script>
+ var headerNotifies = function () {
+ ourPersonsMenu.limit = 50;
+ ourPersonsMenu.getNotifies('//login-team.embria.com');
+
+ };
+
+ if (typeof fs !== 'undefined') {
+ fs.onload(headerNotifies);
+ } else {
+ headerNotifies();
+ }
+</script>
+<div id="container-wrap" class="fixed blur" style="top: auto;">
+ <div id="container">
+ <div id="content-inner">
+ <div id="tab-content" class="tab-content-clean withoutLeftSidebar">
+ <div id="content">
+ <style>
+ .icn-cross { display: none }
+
+ .g-recaptcha {
+ height: 65px;
+ transform: scale(0.827);
+ transform-origin: 0 0;
+ max-width: 337px;
+ }
+</style>
+<div id="forPopup" class="form-select-value">
+ <div class="staff-login">
+ <div class="staff-auth-sms msg msg-red msg-margin h">
+ <div class="msg-icn"><i class="icn icn-moderation icn-white"></i></div>
+ <div class="msg-content">
+ <h4 class="msg-title">Ошибка авторизации</h4>
+ <p class="msg-text"></p>
+ </div>
+ </div>
+ <div class="staff-auth-info msg msg-margin">
+ <div class="msg-icn"><i class="icn icn-adventures icn-white"></i></div>
+ <div class="msg-content">
+ <h4 class="msg-title"></h4>
+ <p class="msg-text">Введите ваш номер телефона и пароль от ленты. Если вы забыли или не знаете свой пароль, его можно восстановить по кнопке Забыли пароль</p>
+ </div>
+ </div>
+ <div class="pt-10">
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff-phone">Номер телефона:&nbsp;</label>
+ </div>
+ <div class="form-data">
+ <input class="form-input staff-phone" type="tel" name="staff-phone" value="">
+ </div>
+ </div>
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff-password">Пароль:&nbsp;</label>
+ </div>
+ <div class="form-data">
+ <input class="form-input staff-password" type="password" name="staff-password">
+ </div>
+ </div>
+ <div class="form-field nclear h" id="captcha-container">
+ <div class="form-data">
+ <div class="g-recaptcha"></div>
+ </div>
+ </div>
+ <div class="fl-r" style="margin-right: 50px; margin-top: 1px">
+ <form action="/signup/index/recoveryPassword/">
+ <input type="hidden" name="phone">
+ <a class="staff-forget-password">Забыли пароль?</a>
+ </form>
+ </div>
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff-remember"></label>
+ </div>
+ <div class="form-data unselectable" id="staff-remember">
+ <div class="form-checkbox checked" onclick="checkbox(this, event)">
+ <input type="checkbox" class="staff-remember" value="1" name="staff-remember" checked="checked">
+ <i class="checkbox-ico"></i> запомнить </div>
+ </div>
+ </div>
+ <div class="form-field nclear center">
+ <span class="ibtn ibtn-blue staff-login-submit unselectable"><span class="inline-block vertical-middle">Войти</span></span>
+ <span class="ibtn ibtn-border unselectable staff-login-google"><i class="icn icn-google pointer"></i> <span class="inline-block vertical-middle">Войти через Google</span></span>
+ </div>
+ </div>
+ </div>
+ <div class="staff-password-new h">
+ <div class="msg msg-margin">
+ <div class="msg-icn"><i class="icn icn-lock icn-white"></i></div>
+ <div class="msg-content">
+ <h4 class="msg-title">Новый пароль</h4>
+ <p class="msg-text">Задайте новый пароль для входа на сайт.</p>
+ </div>
+ </div>
+ <form class="pt-10">
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff_playform">Новый пароль:</label>
+ </div>
+ <div class="form-data ">
+ <input class="form-input max-width" type="password" id="staff_password_new" onkeyup="staff.indicatePassword(this)" autocomplete="off" autocapitalize="off" spellcheck="false">
+ <div class="password-strength"><div class="strength-bar-wrapper"><div class="strength-bar"></div></div><div class="strength-label"></div></div>
+ </div>
+ </div>
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff_playform">Повторите новый пароль:</label>
+ </div>
+ <div class="form-data">
+ <input class="form-input max-width" type="password" id="staff_password_repeat" autocomplete="off" autocapitalize="off" spellcheck="false">
+ </div>
+ </div>
+ <div class="form-field nclear center">
+ <input type="submit" class="ibtn ibtn-blue" value="Сохранить">
+ </div>
+ </form>
+ </div>
+</div>
+<script>
+ var loginCaptcha,
+ $loginCaptchaEl,
+ $captchaCont,
+ googleAuthInit,
+ showLoginCaptcha = function() {
+ if (typeof grecaptcha == 'undefined') {
+ $.getScript('https://www.google.com/recaptcha/api.js?onload=showLoginCaptcha&render=explicit&hl=' + LANG);
+ return;
+ }
+
+ if (typeof loginCaptcha == 'undefined') {
+ loginCaptcha = grecaptcha.render($loginCaptchaEl[0], {
+ 'sitekey' : '6Ldc1SYUAAAAAOPBhDG9i-Yy8Y4bZAZR27p4O5IX'
+ });
+ } else {
+ grecaptcha.reset(loginCaptcha);
+ }
+
+ $captchaCont.removeClass('h');
+ };
+
+ fs.onload(function() {
+ iPopup.open($('#forPopup').html(), {
+ title: '<i class="icn icn-white icn-lock"></i> Войти в Стафф',
+ noOverlayClose: true,
+ style: {
+ width: 560
+ },
+ onopen: function() {
+ var self = this,
+ checkLogin = function(data) {
+ data.remember = self.inner.find('.staff-remember:checked').val();
+
+ if (!$loginCaptchaEl.is(':empty')) {
+ data['g-recaptcha-response'] = grecaptcha.getResponse(loginCaptcha);
+ }
+
+ _ajax.post('/signup/ajax/checkLogin/', data, function(html, status, data) {
+ if (status) {
+ fs.notify("Вы успешно авторизовались");
+
+ 
+ location.reload();
+ } else {
+ if (data.new_password_needed) {
+ var $newPassForm = self.inner.find('.staff-password-new:first');
+
+ if ($newPassForm.is(':visible')) {
+ fs.notify('Пароль введен неверно');
+ }
+
+ self.inner.find('.staff-auth-info').hide();
+ self.inner.find('.staff-login:first').slideUp();
+ $newPassForm.removeClass('h');
+ $newPassForm.find('#staff_password_new').focus();
+
+ return;
+ }
+
+ if (data.error) {
+ self.inner.find('.staff-auth-info').hide();
+ self.inner.find('.staff-auth-sms .msg-text').text(data.error);
+ self.inner.find('.staff-auth-sms').removeClass('h');
+ } else {
+ fs.notify("Ошибка авторизации");
+ }
+
+ if (data.captcha_needed) {
+ showLoginCaptcha();
+ } else {
+ $loginCaptchaEl.empty();
+ $captchaCont.addClass('h');
+ }
+ }
+ });
+ };
+
+ $captchaCont = self.inner.find('#captcha-container');
+ $loginCaptchaEl = self.inner.find('.g-recaptcha');
+
+ 
+ require(['cleave', 'cleave.i18n'], function(Cleave) {
+ var $el = self.inner.find('.staff-phone');
+
+ new Cleave($el, { phone: true });
+ $el.on('keyup', function() {
+ var val = $(this).val();
+ if (val.length && val.charAt(0) !== '+') {
+ $(this).val('+' + val);
+ }
+ });
+ });
+
+ self.inner.find('.staff-login-submit').on('click', function() {
+ var phone = self.inner.find('.staff-phone').val().replace(/[^\d]/g, ''),
+ password = self.inner.find('.staff-password').val();
+
+ self.inner.find('.staff-auth-info').fadeIn(300);
+ self.inner.find('.staff-auth-sms').addClass('h');
+
+ if (phone.match(/[0-9]{11,18}/) && password) {
+ var data = {
+ phone: phone,
+ password: password
+ };
+
+ var $newPassForm = self.inner.find('.staff-password-new:first');
+
+ if ($newPassForm.is(':visible') && staff.changePassword($newPassForm[0])) {
+ data.new_password = $newPassForm.find('#staff_password_new').val();
+ data.repeat_password = $newPassForm.find('#staff_password_repeat').val();
+ }
+
+ checkLogin(data);
+ }
+ });
+
+ self.inner.find('.staff-password-new form').on('submit', function (e) {
+ e.preventDefault();
+
+ if (staff.changePassword(this)) {
+ self.inner.find('.staff-login-submit').trigger('click');
+ }
+ });
+
+ self.inner.find('.staff-phone, .staff-password').keydown(function(e) {
+ if (e.keyCode == 13) {
+ self.inner.find('.staff-login-submit').trigger('click');
+ }
+ });
+
+ self.inner.find('.staff-forget-password').on('click', function() {
+ var phone = self.inner.find('.staff-phone').val().replace(new RegExp(' ', 'g'), '');
+
+ $(this).prev().val(phone);
+ $(this).parent().submit();
+ return false;
+ });
+
+ self.inner.find('.staff-phone').focus();
+ 
+ $.getScript('https://apis.google.com/js/api:client.js?onload=googleAuthInit&render=explicit&hl=' + LANG);
+
+ googleAuthInit = function() {
+ gapi.load('auth2', function() {
+ auth2 = gapi.auth2.init({ client_id: '465183874098-a59970ttlt8ai4hubdld8rko30prj6q4.apps.googleusercontent.com' });
+ auth2.attachClickHandler(self.inner.find('.staff-login-google')[0], {}, function(data) {
+ checkLogin({
+ google_token: data.getAuthResponse().id_token
+ });
+ });
+ });
+ }
+ }
+ });
+ });
+
+ staff.changePassword = function(form) {
+ var valid = true,
+ newP = $(form).find('#staff_password_new').val(),
+ repeatP = $(form).find('#staff_password_repeat').val();
+
+ if (valid && !newP) {
+ fs.notify('Вы не указали новый пароль');
+ valid = false;
+ }
+
+ if (valid && newP != repeatP) {
+ fs.notify('Ваши пароли не совпадают');
+ valid = false;
+ }
+
+ if (valid && newP.length < 6) {
+ fs.notify('Пароль слишком короткий (минимум 6 символов)');
+ valid = false;
+ }
+
+ if (valid && newP.length > 20) {
+ fs.notify('Пароль слишком длинный (максимум 20 символов)');
+ valid = false;
+ }
+
+ var $indicator = $(form).find('.password-strength');
+ if (valid && $indicator.find('.strength-bar').data('score') < 60) {
+ fs.notify($indicator.find('.strength-label').text());
+ valid = false;
+ }
+
+ return valid;
+ };
+</script> </div>
+ <script>
+ fs.onload(function() {
+ topper && topper.init();
+
+ nav2.gc(function(){
+ topper && topper.destroy();
+ });
+
+ if (window.screen != null) {
+ if (window.screen.availWidth < 900) {
+ $('.fixxed').css('position', 'relative');
+ }
+ }
+ });
+</script>
+</div>
+ </div>
+ </div>
+</div>
+
+
+<div id="topper-block" onclick="topper.onClick();"> <div class="topper-inner"><span class="topper-inner-text">Наверх </span><i class="icn icn-gray icn-up"></i> </div> </div>
+<div id="topper-side" onmouseover="topper.sideOver()" onmouseout="topper.sideOut()" onclick="topper.onClick()"></div>
+
+<div id="node-heap"><div class="iPopup-overlay" id="iPopup"><div class="iPopup" style="width: 560px; margin-top: 190.883px;"><div class="popup-header nclear"><h2 class="ellipsis" style="max-width: 95%"><i class="icn icn-white icn-lock"></i> Войти в Стафф</h2><div class="popup-control"><i class="icn icn-white icn-cross" onclick="iPopup.close();"></i></div></div><div class="popup-content">
+ <div class="staff-login">
+ <div class="staff-auth-sms msg msg-red msg-margin h">
+ <div class="msg-icn"><i class="icn icn-moderation icn-white"></i></div>
+ <div class="msg-content">
+ <h4 class="msg-title">Ошибка авторизации</h4>
+ <p class="msg-text"></p>
+ </div>
+ </div>
+ <div class="staff-auth-info msg msg-margin">
+ <div class="msg-icn"><i class="icn icn-adventures icn-white"></i></div>
+ <div class="msg-content">
+ <h4 class="msg-title"></h4>
+ <p class="msg-text">Введите ваш номер телефона и пароль от ленты. Если вы забыли или не знаете свой пароль, его можно восстановить по кнопке Забыли пароль</p>
+ </div>
+ </div>
+ <div class="pt-10">
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff-phone">Номер телефона:&nbsp;</label>
+ </div>
+ <div class="form-data">
+ <input class="form-input staff-phone" type="tel" name="staff-phone" value="">
+ </div>
+ </div>
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff-password">Пароль:&nbsp;</label>
+ </div>
+ <div class="form-data">
+ <input class="form-input staff-password" type="password" name="staff-password">
+ </div>
+ </div>
+ <div class="form-field nclear h" id="captcha-container">
+ <div class="form-data">
+ <div class="g-recaptcha"></div>
+ </div>
+ </div>
+ <div class="fl-r" style="margin-right: 50px; margin-top: 1px">
+ <form action="/signup/index/recoveryPassword/">
+ <input type="hidden" name="phone">
+ <a class="staff-forget-password">Забыли пароль?</a>
+ </form>
+ </div>
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff-remember"></label>
+ </div>
+ <div class="form-data unselectable" id="staff-remember">
+ <div class="form-checkbox checked" onclick="checkbox(this, event)">
+ <input type="checkbox" class="staff-remember" value="1" name="staff-remember" checked="checked">
+ <i class="checkbox-ico"></i> запомнить </div>
+ </div>
+ </div>
+ <div class="form-field nclear center">
+ <span class="ibtn ibtn-blue staff-login-submit unselectable"><span class="inline-block vertical-middle">Войти</span></span>
+ <span class="ibtn ibtn-border unselectable staff-login-google"><i class="icn icn-google pointer"></i> <span class="inline-block vertical-middle">Войти через Google</span></span>
+ </div>
+ </div>
+ </div>
+ <div class="staff-password-new h">
+ <div class="msg msg-margin">
+ <div class="msg-icn"><i class="icn icn-lock icn-white"></i></div>
+ <div class="msg-content">
+ <h4 class="msg-title">Новый пароль</h4>
+ <p class="msg-text">Задайте новый пароль для входа на сайт.</p>
+ </div>
+ </div>
+ <form class="pt-10">
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff_playform">Новый пароль:</label>
+ </div>
+ <div class="form-data ">
+ <input class="form-input max-width" type="password" id="staff_password_new" onkeyup="staff.indicatePassword(this)" autocomplete="off" autocapitalize="off" spellcheck="false">
+ <div class="password-strength"><div class="strength-bar-wrapper"><div class="strength-bar"></div></div><div class="strength-label"></div></div>
+ </div>
+ </div>
+ <div class="form-field nclear">
+ <div class="form-label">
+ <label for="staff_playform">Повторите новый пароль:</label>
+ </div>
+ <div class="form-data">
+ <input class="form-input max-width" type="password" id="staff_password_repeat" autocomplete="off" autocapitalize="off" spellcheck="false">
+ </div>
+ </div>
+ <div class="form-field nclear center">
+ <input type="submit" class="ibtn ibtn-blue" value="Сохранить">
+ </div>
+ </form>
+ </div>
+</div></div></div></div>
+
+<div class="fixed" id="notifiers-wrap"></div>
+
+<script>
+ fs.onload(function() {
+ nav2.eventer.on('load', function() {
+ ourPersonsMenu.getNotifies();
+ uiHelper.currentClose();
+ });
+
+ titles._favicon = '/favicon/team.embria.com.ico?v=3';
+ 
+ var id = nav2.getParam('popup_employee');
+ if (id) {
+ staff.showInfoEmployee(id);
+ }
+ });
+</script>
+
+
+
+
+
+<div id="notifiers-wrap" class="fixed"></div></body></html>

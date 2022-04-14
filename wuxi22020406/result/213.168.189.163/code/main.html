@@ -1,0 +1,121 @@
+<html lang="zh" class=" js chrome webkit"><head>
+<title>Roundcube Webmail :: 欢迎使用 Roundcube Webmail</title>
+<meta name="Robots" content="noindex,nofollow">
+<meta name="viewport" content="" id="viewport">
+<link rel="shortcut icon" href="skins/larry/images/favicon.ico">
+<link rel="stylesheet" type="text/css" href="skins/larry/styles.min.css?s=1480262938">
+<!--[if IE 9]><link rel="stylesheet" type="text/css" href="skins/larry/svggradients.min.css?s=1480262938" /><![endif]-->
+<link rel="stylesheet" type="text/css" href="plugins/jqueryui/themes/larry/jquery-ui-1.10.4.custom.css?s=1480262937">
+<script type="text/javascript" src="skins/larry/ui.min.js?s=1638787908"></script>
+
+
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script src="program/js/jquery.min.js?s=1638787908" type="text/javascript"></script>
+<script src="program/js/common.min.js?s=1638787908" type="text/javascript"></script>
+<script src="program/js/app.min.js?s=1638787908" type="text/javascript"></script>
+<script src="program/js/jstz.min.js?s=1638787908" type="text/javascript"></script>
+<script type="text/javascript">
+
+/*
+        @licstart  The following is the entire license notice for the 
+        JavaScript code in this page.
+
+        Copyright (C) 2005-2014 The Roundcube Dev Team
+
+        The JavaScript code in this page is free software: you can redistribute
+        it and/or modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation, either version 3 of
+        the License, or (at your option) any later version.
+
+        The code is distributed WITHOUT ANY WARRANTY; without even the implied
+        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU GPL for more details.
+
+        @licend  The above is the entire license notice
+        for the JavaScript code in this page.
+*/
+var rcmail = new rcube_webmail();
+rcmail.set_env({"task":"login","x_frame_options":"sameorigin","standard_windows":false,"locale":"zh_CN","cookie_domain":"","cookie_path":"\/","cookie_secure":true,"skin":"larry","refresh_interval":60,"session_lifetime":600,"action":"","comm_path":".\/?_task=login","compose_extwin":false,"date_format":"yy-mm-dd","request_token":"Rt4ddkB7Pz1cDXigJBVKPpREO4R9lwqy"});
+rcmail.add_label({"loading":"\u6b63\u5728\u8f7d\u5165...","servererror":"\u670d\u52a1\u5668\u9519\u8bef\uff01","connerror":"\u8fde\u63a5\u9519\u8bef(\u8fde\u63a5\u670d\u52a1\u5668\u5931\u8d25)\uff01","requesttimedout":"\u8bf7\u6c42\u8d85\u65f6","refreshing":"\u6b63\u5728\u5237\u65b0...","windowopenerror":"\u5f39\u51fa\u7a97\u53e3\u88ab\u5c4f\u853d\uff01","uploadingmany":"\u6b63\u5728\u4e0a\u4f20\u6587\u4ef6...","errortitle":"\u53d1\u751f\u9519\u8bef\uff01","toggleadvancedoptions":"\u5207\u6362\u9ad8\u7ea7\u9009\u9879"});
+rcmail.gui_container("loginfooter","bottomline");
+rcmail.gui_object('loginform', 'form');
+rcmail.gui_object('message', 'message');
+</script>
+
+<script type="text/javascript" src="plugins/jqueryui/js/jquery-ui-1.10.4.custom.min.js?s=1638787908"></script>
+<script type="text/javascript" src="plugins/jqueryui/js/i18n/jquery.ui.datepicker-zh-CN.min.js?s=1638787908"></script>
+</head>
+<body>
+
+<h1 class="voice">Roundcube Webmail 登录</h1>
+
+<div id="login-form">
+<div class="box-inner" role="main">
+<img src="skins/larry/images/roundcube_logo.png" id="logo" alt="Roundcube Webmail">
+
+<form name="form" method="post" action="./?_task=login">
+<input type="hidden" name="_token" value="Rt4ddkB7Pz1cDXigJBVKPpREO4R9lwqy">
+<input type="hidden" name="_task" value="login"><input type="hidden" name="_action" value="login"><input type="hidden" name="_timezone" id="rcmlogintz" value="Asia/Shanghai"><input type="hidden" name="_url" id="rcmloginurl" value=""><table><tbody><tr><td class="title"><label for="rcmloginuser">用户名</label>
+</td>
+<td class="input"><input name="_user" id="rcmloginuser" required="required" size="40" autocapitalize="off" autocomplete="off" type="text"></td>
+</tr>
+<tr><td class="title"><label for="rcmloginpwd">密码</label>
+</td>
+<td class="input"><input name="_pass" id="rcmloginpwd" required="required" size="40" autocapitalize="off" autocomplete="off" type="password"></td>
+</tr>
+</tbody>
+</table>
+<input type="hidden" name="_host" id="rcmloginhost" value="localhost" form="form" size="40" submit="true" autocapitalize="off"><p class="formbuttons"><input type="submit" id="rcmloginsubmit" class="button mainaction" value="登录"></p>
+
+</form>
+
+</div>
+
+<div class="box-bottom" role="complementary">
+	<div id="message"></div>
+	<noscript>
+		<p class="noscriptwarning">警告：本程序需要 Javascript 支持！请在浏览器设置中启用 Javascript。</p>
+	</noscript>
+</div>
+
+<div id="bottomline" role="contentinfo">
+	Roundcube Webmail 
+		
+</div>
+</div>
+
+
+
+<script type="text/javascript">
+if (!window.UI) { var UI = new rcube_mail_ui(); }
+</script>
+
+
+
+
+<script type="text/javascript">
+
+jQuery.extend(jQuery.ui.dialog.prototype.options.position, {
+                using: function(pos) {
+                    var me = jQuery(this),
+                        offset = me.css(pos).offset(),
+                        topOffset = offset.top - 12;
+                    if (topOffset < 0)
+                        me.css('top', pos.top - topOffset);
+                    if (offset.left + me.outerWidth() + 12 > jQuery(window).width())
+                        me.css('left', pos.left - 12);
+                }
+            });
+$(document).ready(function(){ 
+rcmail.init();
+var images = ["skins\/larry\/images\/ajaxloader.gif","skins\/larry\/images\/ajaxloader_dark.gif","skins\/larry\/images\/buttons.png","skins\/larry\/images\/addcontact.png","skins\/larry\/images\/filetypes.png","skins\/larry\/images\/listicons.png","skins\/larry\/images\/messages.png","skins\/larry\/images\/messages_dark.png","skins\/larry\/images\/quota.png","skins\/larry\/images\/selector.png","skins\/larry\/images\/splitter.png","skins\/larry\/images\/watermark.jpg"];
+            for (var i=0; i<images.length; i++) {
+                img = new Image();
+                img.src = images[i];
+            }
+});
+</script>
+
+
+</body></html>

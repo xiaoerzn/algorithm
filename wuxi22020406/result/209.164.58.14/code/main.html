@@ -1,0 +1,165 @@
+<html><head>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<title> (224176-186:209.164.58.14) Configuration</title>
+
+<link rel="stylesheet" href="/styles.css">
+<script type="text/javascript"> AJAX = {};
+MODSECTS = new Array(0,0,0,0,0,0,0,0,0,0);
+var	bfr;
+var	_idb_;
+var	autologoff = 0;
+function
+logoff()
+{
+	if(!autologoff)
+		return;
+	//autologoff = 0;
+	var a = (window.XMLHttpRequest) ? new XMLHttpRequest() : new
+                                        ActiveXObject("Msxml2.XMLHTTP");
+	a.open("GET", "/progs/status/logout_quest", 1);
+	try {
+		a.send(null);
+	} catch(e){}
+}
+
+function
+reload_menu()
+{
+	var menu = document.getElementById("menuiframe");
+
+        if(menu)
+                menu.contentDocument.location.reload(true);
+}
+
+var	waiter;
+var	waiterc;
+
+var	quest;
+var	questtitle;
+var	questtext;
+var	inshowquest = 0;
+
+function
+clearscan(force)
+{
+	if(force)
+		inshowquest = 0;
+	if(inshowquest){
+		inshowquest = 0;
+		return;
+	}
+	waiter.style.display = "none";
+	waiterc.style.display = "none";
+	quest.style.display = "none";
+}
+
+var	load = "<br><div style='width:100%;text-align:center'><div class='loader'></div></div>";
+
+function _showscan(msg)
+{
+	waiterc.innerHTML = msg + " Please Wait..." + load;
+	quest.style.display = "none";
+	waiter.style.display = "block";
+	waiterc.style.display = "block";
+}
+
+function showquest(msg, text)
+{
+	questtitle.innerHTML = msg;
+	questtext.innerHTML = text;
+	waiterc.style.display = "none";
+	waiter.style.display = "block";
+	quest.style.display = "block";
+	inshowquest = 1;
+	var     focus = questtext.getElementsByClassName("Focus");
+        if(focus[0])
+                focus[0].focus();
+
+}
+function questbutstatus(name, value)
+{
+	var     f = questtext.getElementsByClassName(name);
+	for(i = 0 ; i < f.length ; i++)
+		f[i].disabled = value;
+}
+
+</script>
+<script type="text/javascript" src="/top.js"></script>
+<script type="text/javascript" src="/hover.js"></script>
+<script type="text/javascript" src="/hoverinc.js"></script>
+<script type="text/javascript" src="/addrs.js"></script>
+</head>
+<body id="outerbody" onunload="logoff();" onbeforeunload="logoff();">
+<table id="outertable" cellspacing="0">
+<tbody><tr id="outertr"><td id="logotd" rowspan="2"> 
+<div id="lefttop">
+<img id="kemplogo" height="60px" width="136px" src="/kemplogo.png"></div>
+</td>
+<td id="toplinetd">
+<div id="mcname">
+LoadMaster
+</div>
+<div id="righttop">
+<span id="username">&nbsp;</span>
+<span id="ident">&nbsp;</span>
+</div>
+</td>
+</tr>
+<tr>
+<td id="rightstatus">
+<div id="rightstatus">
+<div id="toplinediv"><span id="topline">LoadMaster Login</span></div>
+<div id="rightstatusright">
+<span id="hastatus"><a href="https://209.164.58.14:443" target="_blank" style="text-decoration:none;" onmouseover="ht('HA1 224176-186 is in the \'active\' HA state.</br>Click the icon to open the WUI for this HA unit.')"><img src="/greenA.gif" style="height:15;vertical-align:bottom;"><font color="red">&nbsp;</font></a><a href="https://209.164.58.15:443" target="_blank" style="text-decoration:none;" onmouseover="ht('HA2 224176-192 is in the \'standby\' HA state.</br>Click the icon to open the WUI for this HA unit.')"><img src="/green.gif" style="height:15;vertical-align:bottom;"><font color="red"></font></a>&nbsp;&nbsp;[224176-186]</span>
+<span id="time">Master&nbsp;05:23:29 AM</span>
+</div>
+</div></td></tr>
+<tr>
+<td id="menumaintd" height="100%"><div id="menumain">
+<iframe id="menuiframe" name="menu" src="/progs/menu" width="200" height="100%" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+</div>
+</td>
+<td><div id="rightpage">
+<div id="motd" style="display: none;"></div>
+<iframe id="_bmain" name="bmain" src="/progs/homepage" width="708" height="676" marginheight="0" marginwidth="0" frameborder="0" allowtransparency="true">Iframe support required</iframe>
+</div>
+</td>
+</tr>
+</tbody></table>
+<div id="Itooltip" style="visibility: hidden; left: -1000px; top: -1000px;"></div>
+<div id="waiter" class="waiter" style="display:none;">
+</div>
+<div id="waiterc" class="waitercenter minitabdiv" style="display:none;">
+Please wait
+</div>
+<div id="quest" class="waitercenter minitabdiv" style="display:none;">
+<div class="tabletitle underline" id="questtitle">Title</div>
+<div id="questtext">QuestText</div>
+</div>
+<script type="text/javascript">
+setmotd('');
+tipobj = document.getElementById("Itooltip");
+waiter = document.getElementById("waiter");
+waiterc = document.getElementById("waiterc");
+quest = document.getElementById("quest");
+questtitle = document.getElementById("questtitle");
+questtext = document.getElementById("questtext");
+bfr = document.getElementById("_bmain");
+parent.dohoverhelp = true;
+
+window.onresize = resiz;
+resiz();
+</script>
+<script type="text/javascript">
+autologoff = 1;
+AJAX.init("LoadMaster", "1");
+getstatus();
+</script>
+
+
+
+</body></html>

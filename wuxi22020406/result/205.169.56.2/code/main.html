@@ -1,0 +1,97 @@
+<html><head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.14.1/build/cssnormalize/cssnormalize-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.14.1/build/cssfonts/cssfonts-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.14.1/build/cssgrids/cssgrids-min.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="init.css">
+	<title>TCN User Dashboard</title>
+</head>
+<body class="yui3-skin-sam" id="body">
+	<div class="header">
+		<table class="hdrtable">
+			<tbody><tr>
+				<td><img src="images/uo-logo.png" alt="Unified Office"></td>
+				<td style="display: none;"><input type="checkbox" id="pollstop"></td>
+				<td id="hdrinit">
+					<table>
+						<tbody><tr>
+							<td id="waitingicon"><img src="images/waiting.gif" alt="waiting">
+							</td>
+							<td><span id="initmsg">Initializing...</span></td>
+						</tr>
+					</tbody></table>
+				</td>
+				<td class="hdrtext">
+					<div id="oncallcontainer"></div>
+					<div class="hdrtitle">TCN User Dashboard</div>
+					<div class="topactions" id="logoff" style="display: none;"><a href="logoff.php">Logoff</a></div>
+					</td>
+			</tr>
+		</tbody></table>
+	</div>
+	<div class="sectiondiv" id="logindiv"></div>
+	<div class="sectiondiv" id="autoattendant"></div>
+	<div class="sectiondiv" id="parkedcalls"></div>
+	<div class="sectiondiv" id="sharedlines"></div>
+	<div class="sectiondiv" id="mydevices"></div>
+	<div class="tabsdiv" id="maintabs" style="display: none;">
+		<ul class="tabsul">
+			<li><a href="#userpanel">Users</a></li>
+			<li><a href="#vmailview" id="vmailtablink">Voicemail</a></li>
+			<li><a href="#historyview">Call History</a>
+			</li><li><a href="#contactsview">Directory</a></li>
+			<li><a href="#messagingview" id="messagingtablink">Messaging</a></li>
+			<li><a href="#settingsview">Settings</a></li>
+		</ul>
+		<div>
+			<div class="sectiondiv" id="userpanel"></div>
+			<div class="sectiondiv" id="vmailview"></div>
+			<div class="sectiondiv" id="historyview"></div>
+			<div class="sectiondiv" id="contactsview"></div>
+			<div class="sectiondiv" id="messagingview"></div>
+			<div class="sectiondiv" id="settingsview"></div>
+		</div>
+	</div>
+
+	<script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
+	<script>
+		/*
+		 * Get everything loaded -- YUI and our scripts -- then startup
+		 */
+		var Y = null;
+		var appLoaded = false;
+		var styleLoaded = false;
+		var myexten = '';
+
+		// Load YUI
+		YUI({'combine': true}).use('base', 'node', 'json', 'dd', 'dd-scroll', 'tabview',
+				'io-base', 'get', 'handlebars', 'overlay', 'transition', 'datatable',
+				'datatable-formatters', 'panel',
+				function(y) {
+			Y = y;
+			Y.Get.css(['recpanel.css', 'cloud-dboard.css'], function(err) {
+				if (err) {
+					Y.log('Error loading css: ' + err[0].error);
+				}
+				styleLoaded = true;
+				checkReady();
+			});
+		});
+
+		// Called by our scripts when loaded
+		function onAppLoad() {
+			appLoaded = true;
+			checkReady();
+		}
+
+		function checkReady() {
+			if (Y && appLoaded && styleLoaded) {
+				createClasses();
+				startApp();
+			}
+		}
+	</script>
+	<script src="loadjs.php"></script>
+</body></html>

@@ -1,0 +1,370 @@
+<html><head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="no-cache" http-equiv="cache-control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="-1" http-equiv="expires">
+<link href="./style/styles.css" type="text/css" rel="StyleSheet">
+<link href="./style/fonts.css" type="text/css" rel="StyleSheet">
+<script src="./scripts/general.js" language="JavaScript"></script>
+<script src="./scripts/cookies.js" language="JavaScript"></script>
+<title>User Authentication
+</title>
+<style type="text/css">
+  /*The background color of the page*/
+body.main {background-color: #FFFFFF}
+/*The color of the bars which is up and below the username and credential*/
+td.bg {background-color: #993333}
+/*The color which around the user-name and customer logo*/
+td.inside {background-color: #FFFFFF}
+/*The color of the disclaimer check box*/
+td.disclaimer {background-color: #FFFFFF}
+/*control the disclaimer and check box are appeared or not*/
+div.disclaimer {display:none}
+/*Control the help link is show or not*/
+div.help {display:none}
+/*The font of help link*/
+p.help {font-family:Geneva,Verdana,Arial,sans-serif; font-size:10pt; display:block; color:#000000;}
+/*The font of the accept check box*/
+p.accept {font-family:Geneva,Verdana,Arial,sans-serif; font-size:10pt; display:block; color:#000000;}
+/*The font of the disclaimer*/
+textarea.ex2 {font-family:Times New Roman; font-size:medium; width: 570px; height: 200px; color:#000000;}
+
+</style>
+<script type="text/javascript">
+
+  function positionSelect(obj, selectValue) {
+    if(obj==null) return;
+    if(obj.options==null) return;
+    if(obj.options.length==0) return;
+    
+    for(var i=0; i < obj.options.length; i++) {
+      if(obj.options[i].value==selectValue) {
+        obj.selectedIndex=i;
+        return;
+      }
+    }
+    obj.selectedIndex=0;
+  }
+  
+  function getSelectValue(obj) {
+    if(obj==null) {
+      return null;
+    }
+    if(obj.options==null) {
+      return null;
+    }
+    if(obj.options.length==0) {
+      return null;
+    }
+    return obj.options[obj.selectedIndex].value
+  }
+
+  function get_cookie ( cookie_name ) {
+    var results = document.cookie.match ( cookie_name + '=(.*?)(;|$)' );
+    if ( results )
+      return ( unescape ( results[1] ) );
+    else
+      return null;
+  }
+
+  function set_cookie2(searchname, value, expirelapse, path) {
+    if((expirelapse==null)||(expirelapse=="null")) { expirelapse=365*24*60*60*1000;}
+    var dc = document.cookie;
+    var expires=new Date();
+    expires.setTime(expires.getTime() + expirelapse);
+    
+    var curCookie = searchname + "=" + value + "; expires=" + expires.toGMTString() + "; secure";
+    if ( path ) curCookie += "; path=" + escape ( path );
+    
+    document.cookie = curCookie;
+  }
+
+  function process(form) {
+    set_cookie2("domain", getSelectValue(form.fw_domain) );
+    set_cookie2("username", form.fw_username.value);
+  }
+
+  function gather(form) {
+    var domain   = get_cookie("domain");
+    var username = get_cookie("username");
+    positionSelect(form.fw_domain, domain?domain:"");
+    form.fw_username.value= username?username:"";
+    //get the language from server side
+    var lang = getURLPar("lang", window.location.search);
+    initLang(lang||'en-US');
+  }
+  
+  function checkInput() {
+    if(document.user_auth_form.fw_username.value.length==0 || document.user_auth_form.fw_password.value.length==0) {
+      alert('Invalid credentials!');
+      return false;
+    }
+    var acceptValue = document.getElementById("accept").value;
+    if(acceptValue.trim() == "true") {
+        if(document.getElementById("hsAcceptCkbId").checked == false) {
+            alert('Please read and accept the terms and conditions!');
+            return false;
+        }
+    }
+  }
+</script>
+</head>
+<body class="main" onload="gather(document.user_auth_form)">
+  <form onsubmit="process(this)" id="hsFormId" action="/wgcgi.cgi" name="user_auth_form" method="post">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" height="100%">
+      <tbody>
+        <tr>
+          <td><img width="1" border="0" height="75" alt="" src="./images/pixel.gif"></td>
+        </tr>
+        <tr valign="middle" align="center">
+          <td><table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+              <tbody>
+                <tr>
+                  <td><img width="1" border="0" height="21" alt="" src="./images/pixel.gif"></td>
+                  <td style="background-repeat: repeat-x; height: 21px;" colspan="2">
+                  <!-- error message -->
+                  <b><font color="#FF0000"><span id="errMsg"></span></font></b>
+                  <script language="javascript">
+                  var errcode=getURLPar("errcode", window.location.search);
+                  if(errcode != null) {
+                      document.getElementById("errMsg").innerHTML=getErrStr(errcode);
+                  }else{
+                      document.getElementById("errMsg").innerHTML="";
+                  }
+                  </script>
+                  </td>
+                  <td><img width="1" border="0" height="21" alt="" src="./images/pixel.gif"></td>
+                </tr>
+                <tr>
+                  <td><img width="1" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                  <td width="570" class="bg" height="40" colspan="2">
+                    <img width="570" border="0" height="40" alt="" src="./images/pixel.gif">
+                  </td>
+                  <td><img width="1" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                </tr>
+                <tr>
+                  <td width="50%"><img width="1" border="0" height="1" alt="" src="./images/pixel.gif"></td>
+                  <td class="inside" style="border-right: 1px solid #666666; border-left: 1px solid #666666;" colspan="2">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                        <tr>
+                          <td width="180" align="center" style="border-right: 1px solid #666666; padding: 0px 5px 0px 5px">
+                            <img style="height:65px; width:200px" border="0" alt="WatchGuard Technologies, Inc." src="./auth_portal/Default/logo">
+                          </td>
+                          <td align="left" style="padding-left: 30px">
+                            <table cellspacing="0" cellpadding="0" border="0">
+                              <tbody>
+                                <tr>
+                                  <td colspan="2"><img width="1" border="0" height="30" alt="" src="./images/pixel.gif"></td>
+                                </tr>
+                                <tr>
+                                  <td align="right"><b>Username:&nbsp;</b></td>
+                                  <td><input type="text" autocapitalize="off" value="username" size="20" name="fw_username"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2"><img width="1" border="0" height="5" alt="" src="./images/pixel.gif"></td>
+                                </tr>
+                                <tr>
+                                  <td align="right"><b>Password:&nbsp;</b></td>
+                                  <td><input type="password" autocomplete="off" value="" size="20" name="fw_password"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2"><img width="1" border="0" height="5" alt="" src="./images/pixel.gif"></td>
+                                </tr>
+                                <tr style="">
+                                  <!-- Get the domain name from -->
+                                  <td align="right"><b>Domain:&nbsp;</b></td>
+<td><select class="formtext" name="fw_domain">
+<option value="Firebox-DB">Firebox-DB</option>
+<option value="RMT.LOCAL">RMT.LOCAL</option>
+</select></td>
+
+                                </tr>
+                                <tr style="">
+                                  <td colspan="2"><img width="1" border="0" height="5" alt="" src="./images/pixel.gif"></td>
+                                </tr>
+                                <tr>
+                                  <td><img width="1" border="0" height="10" alt="" src="./images/pixel.gif"></td>
+                                  <td><div align="right">
+                                      <img width="1" border="0" height="20" alt="" src="./images/pixel.gif">
+                                      <input type="submit" onclick="return checkInput()" name="submit" value="Login">
+                                      <input type="reset" name="Reset" value="Reset">
+                                    </div></td>
+                                </tr>
+                                <tr style="display: none;" id="needCookie">
+                                  <td style="color: red;" colspan="2">
+                                    <a onclick="JavaScript:alert(&quot;[TODO] To launch help where we instruct the users to enable Cookies&quot;); return false" href="#"></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">
+                                    <img width="1" border="0" height="15" alt="" src="./images/pixel.gif">
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table></td>
+                        </tr>
+                        <tr>
+                      </tr></tbody>
+                    </table></td>
+                  <td width="50%"><img width="1" border="0" height="1" alt="" src="./images/pixel.gif"></td>
+                </tr>
+                <tr>
+                  <td><img width="1" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                  <td width="570" class="bg" height="40" colspan="2">
+                  <img width="570" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                  <td><img width="1" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                </tr>
+                <tr>
+                  <td><img width="1" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                  <td width="570" height="40" colspan="2" align="center">
+                   <div class="help"><a target="_blank" href="http://www.watchguard.com/
+"><p class="help">Don't you have an account? Please click here
+</p></a></div>
+                  </td>
+                  <td><img width="1" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                </tr> 
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td><img width="1" border="0" height="10" alt="" src="./images/pixel.gif"></td>
+        </tr>
+        <tr valign="middle" align="center">
+        <td>
+        <div class="disclaimer">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+              <tbody>
+               <tr valign="middle" align="center">
+                  <td width="50%"><img width="1" border="0" height="1" alt="" src="./images/pixel.gif"></td>
+                  <td bgcolor="#ffffff" style="border-right: 0px solid #666666; border-left: 0px solid #666666;" colspan="2">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                      <tr valign="middle" align="center">
+                      <td><img width="1" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                      <td width="570" bgcolor="#ffffff" height="40" colspan="2" border="2">
+                      <textarea class="ex2" readonly="readonly">WatchGuard E-Mail and Internet Access Policy 
+Effective Date:  January 1, 2003 
+Overview
+This document establishes the companyis policy regarding the appropriate use of Electronic Mail (E-mail), Internet, and other systems or services accessed through the Internet or Worldwide Web.
+
+Scope
+The scope of this policy includes all WatchGuard employees (full and part-time), as well as all contractors, consultants, or other non-company personnel while engaged in providing services to the company through use of the company's production systems.   The policy also extends to any use of email or Internet access regardless of location including home or office as it pertains to conducting company business, including personal use that may represent company business, or that may be construed to represent company business.
+ 
+Objective
+The objective of this policy is to ensure that use of email and the Internet among company employees and users is consistent with all applicable laws and the individual user's job responsibilities.
+
+Definitions 
+	System User: Any individual or electronic program that accesses company information systems or data including all company employees (full or part-time), contractors, consultants, or other individuals engaged by the company who access company owned or operated computer equipment or services.
+
+	E-Mail (Electronic Mail): Textual or graphic exchange of information from one user to another through public, company, or privately operated email systems(s) such as Microsoft Outlook, Unix mail, or other electronic mail services that may be used from time to time.
+
+	Internet: The network of computers and devices providing access for electronic exchange of information across a public domain including the worldwide web, the services, as well as any company provided extranet or other vehicle for providing electronic data or information exchange.
+
+	System: The general services relative to the transference and use of email or Internet access.
+
+	SPAM: The transmission of unwanted, non-company related email, or the continual or repetitive transmission of unwanted or redundant email messages or files to an individual or to the company at large.
+
+Employee and 3rd Party Consent to Abide by this Policy
+WatchGuard Technologies Inc., maintains an electronic mail and information system that is connected to the Internet. The company provides this system to assist employees in conducting official company business.  Use of the company's email or Internet systems constitutes agreement on the part of the user with the terms and conditions of this policy.   Internet and E-mail access is generally granted to all employees but may be revoked or denied on a case-by-case basis at the sole discretion of the company.
+
+Internet Filtering
+As determined by the company, access to specific Internet sites or other systems may be restricted or denied.  The company may also restrict the receipt or transmission of E-mail attachments based upon content, type or size.  Identification of these sites, systems, and the respective restrictions is the sole discretion of the company.  The list of restricted sites and restrictions may be changed over time as necessary and without notice.
+
+
+
+Circumventing the Production System Firewall 
+IT It is a violation of company policy to utilize any program, system, service, or device that bypasses the company production firewall and provides access to company data or information.  Examples are programs such as PC Anywhere or services such as instant messaging.  Exceptions must be approved on a case-by-case basis by the Information Technology Department. 
+
+Ownership
+All E-mail messages and files, composed, sent or received through the system are the property of the company and are not private or confidential to the employee in any way.  The company may, from time to time and at its sole discretion, read, review, search through, or otherwise analyze email messages or Internet data as deemed necessary and without notice to the intended recipient.
+
+Use
+The company's Internet and E-mail systems are to be used primarily for company business.  Participation in chat rooms, message boards, bulletin boards, or similar forums is prohibited unless expressly authorized by one of the CEO's direct reports or legal council.    Internet usage for personal use is discouraged.  However, if a system user uses the system for personal use, the use must be on the users own time and this privilege is subject to restriction or revocation by the users Department Head.
+
+Public Disclosures and Company Confidentiality
+Users must comply with all applicable WatchGuard corporate polices and confidentiality agreements in their use of the company system.  These policies and agreements include restrictions on sending or posting any information that is considered company confidential or that refers to the legal, financial, or business condition of the company.  
+
+Discrimination, Harassment, and Inappropriate Content
+The company's Internet and E-mail systems are not to be used in any way that may be disruptive or offensive to employees or others, or harmful to the company.  It may not to be used to solicit others for commercial ventures or religious, political, or other non-job related causes, nor may the company's system be used for personal solicitation or messages of an intimate nature.  Users of the system are restricted from accessing, posting, or transmitting obscene or offensive material, inappropriate text, or files dangerous to employees such as, but not limited to, those containing sexual implications, pornography, racial slurs, or any other comment that offensively addresses someone's age, sexual orientation, religious or political beliefs, national origin, or disability.  The company considers those who transmit messages or files of this nature to others as violating company harassment policy.  Users are also prohibited from downloading or intentionally receiving any file or message that may damage the integrity of the network.
+
+Spam
+The creation or transmission (forwarding) of Spam is a violation of this policy.  It is the obligation of the individual sending messages to address the email correctly, to ensure that the content is appropriately business related, and that the messages are sent to only those who have a need or business interest in the content.
+
+Chain Letters
+Employees are prohibited from creating or forwarding chain letters to other employees through the company email and Internet systems.
+
+Copyrighted or Confidential Information
+The company's Internet and E-mail system shall not be used to send,  post, reproduce, or distribute copyrighted materials externally,  or confidential information either internally or externally without prior authorization for such delivery, posting, reproduction or distribution from the owner of the copyrighted materials or confidential information or from WatchGuard Legal if authorization is uncertain or unclear.  For example, even an internal distribution to WatchGuard employees without a need to know may be a violation of a confidentiality agreement the company has entered into with an outside party.
+
+Unauthorized Files
+The downloading or installation of any non-company, non-business related software application from the Internet onto a company computer is prohibited .  Users are also prohibited from downloading any files for personal use.  Files that are not business related may not be received, transmitted, or stored on the company system or network.
+
+Email Etiquette  
+There are a significant number of WatchGuard employees who connect remotely to our company network, often at very slow transmission speeds.  Receipt of a large email message may result in excessive transmission times and delays for a remote system user.  Therefore, system users are encouraged to limit the size of the email message or attachment sent to remote employees to not more than 300,000 bytes (300K or 0.3 megs).  Files larger than this limit should be stored on the Local Area Network (LAN), on a shared drive, and the location of the file should be sent to the email recipient(s) rather than sending the file as part of the message itself.  In addition, use of extended email lists (to those outside of the user immediate area), should be avoided and the list of recipients kept as small as possible to minimize mail receipt problems.  When replying to messages, system users should avoid using the "Reply All" option where possible and only reply to the individual sender to reduce network traffic and unwanted messages. 
+
+Registering of Domain Names and Hosting of Company Internet Sites
+The registration and use of Internet domain names and URLs is the responsibility of the Corporate IT Department.  It is a violation of this policy for any system user to register, own, assist with, or operate an Internet website that represents, in whole or in part, any part of the company website(s) or any related information typically displayed on the company website(s), or which attempts to represent the company in any manner.   
+
+Identification and Accountability 
+System users must clearly identify themselves through bona fide, company supplied, userids and E-mail addresses.  The use of personal aliases while using company systems is prohibited.  Users are prohibited from sending Anonymous messages, making Anonymous Newsgroup postings, or misrepresenting their job title, job description, or position with the company.  Users are also prohibited from sharing or giving out their individual E-mail userid or credential to others and must take responsible steps to preserve their confidentiality.  Users will be responsible for all messages and access performed through the use of their account unless the activity is not the result of any fault of the user.  Use of or tampering with the account of another is also a violation of this policy.
+
+Exceptions to Policy
+Any exceptions to this policy must be in writing and agreed upon by both the CIO and the respective department vice president of the area requesting the exception.
+
+Violation
+Violation of all or any part of this policy is subject to disciplinary action up to and including termination at the discretion of the company.
+</textarea>
+                      </td>
+                      <td><img width="1" border="0" height="40" alt="" src="./images/pixel.gif"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td width="50%"><img width="1" border="0" height="1" alt="" src="./images/pixel.gif"></td>
+                </tr>
+                <tr valign="middle" align="center">
+                <td width="50%"><img width="1" border="0" height="1" alt="" src="./images/pixel.gif"></td>
+                <td bgcolor="#ffffff" style="border-right: 0px solid #666666; border-left: 0px solid #666666;" colspan="2">
+                  <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                    <tr valign="middle" align="center">
+                      <td class="disclaimer"><img width="1" border="2" height="30" alt="" src="./images/pixel.gif"></td>
+                      <td class="disclaimer" width="570" height="30" colspan="2" border="2">
+                      <p id="dis" class="accept">
+                      <input name="hsAcceptCkbName" id="hsAcceptCkbId" type="checkbox">
+                      <span id="hsAcceptLabelId">I have read and accept the terms and conditions</span>
+                      </p>
+                      </td>
+                      <td class="disclaimer"><img width="1" border="2" height="30" alt="" src="./images/pixel.gif"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td width="50%">
+                <img width="1" border="0" height="1" alt="" src="./images/pixel.gif"></td>
+                </tr>
+               </tbody>
+             </table>
+             </div>
+            </td>
+           </tr>
+      </tbody>
+    </table>
+    <input type="hidden" value="fw_logon" name="action">
+    <input type="hidden" value="logon" name="fw_logon_type">
+    <input type="hidden" value="false
+" id="accept">
+    <input type="hidden" id="redirect" name="redirect" value="">
+    <script language="JavaScript">
+      document.user_auth_form.fw_username.focus();
+      var rdurl = getURLPar("redirect", window.location.search);
+      if(rdurl != null) {
+        document.getElementById("redirect").value = rdurl;
+      }
+    </script>
+  <input name="lang" type="hidden" value="en-US"></form>
+
+
+</body></html>
